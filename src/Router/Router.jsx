@@ -1,20 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import {Home} 
 
 
-
-export const Router = () =>{
+export const Router_path = () =>{
     return (
-        <Router>
+        
         <div>
           {/* Define routes */}
           <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            {/* 404 Page */}
-            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={`<h1>gowtham</h1>`} />
           </Routes>
         </div>
-      </Router>
+ 
     )
 }

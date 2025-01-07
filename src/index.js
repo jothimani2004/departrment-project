@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Router} from './Router/Router'
+import { Router_path } from './Router/Router.jsx';
+import { BrowserRouter } from 'react-router-dom';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Router/>
-  </React.StrictMode>
+  
+    <BrowserRouter>
+        <Router_path/>
+    </BrowserRouter>
+
 );
 
 reportWebVitals();
