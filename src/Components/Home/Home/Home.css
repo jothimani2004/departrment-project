@@ -1,0 +1,13 @@
+.custom-carousel {
+    padding-top:7.2rem; /* Adjust the top margin as needed */
+  }
+  
+  .custom-carousel .carousel-inner {
+    height: 85vh; /* Ensure the images inside the carousel stretch to match the parent container's height */
+  }
+  
+  .custom-carousel .carousel-item img {
+    object-fit: cover; /* Ensure the images fill the carousel while maintaining their aspect ratio */
+    height: 85vh; /* Make sure the images cover the entire height of the carousel */
+  }
+  
