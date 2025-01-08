@@ -1,0 +1,42 @@
+.pdf_container{
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    flex-direction: column;
+}
+.card_size{
+    width: 85%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_size > iframe{
+    border-radius: 10px;        
+
+}
+.pdf_container h1{
+    align-self: flex-start;
+    margin:0em 1em ;
+    margin-bottom: .5em;
+}
+
+.content{
+    margin:1em;
+    padding:1em;
+}
+
+.para{
+    padding:.5em 1em;
+}
+
+.para p{
+    font-size: 1.5em;
+}
+
+.main_cover{
+    margin-top: 1.5em;
+}
