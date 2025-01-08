@@ -1,32 +1,22 @@
-.con{
-    padding:3em 3em;
-    padding-top: 1rem;
-
-}
-
-.content{
-    margin-top: 1em;
-    padding: 1em;
-}
-
-.para{
-    padding-left: 2em;
-    font-size: 1.5em;
-}
-
 .pdf_container{
     padding: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
     width:100%;
+    flex-direction: column;
 }
 .card_size{
-    width: 90%;
+    width: 85%;
     border-radius: 10px;
 }
 
 .card_size > iframe{
     border-radius: 10px;        
 
+}
+.pdf_container h1{
+    align-self: flex-start;
+    margin:1em ;
+    margin-bottom: .5em;
 }
