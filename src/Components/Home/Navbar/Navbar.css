@@ -7,9 +7,9 @@
   color: white;
 }
 
-/* Customize the navbar height */
-.navbar {
-  height: 7rem; /* Adjust as needed */
+.navbar{
+  box-shadow: 1px 1px 10px;
+  background-color: #FBF8EF;
 }
 
 /* Customize font size */
@@ -18,7 +18,7 @@
 }
 
 .container-fluid{
-  margin: 5rem;
+  margin: 3rem;
   width: 100%;
 }
 
@@ -26,6 +26,37 @@
   padding: 10px; /* Add padding if needed */
   height:auto;
   font-size: 1.05rem; /* Increase font size */
-
+  background-color: aliceblue;
 }
+
+/* Set text color to black */
+.navbar-nav .nav-link, .navbar-brand {
+  color: black !important;
+}
+
+/* Set background color of collapse content to white */
+.navbar-collapse {
+  background-color: white;
+}
+
+/* Set text color to black */
+/* Set text color to black */
+.navbar-nav .nav-link, .navbar-brand {
+  color: black !important;
+}
+
+/* Set background color of collapse content to white */
+.navbar-collapse {
+  background-color: white;
+}
+
+
+.nav-item{
+  background-color: #D9EAFD;
+  border-radius: 10px;
+  padding: 1px;
+}
+
+
+
 

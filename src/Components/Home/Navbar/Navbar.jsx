@@ -1,13 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import './Navbar.css'
+import './Navbar.css';
 
 export const Navbar = () => {
   return (
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">      
-  <div className="container-fluid">
+    <nav className="navbar navbar-expand-xl navbar-light sticky-top">
+      <div className="container-fluid">
         {/* Logo */}
-        <a className="navbar-brand" href="#">Department of ICB</a>
+        <a className="navbar-brand text-dark" href="#">Department of ICB</a>
 
         {/* Hamburger Button */}
         <button
@@ -28,7 +28,7 @@ export const Navbar = () => {
             {/* Dropdown for HOME */}
             <li className="nav-item dropdown mx-3">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link text-dark dropdown-toggle"
                 href="#"
                 id="homeDropdown"
                 role="button"
@@ -45,10 +45,7 @@ export const Navbar = () => {
 
             {/* Dropdown for ABOUT US */}
             <li className="nav-item dropdown">
-              <a
-                className="nav-link "
-                href="#"
-              >
+              <a className="nav-link text-dark" href="#">
                 ABOUT US
               </a>
             </li>
@@ -56,7 +53,7 @@ export const Navbar = () => {
             {/* Dropdown for ACADEMICS */}
             <li className="nav-item dropdown mx-3">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link text-dark dropdown-toggle"
                 href="#"
                 id="academicsDropdown"
                 role="button"
@@ -76,7 +73,7 @@ export const Navbar = () => {
             {/* Dropdown for PEOPLE */}
             <li className="nav-item dropdown mx-3">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link text-dark dropdown-toggle"
                 href="#"
                 id="peopleDropdown"
                 role="button"
@@ -88,32 +85,21 @@ export const Navbar = () => {
               <ul className="dropdown-menu" aria-labelledby="peopleDropdown">
                 <li><a className="dropdown-item" href="#">Students</a></li>
                 <li><a className="dropdown-item" href="#">Faculty</a></li>
-                <li><a className="dropdown-item" href="#">Alumini</a></li>
+                <li><a className="dropdown-item" href="#">Alumni</a></li>
               </ul>
             </li>
 
             {/* Dropdown for RESOURCE */}
             <li className="nav-item dropdown mx-3">
-              <a
-                className="nav-link"
-                href="#"
-                // id="resourceDropdown"
-                // role="button"
-                // data-bs-toggle="dropdown"
-                // aria-expanded="false"
-              >
+              <a className="nav-link text-dark" href="#">
                 RESOURCE
               </a>
-              {/* <ul className="dropdown-menu" aria-labelledby="resourceDropdown">
-                <li><a className="dropdown-item" href="#">Subitem 1</a></li>
-                <li><a className="dropdown-item" href="#">Subitem 2</a></li>
-              </ul> */}
             </li>
 
             {/* Dropdown for PUBLICATION */}
             <li className="nav-item dropdown mx-3">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link text-dark dropdown-toggle"
                 href="#"
                 id="publicationDropdown"
                 role="button"
@@ -132,7 +118,7 @@ export const Navbar = () => {
             {/* Dropdown for EVENTS */}
             <li className="nav-item dropdown mx-3">
               <a
-                className="nav-link dropdown-toggle"
+                className="nav-link text-dark dropdown-toggle"
                 href="#"
                 id="eventsDropdown"
                 role="button"
@@ -150,10 +136,7 @@ export const Navbar = () => {
 
             {/* Dropdown for CONTACT US */}
             <li className="nav-item dropdown mx-3">
-              <a
-                className="nav-link"
-                href="#"
-              >
+              <a className="nav-link text-dark" href="#">
                 CONTACT US
               </a>
             </li>
