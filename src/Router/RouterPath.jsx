@@ -34,9 +34,9 @@ export const RouterPath = () => {
         <Route path="/Publications/journals" element={<Journals />} />
         <Route path="/Publications/conferences" element={<Conferences />} />
         <Route path="/Publications/patents" element={<Patents />} />
-        <Route path="/Academic/Faculty" element={ <FacultyList />} />
-        <Route path="/Academic/Student" element={<Student_list />} />
-        <Route path="/Academic/courses" element={<Courses />} />
+        <Route path="/People/Faculty" element={ <FacultyList />} />
+        <Route path="/People/Students" element={<Student_list />} />
+        <Route path="/People/courses" element={<Courses />} />
         <Route path="/" element={<Home />} />
 
       </Routes>
