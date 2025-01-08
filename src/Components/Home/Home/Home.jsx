@@ -1,18 +1,19 @@
 import "./Home.css"
-import React, { useEffect } from 'react';
+import React, { useEffect ,useState} from 'react';
+import CountUp from 'react-countup';
 
 export const Home = () =>{
-  useEffect(() => {
-    // Initialize PureCounter after the component mounts
-    const purecounterScript = document.createElement("script");
-    purecounterScript.src = "/assets/purecounter_vanilla.js";
-    purecounterScript.async = true;
-    document.body.appendChild(purecounterScript);
+    const [isstat,setisstat] = useState(false)
+    window.addEventListener("scroll",()=>{
+      let x = window.scrollY
+      console.log(x)
+      if (x>1167){
+        setisstat(true)           
+      }else{
+        setisstat(false)
+      }
+    })
 
-    return () => {
-      document.body.removeChild(purecounterScript); // Clean up
-    };
-  }, []);
 
     return (
         <>
@@ -39,7 +40,7 @@ export const Home = () =>{
         </div>
 
         <div className="about-container">
-            <div className="main-content-con">
+            <div className="main-content-con shadow-lg">
                 <div className="top-con">
                 <div className="text-con">
                     <h2>About the Department</h2>
@@ -55,8 +56,8 @@ export const Home = () =>{
             </div>
         </div>
 
-        <div className="about-container-vm">
-            <div className="main-content-con-vm">
+        <div className="about-container-vm ">
+            <div className="main-content-con-vm shadow-lg">
                 <div className="text-con">
                     <h2>Department Vision and Mission</h2>
                     <div className="vm-con">
@@ -83,46 +84,67 @@ export const Home = () =>{
 
         </div>
 
-        <div id="stats" className="stats section">
+        <div className="stats-container">
+          
+            <div className="stat-item">
+              <h3>Graudation</h3>
+              {isstat &&(
+              <p><CountUp start={0} end={100} duration={2}/>%</p>
+              )}
+            </div>
+            <div className="stat-item">
+              <h3>Placement</h3>
+              {isstat &&(
+              <p><CountUp start={0} end={94.7} duration={2}/>+</p>
+            )}
+            </div>
+            <div className="stat-item">
+              <h3>Certification</h3>
+              {isstat &&(
+              <p><CountUp start={0} end={90} duration={2}/>+</p>
+            )}
+            </div>
+            <div className="stat-item">
+              <h3>LPA</h3>
+              {isstat &&(
+              <p><CountUp start={0} end={7} duration={2}/>LPA</p>
+            )}
+            </div>
+            
+            <div className="stat-item">
+              <h3>Internship</h3>
+              {isstat &&(
+                <p><CountUp start={0} end={80} duration={2}/>+</p>
+              )}
+            </div>
+        </div>
 
-<div className="container" data-aos="fade-up" data-aos-delay="100">
-
-  <div className="row gy-4">
-
-    <div className="col-lg-3 col-md-6">
-      <div className="stats-item text-center w-100 h-100">
-        <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" className="purecounter"></span>
-        <p>Clients</p>
-      </div>
-    </div>
-
-    <div className="col-lg-3 col-md-6">
-      <div className="stats-item text-center w-100 h-100">
-        <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" className="purecounter"></span>
-        <p>Projects</p>
-      </div>
-    </div>
-
-    <div className="col-lg-3 col-md-6">
-      <div className="stats-item text-center w-100 h-100">
-        <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" className="purecounter"></span>
-        <p>Hours Of Support</p>
-      </div>
-    </div>
-
-    <div className="col-lg-3 col-md-6">
-      <div className="stats-item text-center w-100 h-100">
-        <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" className="purecounter"></span>
-        <p>Workers</p>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-</div>
-
+        <div className="about-container-welcome">
+            <div className="main-content-con-welcome shadow-lg">
+          <div className="heading-name">
+            <h2>Welcome Message</h2>
+            <div className="name">
+              <div className="hod_image"></div>
+              <div className="detial">
+                <h3>Dr. N. PALANIVEL,</h3>
+                <p>Professor and Head, Department of loT and Cyber security <br></br>
+                  including Block chain Technology</p>
+              </div>
+            </div>
+          </div>
+          <div className="main-content">
+            <p>The Department of CSE(ICB) has been continuously making progress in Teaching and R&D Activities. The Department was started with an intake of 60 students in 2020. The Department is boasts a dedicated department library stocked with the newest Titles, Editions, Journals and Magazines all connected to the internet. To enhance the Technical skills of students and prepare them for Global competition, the Department organizes Seminars, Workshops, and Guest lectures.
+            The fields of Internet of Things (IoT), Cyber Security, and Blockchain represent dynamic and rapidly evolving areas in technology, offering significant career growth opportunities. IoT refers to the interconnected network of devices that communicate and exchange data, driving innovations in smart homes, healthcare, and industrial automation. Cyber Security is critical in protecting these interconnected systems from threats and ensuring data integrity, privacy, and compliance. Blockchain technology, known for its secure and transparent ledger system, is transforming industries such as finance, supply chain, and healthcare by providing decentralized and tamper-proof transactions.
+            Careers in these fields are in high demand, with roles such as IoT architects, Cyber security analysts, and Blockchain developers offering lucrative and fulfilling paths. Professionals in these domains not only contribute to technological advancements but also play a vital role in safeguarding digital ecosystems making them essential in today’s interconnected world. The future for IoT, Cyber Security, and Blockchain departments is bright, with ample opportunities for innovation, application, and professional growth as these technologies continue to evolve and integrate into the fabric of modern society.</p>
+          </div>
+        </div>
+        </div>
+        <div className="about-container-syllabus">  
+          <div className="main-content-con-syllabus shadow-lg">
+                <h2>curriculam</h2>
+                <div className="main-content"></div>
+          </div>
+        </div>
 
 
         </>
