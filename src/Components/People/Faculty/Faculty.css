@@ -1,0 +1,33 @@
+.card {
+    border: 1px solid #ddd; /* Light gray border */
+  border-radius: 10px;    /* Rounded corners */
+    padding-top: 7.2rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .container{
+    padding-top: 7.2rem;
+  }
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+  
+  h5 {
+    font-size: 1.2rem;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
