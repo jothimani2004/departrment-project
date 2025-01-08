@@ -8,6 +8,11 @@ import { Calander, Time_tables } from "../Content/Academic.js";
 import Seperate_student from "../Components/People/Seperate_Student/Seperate_student.jsx";
 import Event_show from "../Components/Event/MajorEvent/Event_show.jsx";
 import Event_Seperate_page from "../Components/Event/Seperate_event/Event_Seperate_page.jsx";
+import  FacultyList from '../Components/People/Faculty/FacultyList.js';
+import Journals from '../Components/Publication/Journal/Journals.js';
+import Conferences from '../Components/Publication/Paper/Conferences.js';
+import Patents from '../Components/Publication/Patent/Patent.js';
+
 
 
 export const RouterPath = () => {
@@ -17,6 +22,7 @@ export const RouterPath = () => {
       <Navbar/>
     <div>
       <Routes>
+
         <Route path="/Student" element={<Student_list />} />
         <Route path="/Academic/courses" element={<Courses />} />
         <Route path="/Academic/calander" element={ <Calander_show keys={Calander}/> } />
@@ -25,6 +31,12 @@ export const RouterPath = () => {
         <Route path="/Event/Cocurrcular_events" element={ <Event_show title="Cocurrcular Event"/> } />
         <Route path="/Event/Extra_Curricular_events" element={ <Event_show title="Extra Curricular Events"/> } />
         <Route path="/Event/Major_events/Event_detail" element={ <Event_Seperate_page title="Elan 2025"/> } />
+        <Route path="/Publications/journals" element={<Journals />} />
+        <Route path="/Publications/conferences" element={<Conferences />} />
+        <Route path="/Publications/patents" element={<Patents />} />
+        <Route path="/Academic/Faculty" element={ <FacultyList />} />
+        <Route path="/Academic/Student" element={<Student_list />} />
+        <Route path="/Academic/courses" element={<Courses />} />
         <Route path="/" element={<Home />} />
 
       </Routes>
