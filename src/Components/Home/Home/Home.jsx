@@ -1,5 +1,19 @@
 import "./Home.css"
+import React, { useEffect } from 'react';
+
 export const Home = () =>{
+  useEffect(() => {
+    // Initialize PureCounter after the component mounts
+    const purecounterScript = document.createElement("script");
+    purecounterScript.src = "/assets/purecounter_vanilla.js";
+    purecounterScript.async = true;
+    document.body.appendChild(purecounterScript);
+
+    return () => {
+      document.body.removeChild(purecounterScript); // Clean up
+    };
+  }, []);
+
     return (
         <>
         <div id="carouselExampleAutoplaying" className="carousel slide custom-carousel" data-bs-ride="carousel">
@@ -40,6 +54,75 @@ export const Home = () =>{
                 
             </div>
         </div>
+
+        <div className="about-container-vm">
+            <div className="main-content-con-vm">
+                <div className="text-con">
+                    <h2>Department Vision and Mission</h2>
+                    <div className="vm-con">
+                        <h4>Vision</h4>
+                        <ul>
+                            <li className="font-styling">Nurturing future Innovators, Entrepreneurs, and Researchers committed to pioneering Technological solutions and making a meaningful difference in the world
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="vm-con">
+                    <h4>Mission</h4>
+                    <ul className="points">
+                        <li className="font-styling">To develop critical thinking and problem-solving skills in students, so that they are empowered to take on and deal with the complex problems
+                        </li>
+                        <li className="font-styling">To motivate and help students convert their innovative idea into an entrepreneurial venture in their domains
+                        </li>
+                        <li className="font-styling">Enhance the Research skills and knowledge of students and professionals through cutting-edge research.
+                        </li >
+                        <li className="font-styling">Enlighten young minds to educate society on safeguarding human safety and security nationwide in the digital world.</li>
+                    </ul>
+                    </div>
+                </div>
+                </div>
+
+        </div>
+
+        <div id="stats" className="stats section">
+
+<div className="container" data-aos="fade-up" data-aos-delay="100">
+
+  <div className="row gy-4">
+
+    <div className="col-lg-3 col-md-6">
+      <div className="stats-item text-center w-100 h-100">
+        <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" className="purecounter"></span>
+        <p>Clients</p>
+      </div>
+    </div>
+
+    <div className="col-lg-3 col-md-6">
+      <div className="stats-item text-center w-100 h-100">
+        <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" className="purecounter"></span>
+        <p>Projects</p>
+      </div>
+    </div>
+
+    <div className="col-lg-3 col-md-6">
+      <div className="stats-item text-center w-100 h-100">
+        <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" className="purecounter"></span>
+        <p>Hours Of Support</p>
+      </div>
+    </div>
+
+    <div className="col-lg-3 col-md-6">
+      <div className="stats-item text-center w-100 h-100">
+        <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" className="purecounter"></span>
+        <p>Workers</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
 
 
         </>
