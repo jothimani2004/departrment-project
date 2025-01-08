@@ -25,9 +25,7 @@ export const RouterPath = () => {
       <Routes>
 
 
-<Route path="/Event/Major_events" element={<MajorEvents />} />
-  
-
+        <Route path="/Event/Major_events" element={<MajorEvents />} />
         <Route path="/Academic/courses" element={<Courses />} />
         <Route path="/Academic/calander" element={ <Calander_show keys={Calander}/> } />
         <Route path="/Academic/Time_table" element={ <Calander_show keys={Time_tables}/> } />
