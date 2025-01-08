@@ -10,6 +10,7 @@ import Journals from '../Components/Publication/Journal/Journals.js';
 import Conferences from '../Components/Publication/Paper/Conferences.js';
 import Patents from '../Components/Publication/Patent/Patent.js';
 
+import MajorEvents from '../Components/Event/MajorEvent/MajorEvents.js'
 
 export const RouterPath = () => {
   return (
@@ -17,6 +18,10 @@ export const RouterPath = () => {
       <Navbar/>
       <Routes>
       
+
+<Route path="/Event/MajorEvents" element={<MajorEvents />} />
+
+
           <Route path="/Publications/journals" element={<Journals />} />
           <Route path="/Publications/conferences" element={<Conferences />} />
           <Route path="/Publications/patents" element={<Patents />} />

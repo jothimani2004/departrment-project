@@ -24,38 +24,51 @@ const Conferences = () => {
   ];
 
   return (
-    <Container className="mt-5">
-      <h2 className="text-center mb-4">Conferences</h2>
+    <Container className="mt-0 pt-4">
+      <h2 className=" mb-4" >Conferences</h2>
       {conferences.map((conference, index) => (
-        <Card key={index} className="mb-4 shadow-lg pt-0">
+        <Card 
+          key={index} 
+          className="mb-5 shadow-lg pt-0" 
+          style={{
+            backgroundColor: '#FFFFFF',
+            border: '1px solid #D1D8E0',
+            transition: 'transform 0.3s ease-in-out',
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.03)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        >
           <Card.Body>
-            <Card.Title className="fw-bold">{conference.title}</Card.Title>
-            <Card.Text>
+            <Card.Title className="fw-bold" >
+              {conference.title}
+            </Card.Title>
+            <Card.Text >
               <strong>Authors:</strong> {conference.authors}
             </Card.Text>
-            <Card.Text>
+            <Card.Text >
               <strong>Conference:</strong> {conference.conference}
             </Card.Text>
             {conference.location && (
-              <Card.Text>
+              <Card.Text >
                 <strong>Location:</strong> {conference.location}
               </Card.Text>
             )}
-            <Card.Text>
+            <Card.Text >
               <strong>Year:</strong> {conference.year}
             </Card.Text>
             {conference.pages && (
-              <Card.Text>
+              <Card.Text >
                 <strong>Pages:</strong> {conference.pages}
               </Card.Text>
             )}
             {conference.doi && (
-              <Card.Text>
-                <strong>DOI:</strong>{" "}
-                <a
-                  href={`https://doi.org/${conference.doi}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <Card.Text style={{ color: '#495057' }}>
+                <strong>DOI:</strong> 
+                <a 
+                  href={`https://doi.org/${conference.doi}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  style={{  textDecoration: 'none' }}
                 >
                   {conference.doi}
                 </a>

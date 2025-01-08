@@ -1,39 +1,54 @@
 import React from "react";
+import { Card, Container } from "react-bootstrap";
 
 const Patents = () => {
   const patents = [
     {
-      title: "AI-Based Disease Prediction",
-      inventors: "Dr. X, Dr. Y",
-      patentNumber: "US12345678",
-      filingDate: "2020-01-15",
-      grantDate: "2022-06-30",
+      title: "A Method of Retrieving Satellite Image",
+      applicationNumber: "202241031679",
+      grantNumber: "418134",
+      dateGranted: "16/01/2023",
+      patentee: "Annamalai University",
+    },
+    {
+      title: "A Method of Retrieving Satellite Image",
+      applicationNumber: "202241031679",
+      grantNumber: "418134",
+      dateGranted: "16/01/2023",
+      patentee: "Annamalai University",
+    },
+    {
+      title: "A Method of Retrieving Satellite Image",
+      applicationNumber: "202241031679",
+      grantNumber: "418134",
+      dateGranted: "16/01/2023",
+      patentee: "Annamalai University",
     },
   ];
 
   return (
-    <div>
-      <h2>Patents</h2>
+    <Container className="mt-0 pt-4">
+      <h2 className=" mb-4 ">Patents</h2>
       {patents.map((patent, index) => (
-        <div key={index} className="mb-4">
-          <h5 className="fw-bold">{patent.title}</h5>
-          <p className="mb-1">
-            <strong>Inventors:</strong> {patent.inventors}
-          </p>
-          <p className="mb-1">
-            <strong>Patent Number:</strong> {patent.patentNumber}
-          </p>
-          <p className="mb-1">
-            <strong>Filing Date:</strong> {patent.filingDate}
-          </p>
-          {patent.grantDate && (
-            <p className="text-muted">
-              <strong>Grant Date:</strong> {patent.grantDate}
-            </p>
-          )}
-        </div>
+        <Card key={index} className="mb-5 shadow-lg pt-0">
+          <Card.Body>
+            <Card.Title className="fw-bold">{patent.title}</Card.Title>
+            <Card.Text>
+              <strong>Application Number:</strong> {patent.applicationNumber}
+            </Card.Text>
+            <Card.Text>
+              <strong>Grant Number:</strong> {patent.grantNumber}
+            </Card.Text>
+            <Card.Text>
+              <strong>Date Granted:</strong> {patent.dateGranted}
+            </Card.Text>
+            <Card.Text>
+              <strong>Patentee:</strong> {patent.patentee}
+            </Card.Text>
+          </Card.Body>
+        </Card>
       ))}
-    </div>
+    </Container>
   );
 };
 

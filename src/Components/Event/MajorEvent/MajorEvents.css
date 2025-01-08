@@ -1,0 +1,17 @@
+.card {
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .card-title {
+    color: #343A40;
+  }
+  .card-text {
+    color: #495057;
+  }
+  .event_img {
+    width: 100%;          /* Image will take the full width of the card */
+    height: 300px;        /* Set a fixed height */
+    object-fit: cover;    /* Ensures the image is scaled and cropped to fit without distortion */
+    border-radius: 8px;   /* Optional: Adds rounded corners for better design */
+  }
+  
