@@ -1,0 +1,46 @@
+.con{
+    padding:3em 3em;
+    padding-top: 7.2rem;
+
+}
+
+.content{
+    margin-top: 1em;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.para{
+    padding-left: 2em;
+    margin:.5em 0em;
+    font-size: 1.5em;
+    display: grid;
+    grid-template-columns: 75% 25%;
+}
+
+.image{
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    border: 1px solid ;
+    min-height: 250px;
+    width:80%;  
+}
+
+.image_cover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image_size{
+    width:100%;
+    text-align: center;
+    height: 100%;
+}   
+
+.image_size img{
+    min-height: 250px;
+}
