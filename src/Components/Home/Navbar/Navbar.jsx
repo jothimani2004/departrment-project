@@ -1,51 +1,148 @@
-import React, { useState, useEffect } from 'react';
-import './Navbar.css'
-
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import './Navbar.css';
 
 export const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const toggleMenu = () => {
-      setIsMenuOpen(!isMenuOpen);
-    };
-    useEffect(() => {
-      const handleResize = () => {
-          // If the screen width is greater than 768px, close the menu
-          if (window.innerWidth > 768) {
-              setIsMenuOpen(false);
-          }
-      };
+  return (
+    <nav className="navbar navbar-expand-xl navbar-light sticky-top">
+      <div className="container-fluid">
+        {/* Logo */}
+        <a className="navbar-brand text-dark" href="#">Department of ICB</a>
 
-      // Attach the event listener on mount
-      window.addEventListener('resize', handleResize);
+        {/* Hamburger Button */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-      // Cleanup the event listener on unmount
-      return () => {
-          window.removeEventListener('resize', handleResize);
-      };
-    }, []);
-    return (
-      <nav>
-        <div className="container-navbar">
-          <div className="main-navbar">
-              <a href="#" className="logoname">Depratment of ICB</a>
-
-              <div className="hamburger" onClick={toggleMenu}>
-                <img src='/images/menu1.png' className={!isMenuOpen ? 'burger-logo' : 'burger-logo-active'} alt="" />
-              </div>
-
-              <ul className={`nav-ul ${isMenuOpen ? 'nav-active' : 'nav-deactive'}`}>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">ABOUT US</a></li>
-                <li><a href="#">ACADEMICS</a></li>
-                <li><a href="#">PEOPLE</a></li>
-                <li><a href="#">RESOURCE</a></li>
-                <li><a href="#">PUBLICATION</a></li>
-                <li><a href="#">EVENTS</a></li>
-                <li><a href="#">CONTACT US</a></li>
+        {/* Navbar Links */}
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
+            {/* Dropdown for HOME */}
+            <li className="nav-item dropdown mx-3">
+              <a
+                className="nav-link text-dark dropdown-toggle"
+                href="#"
+                id="homeDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                HOME
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="homeDropdown">
+                <li><a className="dropdown-item" href="#">Subitem 1</a></li>
+                <li><a className="dropdown-item" href="#">Subitem 2</a></li>
               </ul>
+            </li>
 
-          </div>
+            {/* Dropdown for ABOUT US */}
+            <li className="nav-item dropdown">
+              <a className="nav-link text-dark" href="#">
+                ABOUT US
+              </a>
+            </li>
+
+            {/* Dropdown for ACADEMICS */}
+            <li className="nav-item dropdown mx-3">
+              <a
+                className="nav-link text-dark dropdown-toggle"
+                href="#"
+                id="academicsDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                ACADEMICS
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="academicsDropdown">
+                <li><a className="dropdown-item" href="#">Calender</a></li>
+                <li><a className="dropdown-item" href="#">Courses</a></li>
+                <li><a className="dropdown-item" href="#">Time Table</a></li>
+                <li><a className="dropdown-item" href="#">Student Data Verification</a></li>
+              </ul>
+            </li>
+
+            {/* Dropdown for PEOPLE */}
+            <li className="nav-item dropdown mx-3">
+              <a
+                className="nav-link text-dark dropdown-toggle"
+                href="#"
+                id="peopleDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                PEOPLE
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="peopleDropdown">
+                <li><a className="dropdown-item" href="#">Students</a></li>
+                <li><a className="dropdown-item" href="#">Faculty</a></li>
+                <li><a className="dropdown-item" href="#">Alumni</a></li>
+              </ul>
+            </li>
+
+            {/* Dropdown for RESOURCE */}
+            <li className="nav-item dropdown mx-3">
+              <a className="nav-link text-dark" href="#">
+                RESOURCE
+              </a>
+            </li>
+
+            {/* Dropdown for PUBLICATION */}
+            <li className="nav-item dropdown mx-3">
+              <a
+                className="nav-link text-dark dropdown-toggle"
+                href="#"
+                id="publicationDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                PUBLICATION
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="publicationDropdown">
+                <li><a className="dropdown-item" href="#">Journal</a></li>
+                <li><a className="dropdown-item" href="#">Paper</a></li>
+                <li><a className="dropdown-item" href="#">Patent</a></li>
+              </ul>
+            </li>
+
+            {/* Dropdown for EVENTS */}
+            <li className="nav-item dropdown mx-3">
+              <a
+                className="nav-link text-dark dropdown-toggle"
+                href="#"
+                id="eventsDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                EVENTS
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="eventsDropdown">
+                <li><a className="dropdown-item" href="#">Major Events</a></li>
+                <li><a className="dropdown-item" href="#">CoCurricular events</a></li>
+                <li><a className="dropdown-item" href="#">Extra Curricular Events</a></li>
+              </ul>
+            </li>
+
+            {/* Dropdown for CONTACT US */}
+            <li className="nav-item dropdown mx-3">
+              <a className="nav-link text-dark" href="#">
+                CONTACT US
+              </a>
+            </li>
+          </ul>
         </div>
-      </nav>
-    )
-}
+      </div>
+    </nav>
+  );
+};

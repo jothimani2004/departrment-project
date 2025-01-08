@@ -1,204 +1,62 @@
-*{
-    margin: none;
-    padding: none;
-    box-sizing: border-box;
-  }
-  
-  body{
-    overflow-x: hidden;
-  }
-  
-  a{
-    all: none;
-    text-decoration: none;
-  }
-  
-  /* Navbar styling  */
-  
-  nav{
-    position: fixed;
-    z-index: 500;
-    width: 100%;
-    padding: 2em;
-    background-color: #000000;
-  }
-  
-  .container-navbar{
-    padding-left: 2.3rem;
-    padding-right: 2.3rem;
-    height: 3.7rem;
-    background-color: transparent;
-  }
-  
-  .main-navbar{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 3.7rem; 
-    border-radius: 10px;
-    padding-left: .5rem;
-    padding-right: .5rem;
-  }
-  
-  .logoname{
-    all: unset; /* Removes all default styles (experimental) */
-    cursor: pointer; /* Retains the pointer cursor for usability */
-    font-family: "Jersey 15", sans-serif;
-    font-weight: 400;
-    font-size: 1.5rem;
-    color: white;
-  }
-  
-  .nav-ul{
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 3em;
-    margin: 0;
-    padding: 0;
-    transition: all 0.5s ease;
-  }
-  
-  .nav-ul li a {
-    text-decoration: none;
-    font-family: "Geist Mono", monospace;
-    font-weight: 500;
-    font-size: .95rem;
-    color: #e5e7ebdc;
-    transition: color 0.4s ease;
-  }
-  
-  .nav-ul li a:hover{
-    color:white;
-  }
-  
-  .getstarted{
-    display: flex;
-    align-items: center;
-    font-family: "Geist Mono", monospace;
-    font-weight: 560;
-    font-size: .85rem;
-    background-color: #FFFFFF;
-    color: black ;
-    padding: 14px;
-    border-radius:10px;  
-    cursor: pointer;
-    transition: all .4s ease;
-  }
-  
-  .getstarted a{
-    color:black ;
-    background-color: inherit;
-  }
-  
-  .getstarted:hover{
-    background-color: #CDCDCD; 
-  }
-  
-  .getstarted-ham{
-    display: flex;
-    align-items: center;
-    font-family: "Geist Mono", monospace;
-    font-weight: 560;
-    font-size: .85rem;
-    background-color: #FFFFFF;
-    color: black !important;
-    padding: 14px;
-    border-radius:10px;  
-    cursor: pointer;
-    transition: all .4s ease;
-  }
-  
-  .getstarted-ham a{
-    color: black !important;
-    background-color: inherit;
-  }
-  
-  .getstarted-ham:hover{
-    background-color: #CDCDCD; 
-  }
-  
-  .hamburger{
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .hamburger{
-    cursor: pointer;
-  }
-  
-  .burger-logo{
-    transition: transform 0.5s ease;
-  }
-  
-  .burger-logo-active{
-    transform: rotateZ(90deg);
-    transition: transform 0.5s ease;
-  }
-  
-  
-  /* navbar media query */
-  @media (max-width: 1500px) {
-  
-    @keyframes navbar-open {
-      0%{
-        transform: translateY(-1000px);
-      }
-      100%{
-        transform: translateY(-1px);
-      }
-    }
-  
-    @keyframes navbar-close {
-      0%{
-        transform: translateY(-1px);
-      }
-      100%{
-        transform: translateY(-1000px);
-      }
-    }
-      .hamburger{
-        display: flex;
-      }
-      
-      .nav-ul {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 120px;
-        left: 0;
-        width: 100%;
-        background-color: #000000;
-        padding: 50px 0;
-        text-align: center;
-        gap: 15px;
-        transform: translateY(-1000px);
-        border-radius: 10px;
-      }
-    
-      /* Active Class to Show Menu */
-      .nav-ul.nav-active {
-        display: flex;
-        transform: translateY(-1px);
-        animation: navbar-open 0.7s ease;
-        transition: all 0.5s ease;
-      }
-  
-      .nav-ul.nav-deactive {
-        display: flex;
-        transform: translateY(-1000px);
-        animation: navbar-close 0.7s ease;
-        transition: all 0.5s ease;
-      }
-  
-      .getstarted {
-        display: none;
-      }
-  
-  }
-  
-  
+.navbar-nav .dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; /* Adjust as needed */
+}
+.dropdown-item:hover{
+  background-color: blue;
+  color: white;
+}
+
+.navbar{
+  box-shadow: 1px 1px 10px;
+  background-color: #FBF8EF;
+}
+
+/* Customize font size */
+.navbar .nav-link {
+  font-size: 1.05rem; /* Increase font size */
+}
+
+.container-fluid{
+  margin: 3rem;
+  width: 100%;
+}
+
+.dropdown-menu {
+  padding: 10px; /* Add padding if needed */
+  height:auto;
+  font-size: 1.05rem; /* Increase font size */
+  background-color: aliceblue;
+}
+
+/* Set text color to black */
+.navbar-nav .nav-link, .navbar-brand {
+  color: black !important;
+}
+
+/* Set background color of collapse content to white */
+.navbar-collapse {
+  background-color: white;
+}
+
+/* Set text color to black */
+/* Set text color to black */
+.navbar-nav .nav-link, .navbar-brand {
+  color: black !important;
+}
+
+/* Set background color of collapse content to white */
+.navbar-collapse {
+  background-color: white;
+}
+
+
+.nav-item{
+  background-color: #D9EAFD;
+  border-radius: 10px;
+  padding: 1px;
+}
+
+
+
+
