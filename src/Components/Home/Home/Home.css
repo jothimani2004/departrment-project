@@ -11,7 +11,7 @@
   
  .about-container{
     width: 100%;
-  padding: 5rem 15rem;
+  padding: 8rem 15rem;
  }  
 
  .main-content-con{
@@ -58,7 +58,7 @@
 
 .about-container-vm{
   width: 100%;
-  padding: 3rem 15rem 10rem 15rem;
+  padding: 3rem 15rem 14rem 15rem;
 } 
 
 .main-content-con-vm{
@@ -118,7 +118,7 @@
 
 .about-container-welcome{
   width: 100%;
-  padding: 10rem 15rem;
+  padding: 14rem 15rem;
 } 
 
 .main-content-con-welcome{
@@ -165,7 +165,7 @@
 
 .about-container-syllabus{
   width: 100%;
-  padding: 0rem 15rem;
+  padding: 5rem 15rem;
 } 
 
 .main-content-con-syllabus{
@@ -227,7 +227,7 @@
 }
 
 .faculty-main-conn{
-  margin: 10rem 0rem;
+  margin: 8rem 0rem;
   background-color: rgb(152, 152, 239);
 }
 
@@ -237,7 +237,8 @@
 
 .about-container-contact{
   width: 100%;
-  padding: 0rem 15rem;
+  padding: 4rem 15rem;
+  padding-bottom: 13rem;
 } 
 
 .main-content-con-contact{
@@ -275,8 +276,11 @@
 
 .main-content-con-syllabus{
   padding: 2rem;
-
 }
+.about-container-contact{
+  width: 100%;
+  padding: 0rem 10rem;
+} 
 
  }
 
@@ -302,6 +306,10 @@
   padding: 2rem;
 
 }
+.about-container-contact{
+  width: 100%;
+  padding: 0rem 4rem;
+} 
 }
 
 
@@ -339,6 +347,10 @@
   padding: 2rem;
 
 }
+.about-container-contact{
+  width: 100%;
+  padding: 0rem 1rem;
+} 
 }
 
 @media (max-width: 800px ){

@@ -3,6 +3,7 @@ import Student_list from '../Components/People/Student/Student_list.jsx';
 import Courses from '../Components/Academic/Courses/Courses_list.jsx'
 import {Navbar} from '../Components/Home/Navbar/Navbar.jsx';
 import {Home} from '../Components/Home/Home/Home.jsx';
+import {Footer} from '../Components/Home/Footer/Footer.jsx'
 
 export const RouterPath = () => {
   return (
@@ -14,6 +15,7 @@ export const RouterPath = () => {
         <Route path="/" element={<Home />} />
 
       </Routes>
+      <Footer/>
     </div>
   );
 };

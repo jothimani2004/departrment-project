@@ -176,6 +176,7 @@ export const Home = () =>{
           </div>
         </div>
         </div>
+        
         <div className="about-container-syllabus">  
           <div className="main-content-con-syllabus shadow-lg">
                 <h2>CURRICULAM</h2>
