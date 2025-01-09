@@ -16,7 +16,7 @@ import Patents from '../Components/Publication/Patent/Patent.js';
 import MajorEvents from '../Components/Event/MajorEvent/MajorEvents.js'
 
 import {Footer} from '../Components/Home/Footer/Footer.jsx'
-
+import Login from '../Components/authentication/login.js'
 export const RouterPath = () => {
 
   return (
@@ -49,6 +49,7 @@ export const RouterPath = () => {
         <Route path="/People/courses" element={<Courses />} />
 
         
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
 
       </Routes>

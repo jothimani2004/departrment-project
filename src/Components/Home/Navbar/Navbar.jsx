@@ -132,6 +132,12 @@ export const Navbar = () => {
                 CONTACT US
               </a>
             </li>
+
+            <li className="nav-item mx-3 sign-up">
+                <a className="nav-link btn btn-lg custom-login-btn" href="/login">
+              Login/SignUp
+            </a>
+            </li>
           </ul>
         </div>
       </div>
