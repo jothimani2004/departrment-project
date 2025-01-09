@@ -163,6 +163,98 @@
 }
 
 
+.about-container-syllabus{
+  width: 100%;
+  padding: 0rem 15rem;
+} 
+
+.main-content-con-syllabus{
+  padding: 5rem;
+  display: flex;
+  flex-direction:column;
+  gap: 25px;
+ }
+
+ .main-content{
+  display: flex;
+  gap: 1rem;
+  justify-content: space-around;
+ }
+
+ .Core-Competencies{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 3rem 1rem;
+  width: 100%;
+ }
+
+.Core-Competencies ul li{
+  font-size: 1.1rem;
+}
+
+ .Syllabi{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  padding: 3rem 1rem;
+
+
+ }
+
+.syllabus-buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+
+}
+
+ .button-syllabi{
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 10px ;
+  background-color: blue;
+  color: white;
+  width: 80%;
+  cursor: pointer;
+ }
+
+.button-syllabi:hover{
+  background-color: black;
+}
+
+.faculty-main-conn{
+  margin: 10rem 0rem;
+  background-color: rgb(152, 152, 239);
+}
+
+.faculty-img{
+  margin:auto;
+}
+
+.about-container-contact{
+  width: 100%;
+  padding: 0rem 15rem;
+} 
+
+.main-content-con-contact{
+  padding: 5rem;
+  display: flex;
+  flex-direction:column;
+  gap: 25px;
+  align-items: center;
+ }
+
+ .main-content-con-contact p{
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 35px;
+ }
+
+
  @media (min-width: 1200px) and (max-width: 1440px ) {
   .about-container-vm{
    width: 100%;
@@ -176,6 +268,16 @@
   width: 100%;
   padding: 5rem 10rem;
 } 
+.about-container-syllabus{
+  width: 100%;
+  padding: 0rem 10rem;
+} 
+
+.main-content-con-syllabus{
+  padding: 2rem;
+
+}
+
  }
 
 
@@ -192,6 +294,14 @@
   width: 100%;
   padding: 5rem 4rem;
 } 
+.about-container-syllabus{
+  width: 100%;
+  padding: 0rem 4rem;
+} 
+.main-content-con-syllabus{
+  padding: 2rem;
+
+}
 }
 
 
@@ -216,6 +326,19 @@
   width: 100%;
   padding: 2rem 1rem;
 } 
+.about-container-syllabus{
+  width: 100%;
+  padding: 0rem 1rem;
+} 
+.main-content{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.main-content-con-syllabus{
+  padding: 2rem;
+
+}
 }
 
 @media (max-width: 800px ){
