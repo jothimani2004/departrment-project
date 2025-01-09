@@ -1,17 +1,39 @@
-.card {
-    border-radius: 20px;
-    overflow: hidden;
-  }
-  .card-title {
-    color: #343A40;
-  }
-  .card-text {
-    color: #495057;
-  }
-  .event_img {
-    width: 100%;          /* Image will take the full width of the card */
-    height: 300px;        /* Set a fixed height */
-    object-fit: cover;    /* Ensures the image is scaled and cropped to fit without distortion */
-    border-radius: 8px;   /* Optional: Adds rounded corners for better design */
-  }
-  
+.event-card {
+  border-radius: 12px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.event-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+
+
+}
+
+.event-img {
+  height: 500px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.event-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.event-description {
+  font-size: 1rem;
+  color: #555;
+}
+
+button {
+  background-color: #007bff; /* Primary color */
+  border: none;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
