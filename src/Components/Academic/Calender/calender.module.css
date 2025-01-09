@@ -11,6 +11,10 @@
 
 .para{
     padding-left: 2em;
+   
+}
+
+.para p{
     font-size: 1.5em;
 }
 

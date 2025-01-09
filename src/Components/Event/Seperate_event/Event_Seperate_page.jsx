@@ -1,4 +1,5 @@
 import style from "./Event_Seperate_page.module.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 export default function Event_Seperate_page({title}){
@@ -6,30 +7,55 @@ export default function Event_Seperate_page({title}){
 
     return(
         <>
-        <div className={style.main_cover}>
-            <div className={style.pdf_container}>
-                <h1>{title}</h1>
+      <div className="container my-2">
+      {/* Event Header */}
+      <header className="text-center mb-4">
+        <h1 className="display-4 fw-normal">Elan 2025: Annual Cultural Festival</h1>
+        <p className="lead text-muted fw-normal">
+          Join us for a spectacular celebration of culture, music, and art!
+        </p>
+      </header>
 
-                <div className={style.card_size}>
-                <img src="/images/event_page/elan.jpeg" width="100%" height="600px" />
-                </div>
+      {/* Banner Image */}
+      <div
+        className="d-flex justify-content-center align-items-center bg-dark text-white rounded-4"
+        style={{
+          height: "60vh", // Adjusts proportionally for different devices
+          backgroundImage: `url("/images/event_page/elan.jpeg")`, // Replace with your image URL
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      ></div>
 
-            </div>
+      {/* About the Event */}
+      <section className="my-4">
+        <h1>About the Event</h1>
+        <p className="fs-5 ms-2 ms-md-5">
+          Elan 2025 is a premier cultural festival showcasing vibrant music,
+          stunning performances, and a celebration of art and diversity. This
+          year, we’re bringing you an unforgettable experience with renowned
+          artists, cultural workshops, and engaging activities for all age
+          groups.
+        </p>
+      </section>
 
-            <div className={style.content}>
-                <h1>Detail</h1>
-                <div className={style.para}>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, facere. Labore fugit voluptatibus odit perspiciatis explicabo omnis? Neque, tempora incidunt praesentium nesciunt corrupti blanditiis id totam. Provident dicta quos modi!
-                    Magni, facilis nulla harum tempora reiciendis ipsum assumenda ipsam, est perferendis iure adipisci a dicta hic deleniti fugit animi possimus iusto nam eaque odio. Voluptates animi suscipit officia impedit eos!
-                    Quasi error tenetur, repudiandae illum animi iure quam ipsa accusamus officia cumque dolorum praesentium consectetur odio fugit tempora voluptatum veritatis impedit placeat officiis quos adipisci doloribus porro! Vel, atque enim.</p>
-
-                </div>
-
-            </div>
-
-
-            
-        </div>
+      {/* Event Schedule */}
+      <section className="my-4">
+        <h1>Event Schedule</h1>
+        <ul className="list-group ms-2 ms-md-5">
+          <li className="list-group-item fs-5">
+            <strong className="fs-4">Date:</strong> Saturday, February 15, 2025
+          </li>
+          <li className="list-group-item fs-5">
+            <strong className="fs-4">Time:</strong> 10:00 AM to 10:00 PM
+          </li>
+          <li className="list-group-item fs-5">
+            <strong className="fs-4">Venue:</strong> Grand Auditorium, City Center
+          </li>
+        </ul>
+      </section>
+    </div>
         </>
     )
 }
