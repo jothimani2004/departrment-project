@@ -26,21 +26,13 @@ export const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             {/* Dropdown for HOME */}
-            <li className="nav-item dropdown mx-3">
+            <li className="nav-item mx-3">
               <a
-                className="nav-link text-dark dropdown-toggle"
-                href="#"
-                id="homeDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                className="nav-link text-dark "
+                href="/"
               >
                 HOME
               </a>
-              <ul className="dropdown-menu" aria-labelledby="homeDropdown">
-                <li><a className="dropdown-item" href="#">Subitem 1</a></li>
-                <li><a className="dropdown-item" href="#">Subitem 2</a></li>
-              </ul>
             </li>
 
             {/* Dropdown for ABOUT US */}
@@ -54,7 +46,7 @@ export const Navbar = () => {
             <li className="nav-item dropdown mx-3">
               <a
                 className="nav-link text-dark dropdown-toggle"
-                href="#"
+                href="/"
                 id="academicsDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -63,9 +55,9 @@ export const Navbar = () => {
                 ACADEMICS
               </a>
               <ul className="dropdown-menu" aria-labelledby="academicsDropdown">
-                <li><a className="dropdown-item" href="#">Calender</a></li>
-                <li><a className="dropdown-item" href="#">Courses</a></li>
-                <li><a className="dropdown-item" href="#">Time Table</a></li>
+                <li><a className="dropdown-item" href="/Academic/calander">Calender</a></li>
+                <li><a className="dropdown-item" href="/Academic/courses">Courses</a></li>
+                <li><a className="dropdown-item" href="/Academic/Time_table">Time Table</a></li>
                 <li><a className="dropdown-item" href="#">Student Data Verification</a></li>
               </ul>
             </li>
@@ -74,7 +66,7 @@ export const Navbar = () => {
             <li className="nav-item dropdown mx-3">
               <a
                 className="nav-link text-dark dropdown-toggle"
-                href="#"
+                href="/"
                 id="peopleDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -83,15 +75,15 @@ export const Navbar = () => {
                 PEOPLE
               </a>
               <ul className="dropdown-menu" aria-labelledby="peopleDropdown">
-                <li><a className="dropdown-item" href="#">Students</a></li>
-                <li><a className="dropdown-item" href="#">Faculty</a></li>
-                <li><a className="dropdown-item" href="#">Alumni</a></li>
+                <li><a className="dropdown-item" href="/People/Students">Students</a></li>
+                <li><a className="dropdown-item" href="/People/Faculty">Faculty</a></li>
+                <li><a className="dropdown-item" href="/People/Alumni">Alumni</a></li>
               </ul>
             </li>
 
             {/* Dropdown for RESOURCE */}
             <li className="nav-item dropdown mx-3">
-              <a className="nav-link text-dark" href="#">
+              <a className="nav-link text-dark" href="https://www.zenotion.college/">
                 RESOURCE
               </a>
             </li>
@@ -109,9 +101,9 @@ export const Navbar = () => {
                 PUBLICATION
               </a>
               <ul className="dropdown-menu" aria-labelledby="publicationDropdown">
-                <li><a className="dropdown-item" href="#">Journal</a></li>
-                <li><a className="dropdown-item" href="#">Paper</a></li>
-                <li><a className="dropdown-item" href="#">Patent</a></li>
+                <li><a className="dropdown-item" href="/Publications/journals">Journal</a></li>
+                <li><a className="dropdown-item" href="/Publications/conferences">Paper</a></li>
+                <li><a className="dropdown-item" href="/Publications/patents">Patent</a></li>
               </ul>
             </li>
 
@@ -128,9 +120,9 @@ export const Navbar = () => {
                 EVENTS
               </a>
               <ul className="dropdown-menu" aria-labelledby="eventsDropdown">
-                <li><a className="dropdown-item" href="#">Major Events</a></li>
-                <li><a className="dropdown-item" href="#">CoCurricular events</a></li>
-                <li><a className="dropdown-item" href="#">Extra Curricular Events</a></li>
+                <li><a className="dropdown-item" href="/Event/Major_events/Event_detail">Major Events</a></li>
+                <li><a className="dropdown-item" href="/Event/Cocurrcular_events">CoCurricular events</a></li>
+                <li><a className="dropdown-item" href="/Event/Extra_Curricular_events">Extra Curricular Events</a></li>
               </ul>
             </li>
 
