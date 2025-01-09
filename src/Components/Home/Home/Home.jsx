@@ -9,7 +9,7 @@ export const Home = () =>{
     window.addEventListener("scroll",()=>{
       let x = window.scrollY
       console.log(x)
-      if (x>1167){
+      if (x>1767){
         setisstat(true)           
       }else{
         setisstat(false)
