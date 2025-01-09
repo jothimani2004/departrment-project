@@ -1,0 +1,33 @@
+.mani-container{
+    padding: 8rem 41rem;
+}
+@media (min-width: 1200px) and (max-width: 1440px ) {
+    .mani-container{
+        padding: 8rem 25rem;
+
+    }
+}
+@media (min-width: 1000px) and (max-width: 1200px ) {
+    .mani-container{
+        padding: 8rem 20rem;
+
+    }
+}
+@media (max-width: 1000px ) {
+    .mani-container{
+        padding: 8rem 10rem;
+
+    }
+}
+@media (max-width: 715px){
+    .mani-container{
+        padding: 8rem 5rem;
+
+    }
+}
+@media (max-width: 500px){
+    .mani-container{
+        padding: 8rem 1rem;
+
+    }
+}
