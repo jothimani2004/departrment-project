@@ -1,6 +1,8 @@
 import "./Home.css"
 import React, { useEffect ,useState} from 'react';
+import { useRef } from 'react';
 import CountUp from 'react-countup';
+import Slider from 'react-slick';
 
 export const Home = () =>{
     const [isstat,setisstat] = useState(false)
@@ -13,7 +15,42 @@ export const Home = () =>{
         setisstat(false)
       }
     })
-
+    const staffData = [
+      { id: 1, name: 'John Doe', role: 'Manager', image: 'https://via.placeholder.com/150' },
+      { id: 2, name: 'Jane Smith', role: 'Developer', image: 'https://via.placeholder.com/150' },
+      { id: 3, name: 'Emily Johnson', role: 'Designer', image: 'https://via.placeholder.com/150' },
+      { id: 4, name: 'Michael Brown', role: 'Marketing', image: 'https://via.placeholder.com/150' },
+      { id: 5, name: 'Sara Davis', role: 'HR', image: 'https://via.placeholder.com/150' },
+      { id: 6, name: 'David Wilson', role: 'Engineer', image: 'https://via.placeholder.com/150' },
+    ];
+  
+    const sliderRef = useRef(null);
+  
+    const sliderSettings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 1,
+      autoplay: true, // Auto-slide
+      autoplaySpeed: 3000, // 3 seconds
+      responsive: [
+        {
+          breakpoint: 768, // For small screens
+          settings: {
+            slidesToShow: 1,
+          },
+        },
+        {
+          breakpoint: 1024, // For medium screens
+          settings: {
+            slidesToShow: 2,
+          },
+        },
+      ],
+    };
+  
+  
 
     return (
         <>
@@ -139,12 +176,88 @@ export const Home = () =>{
           </div>
         </div>
         </div>
+        
         <div className="about-container-syllabus">  
           <div className="main-content-con-syllabus shadow-lg">
-                <h2>curriculam</h2>
-                <div className="main-content"></div>
+                <h2>CURRICULAM</h2>
+                <div className="main-content">
+                  <div className="Core-Competencies shadow-lg">
+                    <h2>Core Competencies</h2>
+                    <ul>
+                      <li>Internet of things</li>
+                      <li>Cloud computing</li>
+                      <li>Information Security</li>
+                      <li>Block Chain Technology</li>
+                    </ul>
+                  </div>
+                  <div className="Syllabi shadow-lg">
+                    <h2>Curriculum and Syllabi</h2>
+                    <div className="syllabus-buttons ">
+                      <div className="button-syllabi">UG CURRICULUM AND SYLLABI 2020-2021</div>
+                      <div className="button-syllabi">UG CURRICULUM AND SYLLABI 2023-2024</div>
+                    </div>
+                  </div>
+                </div>
           </div>
         </div>
+
+
+<div className="w-100 py-3 faculty-main-conn" style={{ overflow: 'hidden', position: 'relative'}}>
+      <h2 className="text-center mb-4 py-2">Faculty Members</h2>
+      <div style={{ position: 'relative' }} >
+        {/* Custom Left and Right Buttons */}
+        <button
+          className="btn btn-primary"
+          style={{
+            position: 'absolute',
+            top: '39%', // Center vertically
+            left: '10px', // Distance from the left edge
+            zIndex: 10,
+            transform: 'translateY(-50%)', // Adjust for true vertical centering
+          }}
+          onClick={() => sliderRef.current.slickPrev()}
+        >
+          &lt;
+        </button>
+        <button
+          className="btn btn-primary"
+          style={{
+            position: 'absolute',
+            top: '39%', // Center vertically
+            right: '10px', // Distance from the right edge
+            zIndex: 10,
+            transform: 'translateY(-50%)', // Adjust for true vertical centering
+          }}
+          onClick={() => sliderRef.current.slickNext()}
+        >
+          &gt;
+        </button>
+
+        {/* Slick Slider */}
+        <Slider ref={sliderRef} {...sliderSettings}>
+          {staffData.map((staff) => (
+            <div key={staff.id} className="faculty-conn">
+              <img
+                src={staff.image}
+                className="rounded-circle faculty-img"
+                alt={staff.name}
+              />
+              <h5 className="mt-3 text-center">{staff.name}</h5>
+              <p className="mt-3 text-center">{staff.role}</p>
+            </div>
+          ))}
+        </Slider>
+      </div>
+    </div>
+        
+      <div className="about-container-contact">
+        <div className="main-content-con-contact shadow-lg">
+          <h2>Contact</h2>
+          <p>If you have any inquiries regarding the department, please feel free to reach out to us.<br></br> We are here to assist you with any questions or information you may need.
+<br></br>Dr. N. PALANIVEL, Professor & Head,
+Department of CSE(Internet of Things and Cyber security including Block chain technology)</p>
+        </div>
+      </div>
 
 
         </>

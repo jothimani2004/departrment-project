@@ -15,6 +15,7 @@ import Patents from '../Components/Publication/Patent/Patent.js';
 
 import MajorEvents from '../Components/Event/MajorEvent/MajorEvents.js'
 
+import {Footer} from '../Components/Home/Footer/Footer.jsx'
 
 export const RouterPath = () => {
 
@@ -42,6 +43,7 @@ export const RouterPath = () => {
         <Route path="/" element={<Home />} />
 
       </Routes>
+      <Footer/>
     </div>
     </>
   );
