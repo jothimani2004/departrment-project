@@ -14,11 +14,15 @@
 
 /* Customize font size */
 .navbar .nav-link {
-  font-size: 1.05rem; /* Increase font size */
+  font-size: 0.8rem; /* Increase font size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container-fluid{
-  margin: 3rem;
+  margin: 2rem ;
+
   width: 100%;
 }
 
@@ -55,12 +59,13 @@
   background-color: #D9EAFD;
   border-radius: 10px;
   padding: 1px;
+  
 }
 
 
 /* Apply styles specifically to the 'Login/SignUp' button only */
 .navbar .nav-item.sign-up .nav-link.custom-login-btn {
-  font-size: 1.1rem; /* Increase font size */
+  font-size: 1rem; /* Increase font size */
   border: 2px solid #000; /* Optional: Add border */
   border-radius: 5px; /* Optional: Round edges */
   background-color: #f8f9fa; /* Light background color */
@@ -73,5 +78,3 @@
   background-color: #000; /* Background color on hover */
   color: white !important; /* Force white text color on hover */
 }
-
-

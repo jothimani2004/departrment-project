@@ -4,10 +4,10 @@ import './Navbar.css';
 
 export const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-xl navbar-light sticky-top">
+    <nav className="navbar  navbar-expand-xxl navbar-light sticky-top">
       <div className="container-fluid">
         {/* Logo */}
-        <a className="navbar-brand text-dark" href="#">Department of ICB</a>
+        <a className="navbar-brand text-dark" href="/">Department of ICB</a>
 
         {/* Hamburger Button */}
         <button
@@ -135,7 +135,7 @@ export const Navbar = () => {
 
             <li className="nav-item mx-3 sign-up">
                 <a className="nav-link btn btn-lg custom-login-btn" href="/login">
-              Login/SignUp
+              Log IN
             </a>
             </li>
           </ul>
