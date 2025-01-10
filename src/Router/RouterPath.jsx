@@ -20,9 +20,6 @@ import Login from '../Components/authentication/login.js'
 import About_us from "../Components/About_us/About_us.jsx";
 import ResetPassword from '../Components/authentication/resetpassword.js'
 
-
-import Login from '../Components/authentication/login.js';
-
 import React, { useContext } from 'react';
 
 import DomainRoute from '../Components/Resource/domain/DomainRoute.jsx';

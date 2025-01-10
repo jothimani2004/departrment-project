@@ -83,7 +83,7 @@ export const Navbar = () => {
 
             {/* Dropdown for RESOURCE */}
             <li className="nav-item dropdown mx-3">
-              <a className="nav-link text-dark" href="https://www.zenotion.college/">
+              <a className="nav-link text-dark" href="/resourse/CyberSecurity">
                 RESOURCE
               </a>
             </li>
