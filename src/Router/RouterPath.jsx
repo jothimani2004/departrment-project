@@ -21,7 +21,21 @@ import About_us from "../Components/About_us/About_us.jsx";
 import ResetPassword from '../Components/authentication/resetpassword.js'
 
 
+import Login from '../Components/authentication/login.js';
+
+import React, { useContext } from 'react';
+
+import DomainRoute from '../Components/Resource/domain/DomainRoute.jsx';
+import PdfViewer from '../Components/Resource/pdfview/PdfViewer.jsx';
+import NoteViewer from '../Components/Resource/pdfview/NoteViewer.jsx';
+import { DomainContext } from '../Components/Resource/domain/DomainContext.jsx'
+
 export const RouterPath = () => {
+
+  const domainnames = ["InternetOfThings", "CyberSecurity", "BlockchainTechnology"];
+  const { domainDetails, resourses } = useContext(DomainContext);
+  
+  
 
   return (
     <>
@@ -56,6 +70,60 @@ export const RouterPath = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Home />} />
+
+
+
+
+
+
+
+        <Route
+          path="resourse/:domain"
+          element={
+            <DomainRoute 
+              domainnames={domainnames} 
+              domainDetails={domainDetails} 
+            />
+          }
+        />
+
+        {/* Domain + Resource Route */}
+        <Route
+          path="resourse/:domain/:resourse"
+          element={
+            <DomainRoute 
+              resourses={resourses}
+              domainnames={domainnames} 
+              domainDetails={domainDetails} 
+            />
+          }
+        />
+
+        {/* Domain + Resource + Year Route */}
+        <Route
+          path="resourse/:domain/:resourse/:year"
+          element={
+            <DomainRoute 
+              resourses={resourses}
+              domainnames={domainnames} 
+            />
+          }
+        />
+
+        {/* PdfViewer Route with Query Params */}
+        <Route
+          path="resourse/:domain/:resourse/:year/pdf"
+          element={<PdfViewer />}
+        />
+
+
+<Route
+  path="resourse/notes"
+  element={<NoteViewer />}
+/>
+
+
+
 
       </Routes>
     </div>
