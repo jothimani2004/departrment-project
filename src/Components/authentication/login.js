@@ -31,7 +31,7 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log('Login successful');
-        navigate('/mentalhealthcheckin');
+        navigate('/');
       }
     } catch (err) {
       if (err.response?.data?.message === 'Account locked. Please try again later or reset your password.') {
