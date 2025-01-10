@@ -68,8 +68,9 @@ const Login = () => {
   };
 
   return (
-<div className="min-h-screen flex items-center justify-center bg-gray-100 mani-container">
-<div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full p-5">
+    <div className="mani-container hirthick-container">
+      <div className="card shadow-sm w-100 p-0" style={{ maxWidth: '500px' }}>
+<div className="card-body">
 <h2 className="text-center mb-4">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
@@ -110,7 +111,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="btn btn-primary w-100 mb-3"
+            className="btn btn-success w-100 mb-3"
             disabled={loading}
           >
             {loading ? (
@@ -124,12 +125,6 @@ const Login = () => {
           </button>
         </form>
         {error && <p className="text-danger text-center">{error}</p>}
-        <p className="text-center">
-          Don't have an account?{' '}
-          <a href="/#/register" className="text-primary">
-            Register
-          </a>
-        </p>
         {/* Forgot Password Link */}
         <div className="text-center mt-3">
           <a
@@ -234,6 +229,7 @@ const Login = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

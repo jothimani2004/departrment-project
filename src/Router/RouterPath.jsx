@@ -18,6 +18,9 @@ import MajorEvents from '../Components/Event/MajorEvent/MajorEvents.js'
 import {Footer} from '../Components/Home/Footer/Footer.jsx'
 import Login from '../Components/authentication/login.js'
 import About_us from "../Components/About_us/About_us.jsx";
+import ResetPassword from '../Components/authentication/resetpassword.js'
+
+
 export const RouterPath = () => {
 
   return (
@@ -51,6 +54,7 @@ export const RouterPath = () => {
 
         <Route path="/About_us" element={<About_us/>} />        
         <Route path="/login" element={<Login />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Home />} />
 
       </Routes>
