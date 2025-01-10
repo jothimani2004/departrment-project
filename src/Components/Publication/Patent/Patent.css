@@ -1,0 +1,31 @@
+@media (max-width: 576px) {
+    .card-title {
+      font-size: 1.2rem;
+    }
+    .shadow-lg {
+        box-shadow: none;
+      }
+  }
+  @media (max-width: 325px) {
+    .card-title {
+        font-size: 1rem;
+      }
+      .shadow-lg {
+          box-shadow: none;
+        }
+  }
+  
+
+  .patent-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table, Form, Button } from 'react-bootstrap';
+import { Table, Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const StudentTable = () => {
@@ -8,24 +8,33 @@ const StudentTable = () => {
   const [courseFilter, setCourseFilter] = useState('');
   const [yearFilter, setYearFilter] = useState('');
 
-  // Fetch students data from the backend
+  // Fetch students data from the backend (using mock data for now)
   useEffect(() => {
-    axios.get('http://localhost:5000/students')
-      .then(response => setStudents(response.data))
-      .catch(error => console.error('Error fetching students:', error));
+    // Sample data
+    const mockData = [
+      { registerNumber: 'S12345', name: 'John Doe',  year: '1' },
+      { registerNumber: 'S12346', name: 'Jane Smith',  year: '2' },
+      { registerNumber: 'S12347', name: 'Sam Brown',  year: '3' },
+      { registerNumber: 'S12348', name: 'Anna Taylor', year: '4' },
+      { registerNumber: 'S12349', name: 'Michael Johnson', year: '1' },
+    ];
+    setStudents(mockData);
   }, []);
 
   // Filter students based on course type and year
   const filteredStudents = students.filter(student =>
-    (courseFilter === '' || student.courseType === courseFilter) &&
     (yearFilter === '' || student.year === yearFilter)
   );
 
   return (
-    <div className="container my-5">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="fw-bold">Student List</h2>
-        <div className="d-flex gap-3">
+    <Container className="my-5">
+      <Row className="mb-4">
+        <Col md={8}>
+          <h2 className="fw-bold">Student List</h2>
+        </Col>
+        <Col md={4} className="d-flex gap-3 align-items-center justify-content-end">
+         
+
           {/* Filter by Year */}
           <Form.Select
             value={yearFilter}
@@ -39,27 +48,29 @@ const StudentTable = () => {
             <option value="3">Year 3</option>
             <option value="4">Year 4</option>
           </Form.Select>
-        </div>
-      </div>
+        </Col>
+      </Row>
 
       {/* Table */}
       <Table striped bordered hover responsive variant="light">
         <thead>
           <tr className="table-primary">
-            <th>Student Register Number</th>
-            <th>Student Name</th>
-            <th>View Details</th>
+            <th>Register Number</th>
+            <th>Name</th>
+           
+            <th>Year</th>
+            <th>Details</th>
           </tr>
         </thead>
         <tbody>
-           
-        
           {filteredStudents.length > 0 ? filteredStudents.map(student => (
             <tr key={student.registerNumber}>
               <td>{student.registerNumber}</td>
               <td>{student.name}</td>
+              
+              <td>{student.year}</td>
               <td>
-                <Link to={`/student/${student.registerNumber}`} className="btn btn-primary btn-sm">
+                <Link to={`/People/Students/Profile?register_no=${student.registerNumber}`} className="btn btn-primary btn-sm">
                   View Details
                 </Link>
               </td>
@@ -72,7 +83,7 @@ const StudentTable = () => {
         </tbody>
       </Table>
 
-      {/* No students available message */}
+      {/* Reset Filters */}
       {filteredStudents.length === 0 && (
         <div className="text-center">
           <Button variant="secondary" onClick={() => { setCourseFilter(''); setYearFilter(''); }}>
@@ -80,7 +91,7 @@ const StudentTable = () => {
           </Button>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

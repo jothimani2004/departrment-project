@@ -34,10 +34,10 @@ const FacultyList = () => {
   ];
 
   return (
-    <div className="container my-4">
+    <div className="container mt-0 pt-4">
       <h2 className="mb-4">Faculty</h2>
       {facultyData.map((faculty, index) => (
-        <FacultyCard key={index} {...faculty} />
+        <FacultyCard key={index} {...faculty} animationDelay={index * 0.3} />
       ))}
     </div>
   );

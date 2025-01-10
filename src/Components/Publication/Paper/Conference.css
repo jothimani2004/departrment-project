@@ -1,0 +1,54 @@
+/* Animation for the conference cards */
+.conference-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Text Adjustments */
+  @media (max-width: 576px) {
+    .conference-card .card-body {
+      padding: 1rem;
+    }
+    
+    .conference-card .card-title {
+      font-size: 1.2rem;
+    }
+  
+    .conference-card .card-text {
+      font-size: 0.9rem;
+    }
+  
+    .conference-card .fw-bold {
+      font-size: 1rem;
+    }
+  }
+  
+  /* Ensure that the card text doesn't overflow or get too cramped */
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+  }
+  
+  .card-text a {
+    color: #007bff;
+  }
+  
+  .card-text a:hover {
+    text-decoration: underline;
+  }
+  

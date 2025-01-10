@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Form, Spinner } from 'react-bootstrap';
+import { Table, Form, Spinner, Container } from 'react-bootstrap';
 
 const CourseTable = () => {
   const [courses, setCourses] = useState([]);
@@ -29,7 +29,7 @@ const CourseTable = () => {
   });
 
   return (
-    <div className="container my-5">
+    <Container className="my-5">
       <h2 className="text-center mb-4">Courses Offered by the Department</h2>
       <p className="text-muted text-center mb-4">
         Here is a list of all the courses offered by our department. Use the filter to refine your search.
@@ -48,7 +48,7 @@ const CourseTable = () => {
         </Form.Select>
       </div>
 
-      {/* Table */}
+      {/* Loading Spinner */}
       {loading ? (
         <div className="d-flex justify-content-center">
           <Spinner animation="border" variant="primary" />
@@ -81,7 +81,7 @@ const CourseTable = () => {
           </tbody>
         </Table>
       )}
-    </div>
+    </Container>
   );
 };
 
