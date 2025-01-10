@@ -37,7 +37,7 @@ export const Navbar = () => {
 
             {/* Dropdown for ABOUT US */}
             <li className="nav-item dropdown">
-              <a className="nav-link text-dark" href="#">
+              <a className="nav-link text-dark" href="/About_us">
                 ABOUT US
               </a>
             </li>
@@ -120,7 +120,7 @@ export const Navbar = () => {
                 EVENTS
               </a>
               <ul className="dropdown-menu" aria-labelledby="eventsDropdown">
-                <li><a className="dropdown-item" href="/Event/Major_events/Event_detail">Major Events</a></li>
+                <li><a className="dropdown-item" href="/Event/Major_events">Major Events</a></li>
                 <li><a className="dropdown-item" href="/Event/Cocurrcular_events">CoCurricular events</a></li>
                 <li><a className="dropdown-item" href="/Event/Extra_Curricular_events">Extra Curricular Events</a></li>
               </ul>
@@ -128,7 +128,7 @@ export const Navbar = () => {
 
             {/* Dropdown for CONTACT US */}
             <li className="nav-item dropdown mx-3">
-              <a className="nav-link text-dark" href="#">
+              <a className="nav-link text-dark" href="#Contact">
                 CONTACT US
               </a>
             </li>

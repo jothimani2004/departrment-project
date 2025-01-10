@@ -3,6 +3,7 @@ import React, { useEffect ,useState} from 'react';
 import { useRef } from 'react';
 import CountUp from 'react-countup';
 import Slider from 'react-slick';
+import About_us from "../../About_us/About_us";
 
 export const Home = () =>{
     const [isstat,setisstat] = useState(false)
@@ -76,25 +77,15 @@ export const Home = () =>{
         </button>
         </div>
 
-        <div className="about-container">
-            <div className="main-content-con shadow-lg">
-                <div className="top-con">
-                <div className="text-con">
-                    <h2>About the Department</h2>
-                    <p>The Department of CSE(ICB) has been continuously making progress in Teaching and R&D Activities. The Department was started with an intake of 60 students in 2020. The Department is boasts a dedicated department library stocked with the newest Titles, Editions, Journals and Magazines all connected to the internet. To enhance the Technical skills of students and prepare them for Global competition, the Department organizes Seminars, Workshops, and Guest lectures. The fields of Internet of Things (IoT), Cyber Security, and Blockchain represent dynamic and rapidly evolving areas in technology, offering significant career growth opportunities. IoT refers to the interconnected network of devices that communicate and exchange data, driving innovations in smart homes, healthcare, and industrial automation. Cyber Security is critical in protecting these interconnected systems from threats and ensuring data integrity, privacy, and compliance. Blockchain technology, known for its secure and transparent ledger system, is transforming industries such as finance, supply chain, and healthcare by providing decentralized and tamper-proof transactions.</p>
-                </div>
-                <div className="img-con">
-                <img src="/images/about_dept.png" alt="" className="dept-img"/>
-                </div>
-                </div>
-                <div className="bottom-con">Careers in these fields are in high demand, with roles such as IoT architects, Cyber security analysts, and Blockchain developers offering lucrative and fulfilling paths. Professionals in these domains not only contribute to technological advancements but also play a vital role in safeguarding digital ecosystems making them essential in today’s interconnected world. The future for IoT, Cyber Security, and Blockchain departments is bright, with ample opportunities for innovation, application, and professional growth as these technologies continue to evolve and integrate into the fabric of modern society. Vision and Mission
-                </div>
-                
-            </div>
-        </div>
+       
+      {/* About department */}
+        <About_us/>
 
-        <div className="about-container-vm ">
-            <div className="main-content-con-vm shadow-lg">
+
+      {/* Vision and Mission for the department */}
+
+        <div className="about-container-vm p_b">
+            <div className="main-content-con-vm shadow-lg s_b t_c rounded-3">
                 <div className="text-con">
                     <h2>Department Vision and Mission</h2>
                     <div className="vm-con">
@@ -121,7 +112,9 @@ export const Home = () =>{
 
         </div>
 
-        <div className="stats-container">
+          
+
+        <div className="stats-container si_b t_c">
           
             <div className="stat-item">
               <h3>Graudation</h3>
@@ -157,7 +150,7 @@ export const Home = () =>{
         </div>
 
         <div className="about-container-welcome">
-            <div className="main-content-con-welcome shadow-lg">
+            <div className="main-content-con-welcome shadow-lg  s_b t_c rounded-3">
           <div className="heading-name">
             <h2>Welcome Message</h2>
             <div className="name">
@@ -178,10 +171,10 @@ export const Home = () =>{
         </div>
         
         <div className="about-container-syllabus">  
-          <div className="main-content-con-syllabus shadow-lg">
+          <div className="main-content-con-syllabus shadow-lg  s_b t_c rounded-3">
                 <h2>CURRICULAM</h2>
                 <div className="main-content">
-                  <div className="Core-Competencies shadow-lg">
+                  <div className="Core-Competencies shadow-lg s2_b rounded-4">
                     <h2>Core Competencies</h2>
                     <ul>
                       <li>Internet of things</li>
@@ -190,11 +183,11 @@ export const Home = () =>{
                       <li>Block Chain Technology</li>
                     </ul>
                   </div>
-                  <div className="Syllabi shadow-lg">
+                  <div className="Syllabi shadow-lg s2_b rounded-4">
                     <h2>Curriculum and Syllabi</h2>
                     <div className="syllabus-buttons ">
-                      <div className="button-syllabi">UG CURRICULUM AND SYLLABI 2020-2021</div>
-                      <div className="button-syllabi">UG CURRICULUM AND SYLLABI 2023-2024</div>
+                      <div className="button-syllabi s_b t_c">UG CURRICULUM AND SYLLABI 2020-2021</div>
+                      <div className="button-syllabi s_b t_c">UG CURRICULUM AND SYLLABI 2023-2024</div>
                     </div>
                   </div>
                 </div>
@@ -202,12 +195,12 @@ export const Home = () =>{
         </div>
 
 
-<div className="w-100 py-3 faculty-main-conn" style={{ overflow: 'hidden', position: 'relative'}}>
+<div className="w-100 py-3 faculty-main-conn si_b t_c" style={{ overflow: 'hidden', position: 'relative'}}>
       <h2 className="text-center mb-4 py-2">Faculty Members</h2>
       <div style={{ position: 'relative' }} >
         {/* Custom Left and Right Buttons */}
         <button
-          className="btn btn-primary"
+          className="btn btn-primary rounded-1"
           style={{
             position: 'absolute',
             top: '39%', // Center vertically
@@ -220,7 +213,7 @@ export const Home = () =>{
           &lt;
         </button>
         <button
-          className="btn btn-primary"
+          className="btn btn-primary rounded-1 "
           style={{
             position: 'absolute',
             top: '39%', // Center vertically
@@ -250,8 +243,8 @@ export const Home = () =>{
       </div>
     </div>
         
-      <div className="about-container-contact">
-        <div className="main-content-con-contact shadow-lg">
+      <div className="about-container-contact ">
+        <div className="main-content-con-contact shadow-lg s_b rounded-3 t_c">
           <h2>Contact</h2>
           <p>If you have any inquiries regarding the department, please feel free to reach out to us.<br></br> We are here to assist you with any questions or information you may need.
 <br></br>Dr. N. PALANIVEL, Professor & Head,

@@ -88,7 +88,7 @@ const Conferences = () => {
             animationDelay: `${index * 0.3}s`,
           }}
         >
-          <Card.Body>
+          <Card.Body className="s_b t_c rounded-3">
             <Card.Title className="fw-bold">{conference.title}</Card.Title>
             <Card.Text>
               <strong>Authors:</strong> {conference.authors}

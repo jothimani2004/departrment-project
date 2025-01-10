@@ -52,7 +52,7 @@ const MajorEvents = () => {
                 alt={event.title}
                 className="event-img"
               />
-              <Card.Body>
+              <Card.Body className="s_b t_c rounded-3">
                 <Card.Title className="event-title">{event.title}</Card.Title>
                 <Card.Text className="event-description">
                   {event.description}
@@ -66,7 +66,7 @@ const MajorEvents = () => {
                   variant="primary"
                   size="sm"
                   className="mt-2"
-                  href={event.link}
+                  href="/Event/Major_events/Event_detail"
                 >
                   Learn More
                 </Button>

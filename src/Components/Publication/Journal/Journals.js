@@ -68,7 +68,7 @@ const Journals = () => {
   
 
   return (
-    <Container className="mt-0 pt-4">
+    <Container className="mt-0 pt-4 ">
       <h2 className="mb-4 text-center">Journals</h2>
       {journals.map((journal, index) => (
         <Card
@@ -78,7 +78,7 @@ const Journals = () => {
             animationDelay: `${index * 0.3}s`,
           }}
         >
-          <Card.Body>
+          <Card.Body className="s_b rounded-3 t_c">
             <Card.Title className="fw-bold">{journal.title}</Card.Title>
             <Card.Text>
               <strong>Authors:</strong> {journal.authors}

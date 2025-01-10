@@ -4,12 +4,14 @@ import "./Faculty.css";
 const FacultyCard = ({ photo, name, degree, role, joiningDate, description, animationDelay }) => {
   return (
     <div
-      className="card faculty-card mb-4 p-4 border-2 rounded-4 fade-in-up"
+      className="card faculty-card mb-4 p-4 border-2 rounded-4 fade-in-up t_c"
       style={{
-        animationDelay: `${animationDelay}s`, // Delay for staggered animation
+        animationDelay: `${animationDelay}s`, 
+        background:"#E1F7F5",
+        // Delay for staggered animation
       }}
     >
-      <div className="row g-4 flex-column flex-md-row align-items-center align-items-md-start">
+      <div className="row g-4 flex-column flex-md-row align-items-center align-items-md-start ">
         {/* Faculty Photo */}
         <div className="col-auto text-center">
           <img

@@ -7,7 +7,7 @@ export default function Event_Seperate_page({title}){
 
     return(
         <>
-      <div className="container my-2">
+      <div className="container my-2 s_b px-4 py-3 rounded-3 t_c">
       {/* Event Header */}
       <header className="text-center mb-4">
         <h1 className="display-4 fw-normal">Elan 2025: Annual Cultural Festival</h1>
@@ -41,16 +41,16 @@ export default function Event_Seperate_page({title}){
       </section>
 
       {/* Event Schedule */}
-      <section className="my-4">
+      <section className="my-4 ">
         <h1>Event Schedule</h1>
-        <ul className="list-group ms-2 ms-md-5">
-          <li className="list-group-item fs-5">
+        <ul className="list-group ms-2 ms-md-5 ">
+          <li className="list-group-item fs-5 s2_b">
             <strong className="fs-4">Date:</strong> Saturday, February 15, 2025
           </li>
-          <li className="list-group-item fs-5">
+          <li className="list-group-item fs-5 s2_b">
             <strong className="fs-4">Time:</strong> 10:00 AM to 10:00 PM
           </li>
-          <li className="list-group-item fs-5">
+          <li className="list-group-item fs-5 s2_b">
             <strong className="fs-4">Venue:</strong> Grand Auditorium, City Center
           </li>
         </ul>

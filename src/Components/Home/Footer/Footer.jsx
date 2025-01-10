@@ -1,6 +1,6 @@
 export const Footer = () =>{
     return (
-        <footer className="bg-dark text-white py-4">
+        <footer className="bg-dark text-white py-4" id="Contact">
           <div className="container">
             <div className="row">
               {/* About Section */}

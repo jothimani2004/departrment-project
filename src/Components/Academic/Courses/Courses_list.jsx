@@ -29,16 +29,16 @@ const CourseTable = () => {
   });
 
   return (
-    <Container className="my-5">
+    <Container className="my-5 t_c">
       <h2 className="text-center mb-4">Courses Offered by the Department</h2>
-      <p className="text-muted text-center mb-4">
+      <p className="text-muted text-center mb-4 " >
         Here is a list of all the courses offered by our department. Use the filter to refine your search.
       </p>
 
       {/* Filter Dropdown */}
-      <div className="d-flex justify-content-end mb-3">
+      <div className="d-flex justify-content-end mb-3 ">
         <Form.Select
-          className="w-auto"
+          className="w-auto rounded-3"
           value={filter}
           onChange={e => setFilter(e.target.value)}
         >
@@ -50,12 +50,12 @@ const CourseTable = () => {
 
       {/* Loading Spinner */}
       {loading ? (
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center rounded-3">
           <Spinner animation="border" variant="primary" />
         </div>
       ) : (
-        <Table striped bordered hover responsive variant="light">
-          <thead className="bg-primary text-white">
+        <Table striped bordered hover responsive variant="light" >
+          <thead className="bg-primary text-white ">
             <tr>
               <th>Subject Code</th>
               <th>Course Name</th>

@@ -213,17 +213,18 @@
 }
 
  .button-syllabi{
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 10px;
   border-radius: 10px ;
   background-color: blue;
   color: white;
   width: 80%;
   cursor: pointer;
+  
  }
 
 .button-syllabi:hover{
-  background-color: black;
+  background-color: rgb(202, 228, 242);
 }
 
 .faculty-main-conn{

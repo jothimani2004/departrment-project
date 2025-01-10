@@ -72,8 +72,9 @@ const Patents = () => {
               style={{
                 animationDelay: `${index * 0.3}s`,
               }}
+              
             >
-              <Card.Body>
+              <Card.Body className="s_b rounded-3">
                 <Card.Title className="fw-bold text-dark">{patent.title}</Card.Title>
                 <Card.Text>
                   <strong>Application Number:</strong> {patent.applicationNumber}

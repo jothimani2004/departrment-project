@@ -17,12 +17,13 @@ import MajorEvents from '../Components/Event/MajorEvent/MajorEvents.js'
 
 import {Footer} from '../Components/Home/Footer/Footer.jsx'
 import Login from '../Components/authentication/login.js'
+import About_us from "../Components/About_us/About_us.jsx";
 export const RouterPath = () => {
 
   return (
     <>
       <Navbar/>
-    <div>
+    <div className="p_b p-1">
       <Routes>
 
 
@@ -48,13 +49,13 @@ export const RouterPath = () => {
         <Route path="/People/Students" element={<Student_list />} />
         <Route path="/People/courses" element={<Courses />} />
 
-        
+        <Route path="/About_us" element={<About_us/>} />        
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
 
       </Routes>
-      <Footer/>
     </div>
+      <Footer/>
     </>
   );
 };
