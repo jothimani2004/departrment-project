@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { jwtDecode } from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 const Login = () => {
   const [loginInput, setloginInput] = useState('');
@@ -28,10 +30,12 @@ const Login = () => {
         { loginInput, password },
         { withCredentials: true }
       );
-
       if (response.status === 200) {
         console.log('Login successful');
-        navigate('/');
+        const token = Cookies.get('jwtToken');
+        const decodedToken = jwtDecode(token);
+        console.log(decodedToken.jwtPayload.reg)
+        navigate(`/People/Students/Profile/Edit?register_no=${decodedToken.jwtPayload.reg}`);
       }
     } catch (err) {
       if (err.response?.data?.message === 'Account locked. Please try again later or reset your password.') {
