@@ -1,73 +1,64 @@
 const express = require('express');
 const multer = require('multer');
-const { Client } = require('pg'); // Correct import
 const cors = require('cors');
 const cron = require('node-cron');
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
+const { MongoClient, ObjectId } = require('mongodb');
+
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS for frontend-backend communication
-app.use(express.json()); // Handle JSON data
-
-
-const CLIENT_ID = '745382712302-50snqotru2jjk9r4c5b43q1dpd2bjf9u.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
-const REFRESH_TOKEN = '1//04T9h6YvqPZAUCgYIARAAGAQSNwF-L9IrFQa04S5fTghHNZCAH7-gSrzDYI-5d0caoNoZY8dZvrZxs33zro7_134qCb3i8NnUZqY';
-
-const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
-oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
-// PostgreSQL connection
-const db = new Client({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'researchpapers',
-  password: 'mass',
-  port: 5432,
-});
-
-// Connect to the database
-db.connect()
-  .then(() => {
-    console.log('Connected to the database');
-  })
-  .catch(err => {
-    console.error('Connection error', err.stack);
-  });
+app.use(cors());
+app.use(express.json());
 
 // Multer setup for handling file uploads
 const upload = multer({ storage: multer.memoryStorage() });
 
+// MongoDB Connection
+const mongoURI = 'mongodb://localhost:27017';
+const client = new MongoClient(mongoURI);
+let db;
 
+// Connect to MongoDB
+(async () => {
+  try {
+    await client.connect();
+    db = client.db('researchpapers');
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+  }
+})();
 
+// OAuth2 Configuration for Gmail
+const CLIENT_ID = 'YOUR_CLIENT_ID';
+const CLIENT_SECRET = 'YOUR_CLIENT_SECRET';
+const REDIRECT_URI = 'https://developers.google.com/oauthplayground';
+const REFRESH_TOKEN = 'YOUR_REFRESH_TOKEN';
 
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
-// Route to get the research papers
+// Routes
+
+// Get research papers by year
 app.get('/researchpaper/:year', async (req, res) => {
   try {
-   
-    let { year } = req.params;
-    year = parseInt(year);
-     // Debugging to verify the year
+    const { year } = req.params;
+    const papers = await db.collection('researchpapers').find({ paperyear: parseInt(year) }).toArray();
 
-    const result = await db.query('SELECT * FROM researchpapers where paperyear=$1',[year]);
-    
-    if (result.rows.length === 0) {
+    if (!papers.length) {
       return res.status(404).json({ message: 'No research papers found for this year' });
     }
 
-    // Map the result to format it as desired
-    const papersList = result.rows.map(paper => ({
+    const papersList = papers.map(paper => ({
       title: paper.papertitle,
-      name: paper.papername || 'N/A',  // If papername is null, display 'N/A'
+      name: paper.papername || 'N/A',
       postedAt: paper.posted_at,
-      year: paper.paperyear
+      year: paper.paperyear,
     }));
 
-   // Debugging to verify the paper list
-    
     res.status(200).json({ pdfs: papersList });
   } catch (error) {
     console.error('Error fetching research papers:', error);
@@ -75,42 +66,51 @@ app.get('/researchpaper/:year', async (req, res) => {
   }
 });
 
-app.get('/resource/pdfview', async (req, res) => {
-  const { pdftitle, resourse } = req.query;
-  console.log(pdftitle, resourse);
-  
-  // Convert the resource name to lowercase
-  const resourse1 = resourse.toLowerCase();
-
+// Upload a new research paper
+app.post('/researchpapers', upload.single('pdf'), async (req, res) => {
   try {
-    // Query the database for the PDF based on the title and resource
-    const response = await db.query(`SELECT paper FROM ${resourse1} WHERE papertitle = $1`, [pdftitle]);
+    const { originalname, buffer } = req.file;
+    const { title, year } = req.body;
 
-    // Check if any rows were returned
-    if (response.rows.length > 0) {
-      const pdfBuffer = response.rows[0].paper; // Assuming 'paper' contains the binary data
-console.log(pdfBuffer);
-      // Send the PDF buffer back as a response
-      res.json({ buffer: pdfBuffer });
-    } else {
-      // Handle case when no document is found
-      res.status(404).json({ error: 'PDF not found' });
-    }
+    const response = await db.collection('researchpapers').insertOne({
+      paper: buffer,
+      papertitle: title,
+      papername: originalname,
+      paperyear: parseInt(year),
+      posted_at: new Date(),
+    });
+
+    res.json(response.ops[0]);
   } catch (error) {
-    console.error('Error fetching PDF:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.error('Error inserting research paper:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
-app.post('/schedule-email', async (req, res) => {
-  const { email, pdfTitle } = req.body;
-  const scheduledDate = new Date();
-  scheduledDate.setDate(scheduledDate.getDate() ); // Set the date to one day later
+// Delete a research paper
+app.delete('/delete-pdf/:title', async (req, res) => {
+  const { title } = req.params;
 
   try {
-    const query = `INSERT INTO email_requests (email, pdf_title, scheduled_date) VALUES ($1, $2, $3)`;
-    await db.query(query, [email, pdfTitle, scheduledDate]);
-    console.log("sucessfully req added to req table");
+    await db.collection('researchpapers').deleteOne({ papertitle: title });
+    res.json({ message: 'Paper successfully deleted' });
+  } catch (error) {
+    console.error('Error deleting paper:', error);
+    res.status(500).json({ error: 'Failed to delete paper' });
+  }
+});
+
+// Schedule an email request
+app.post('/schedule-email', async (req, res) => {
+  const { email, pdfTitle } = req.body;
+
+  try {
+    await db.collection('email_requests').insertOne({
+      email,
+      pdfTitle,
+      scheduled_date: new Date(),
+    });
+
     res.status(200).json({ message: 'Email request scheduled successfully.' });
   } catch (error) {
     console.error('Error scheduling email:', error);
@@ -118,43 +118,24 @@ app.post('/schedule-email', async (req, res) => {
   }
 });
 
-
-// Configure your email transport
-// const transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: 'jothimani282004@gmail.com',
-//     pass: 'm@ssm@ni',
-//   },
-// });
-
-// Run a cron job every hour to check for emails to send
-
-// Cron job to run every hour
+// Cron job to send scheduled emails
 cron.schedule('0 * * * *', async () => {
   console.log('Checking for scheduled emails...');
 
   try {
-    const result = await db.query('SELECT * FROM email_requests WHERE scheduled_date <= NOW()');
-    const emailRequests = result.rows;
+    const emailRequests = await db.collection('email_requests').find({ scheduled_date: { $lte: new Date() } }).toArray();
 
     for (let request of emailRequests) {
-      // Fetch the PDF data from the database
-      const pdfResult = await db.query('SELECT paper FROM researchpapers WHERE papertitle = $1', [request.pdf_title]);
+      const paper = await db.collection('researchpapers').findOne({ papertitle: request.pdfTitle });
 
-      if (pdfResult.rows.length > 0) {
-        const pdfBuffer =  pdfResult.rows[0].paper;
-        console.log(pdfBuffer);
-        // console.log(`PDF Buffer Size: ${pdfBuffer.length} bytes and ${pdfBuffer}`);
-        // Obtain a new access token
+      if (paper) {
         const accessToken = await oAuth2Client.getAccessToken();
 
-        // Set up the email transport using OAuth2
         const transport = nodemailer.createTransport({
           service: 'gmail',
           auth: {
             type: 'OAuth2',
-            user: 'jothimani88531@gmail.com',
+            user: 'your-email@gmail.com',
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
             refreshToken: REFRESH_TOKEN,
@@ -162,165 +143,94 @@ cron.schedule('0 * * * *', async () => {
           },
         });
 
-        // Email options including PDF attachment
         const mailOptions = {
-          from: 'Your Name <jothimani88531@gmail.com>',
+          from: 'Your Name <your-email@gmail.com>',
           to: request.email,
-          subject: `Requested Research Paper: ${request.pdf_title}`,
-          text: `Here is your requested research paper titled: ${request.pdf_title}`,
+          subject: `Requested Research Paper: ${request.pdfTitle}`,
+          text: `Here is your requested research paper titled: ${request.pdfTitle}`,
           attachments: [
             {
-              filename: `${request.pdf_title}.pdf`,
-              content: pdfBuffer,
+              filename: `${request.pdfTitle}.pdf`,
+              content: paper.paper,
               contentType: 'application/pdf',
             },
           ],
         };
 
-        // Send the email
-        const result = await transport.sendMail(mailOptions);
-        console.log(`Email sent successfully to ${request.email} with PDF titled ${request.pdf_title}:`, result);
-
-        // Delete the email request after sending
-       
-      } else {
-        console.log(`PDF titled ${request.pdf_title} not found in the database.`);
+        await transport.sendMail(mailOptions);
+        console.log(`Email sent to ${request.email} with PDF titled ${request.pdfTitle}`);
       }
     }
-      await db.query('DELETE FROM email_requests WHERE scheduled_date <= NOW()');
-      console.log(`Email request for deleted from the database.`);
 
+    await db.collection('email_requests').deleteMany({ scheduled_date: { $lte: new Date() } });
+    console.log('Processed scheduled email requests');
   } catch (error) {
     console.error('Error processing scheduled emails:', error);
   }
 });
 
-
-
-app.post('/researchpapers', upload.single('pdf'), async (req, res) => {
-  try {
-    const { originalname, buffer } = req.file;
-    let { title, year } = req.body;
-
-    // Check if year is provided and is a valid number
-    if (isNaN(year)) {
-      console.log( 'Invalid or missing year');
-      return res.status(400).json({ error: 'Invalid or missing year' });
-    }
-
-    // Convert year to an integer
-    year = parseInt(year, 10);
-    
-    console.log(typeof(year)); // To confirm it's a number
-
-    // Insert into the database
-    const response = await db.query(
-      `INSERT INTO researchpapers (paper, papertitle, papername, paperyear) 
-       VALUES ($1, $2, $3, $4) RETURNING *`,
-      [buffer, title, originalname, year]
-    );
-    
-    // Respond with the inserted data
-    res.json(response.rows[0]);
-
-  } catch (error) {
-    console.error('Error inserting research paper:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
-
-
-
-app.delete('/delete-pdf/:title/:resourse',async(req,res)=>{
-  let {title,resourse}=req.params;
-  console.log(title,resourse);
-  resourse=resourse.toLowerCase();
-  await db.query(`delete from ${resourse} where papertitle=$1`,[title])
-  res.json("paper successfully deleted")
-
-});
-
-
-
-
-
-
-// Implementing other routes (ensure you fill in the queries)
+// Fetch notes
 app.get('/notes', async (req, res) => {
   try {
-    const notesData = await db.query('SELECT notes_name, notes_title, notes_desc FROM notes'); 
-    console.log(notesData.rows);// Replace with actual query
-    res.json({ notes: notesData.rows });
+    const notes = await db.collection('notes').find({}).toArray();
+    res.json({ notes });
   } catch (error) {
     console.error('Error fetching notes:', error);
     res.status(500).json({ error: 'Failed to fetch notes' });
   }
 });
 
-
-
-
-
-app.get("/notes/:noteTitle", async (req, res) => {
+// Fetch a specific note
+app.get('/notes/:noteTitle', async (req, res) => {
   const { noteTitle } = req.params;
-  console.log(noteTitle);
 
   try {
-    const result = await db.query("SELECT notes_data, notes_type, notes_name, notes_desc FROM notes WHERE notes_title = $1", [noteTitle]);
-console.log(result.rows);
-    if (result.rows.length > 0) {
-      const note = result.rows[0];
-      
-      // Convert the binary data to base64
-      const base64Data = Buffer.from(note.notes_data).toString("base64");
-      console.log(  base64Data, 
-        note.notes_type, 
-        note.notes_name, 
-         note.notes_desc);
-      res.json({
-        notes_data: base64Data, 
-        notes_type: note.notes_type, 
-        notes_name: note.notes_name, 
-        notes_desc: note.notes_desc
-      });
-    } else {
-      res.status(404).json({ error: "Note not found" });
+    const note = await db.collection('notes').findOne({ notes_title: noteTitle });
+
+    if (!note) {
+      return res.status(404).json({ error: 'Note not found' });
     }
+
+    const base64Data = Buffer.from(note.notes_data).toString('base64');
+
+    res.json({
+      notes_data: base64Data,
+      notes_type: note.notes_type,
+      notes_name: note.notes_name,
+      notes_desc: note.notes_desc,
+    });
   } catch (error) {
-    console.error("Error fetching note:", error);
-    res.status(500).json({ error: "Failed to fetch the note" });
+    console.error('Error fetching note:', error);
+    res.status(500).json({ error: 'Failed to fetch the note' });
   }
 });
 
-
-
-
-
+// Upload notes
 app.post('/uploadnotes', upload.single('file'), async (req, res) => {
   const { title, description, uploadedBy } = req.body;
   const file = req.file;
 
   try {
-    const query = `
-      INSERT INTO notes (notes_name, notes_data, notes_type, notes_title, notes_desc, uploaded_by)
-      VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
-    
-    const values = [
-      file.originalname,
-      file.buffer,  // File binary data
-      file.mimetype,  // File MIME type (e.g., 'application/pdf')
-      title,
-      description,
-      uploadedBy
-    ];
+    const result = await db.collection('notes').insertOne({
+      notes_name: file.originalname,
+      notes_data: file.buffer,
+      notes_type: file.mimetype,
+      notes_title: title,
+      notes_desc: description,
+      uploaded_by: uploadedBy,
+    });
 
-    const result = await db.query(query, values);
-    res.json({ success: true, noteId: result.rows[0].id });
-  } catch (err) {
-    console.error('Error uploading file:', err);
-    res.status(500).send('Server error');
+    res.json({ message: 'Note uploaded successfully', id: result.insertedId });
+  } catch (error) {
+    console.error('Error uploading note:', error);
+    res.status(500).json({ error: 'Failed to upload note' });
   }
 });
+
+// Start the server
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
 app.delete(`/delete/notes/:notetitle`, async (req, res) => {
   const { notetitle } = req.params; // Destructure correctly to get notetitle

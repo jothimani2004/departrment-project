@@ -63,7 +63,7 @@ const VideoComponent = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container m-2">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Video Resources</h1>
         {true && (
@@ -118,6 +118,11 @@ const VideoComponent = () => {
 
       {/* Bootstrap Modal for Adding New Video */}
       {showPopup && (
+         <motion.div
+                  initial={{ opacity: 0, y: -100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50"
+                >
         <div
           className="modal fade show d-block"
           tabIndex="-1"
@@ -174,10 +179,17 @@ const VideoComponent = () => {
                     Submit
                   </button>
                 </div>
+
+                {message && <p className="text-danger text-center mt-4">{message}</p>}
+
+
+
               </form>
             </div>
           </div>
         </div>
+
+        </motion.div>
       )}
 
       {message && <p className="text-center text-success mt-3">{message}</p>}
