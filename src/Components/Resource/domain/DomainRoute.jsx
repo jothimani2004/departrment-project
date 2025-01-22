@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence  } from 'framer-motion';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
 import Domain_details from './Domain_details';
@@ -8,142 +8,177 @@ import Notes from '../resourse/Notes';
 import ResearchPapers from '../resourse/ResearchPapers';
 import Links from '../resourse/Links';
 import Videos from '../resourse/Videos';
-
-import './DomainRoute.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 
 const DomainRoute = ({ domainnames, domainDetails, resources }) => {
-    const { domain, resourse } = useParams(); // Gets the current domain and resource from the URL
-    const [isDropdownOpen, setIsDropdownOpen] = useState(true); // Controls both dropdowns
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Controls mobile menu visibility
+  const { domain, resourse } = useParams();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    const resourceComponents = {
-        ResearchPapers: ResearchPapers,
-        Notes: Notes,
-        Links: Links,
-        Videos: Videos,
-    };
+  const resourceComponents = {
+    ResearchPapers: ResearchPapers,
+    Notes: Notes,
+    Links: Links,
+    Videos: Videos,
+  };
 
-    const ResourceComponent = resourceComponents[resourse];
+  const ResourceComponent = resourceComponents[resourse];
 
-    const toggleDropdown = () => {
-        setIsDropdownOpen((prev) => !prev); // Toggle the dropdown state
-    };
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen((prev) => !prev); // Toggle the mobile menu state
-    };
+  return (
+    <div className="container-fluid vh-100">
+      <div className="row">
 
-    return (
-        <div className="d-flex h-100">
-            {/* Left Side Navigation */}
+      {/* Mobile Menu Button */}
+<div className="d-block d-md-none p-0 ">
+  <button className="w-2" onClick={toggleMobileMenu}>
+    {isMobileMenuOpen ? (
+      <FontAwesomeIcon icon={faTimes} />
+    ) : (
+      <FontAwesomeIcon icon={faBars} />
+    )}
+  </button>
+</div>
+
+<AnimatePresence>
+          {isMobileMenuOpen && (
             <motion.div
-                className={` left bg-light vh-100 p-4 transition-transform transform ${
-                    isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-                } d-lg-block  h-100vh`}
-                style={{
-                    width: '100%',
-                    maxWidth: '300px', // Fixed width for desktop
-                }}
-                initial={false}
-                animate={isMobileMenuOpen ? { x: 0 } : { x: '0%' }}
-                transition={{ duration: 0.3 }}
+              className="col-md-3 col-12"
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', stiffness: 70 }}
             >
-                {/* Navigation Content */}
-                <div>
-                    <h2
-                        className="font-weight-bold h5 d-flex align-items-center cursor-pointer"
-                        onClick={toggleDropdown}
-                    >
-                        Domains
-                        {isDropdownOpen ? (
-                            <FaChevronUp className="ml-2" />
-                        ) : (
-                            <FaChevronDown className="ml-2" />
-                        )}
-                    </h2>
-                    <motion.div
-                        initial={false}
-                        animate={{ height: isDropdownOpen ? 'auto' : 0 }}
-                        className="overflow-hidden"
-                    >
-                        <select
-                            className="form-select mt-2"
-                            onChange={(e) => (window.location.href = `/resourse/${e.target.value}`)}
-                            value={domain || ''}
-                        >
-                            <option value="" disabled>
-                                Select a Domain
-                            </option>
-                            {domainnames.map((domainItem, index) => (
-                                <option key={index} value={domainItem}>
-                                    {domainItem}
-                                </option>
-                            ))}
-                        </select>
-                    </motion.div>
+              <div className="p-3 bg-light border rounded">
+                {/* Domain Dropdown */}
+                <div className="mb-4">
+                  <h5
+                    className="d-flex align-items-center justify-content-between"
+                    onClick={toggleDropdown}
+                  >
+                    Domains
+                  
+                  </h5>
+                  <motion.select
+                    className="form-select mt-2"
+                    onChange={(e) => (window.location.href = `/resourse/${e.target.value}`)}
+                    value={domain || ''}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <option value="" disabled>
+                      Select a Domain
+                    </option>
+                    {domainnames.map((domainItem, index) => (
+                      <option key={index} value={domainItem}>
+                        {domainItem}
+                      </option>
+                    ))}
+                  </motion.select>
                 </div>
 
-                <div className="mt-4">
-                    <h2
-                        className="font-weight-bold h5 d-flex align-items-center cursor-pointer"
-                        onClick={toggleDropdown}
-                    >
-                        Resources
-                        {isDropdownOpen ? (
-                            <FaChevronUp className="ml-2" />
-                        ) : (
-                            <FaChevronDown className="ml-2" />
-                        )}
-                    </h2>
-                    <motion.div
-                        initial={false}
-                        animate={{ height: isDropdownOpen ? 'auto' : 0 }}
-                        className="overflow-hidden"
-                    >
-                        <select
-                            className="form-select mt-2"
-                            onChange={(e) =>
-                                (window.location.href = `/resourse/${domain}/${e.target.value}`)
-                            }
-                            value={resourse || ''}
-                        >
-                            <option value="" disabled>
-                                Select a Resource
-                            </option>
-                            {Object.keys(resourceComponents).map((resourceKey, index) => (
-                                <option key={index} value={resourceKey}>
-                                    {resourceKey}
-                                </option>
-                            ))}
-                        </select>
-                    </motion.div>
+                {/* Resources Dropdown */}
+                <div className="mb-4">
+                  <h5
+                    className="d-flex align-items-center justify-content-between"
+                    onClick={toggleDropdown}
+                  >
+                    Resources
+                   
+                  </h5>
+                  <motion.select
+                    className="form-select mt-2"
+                    onChange={(e) =>
+                      (window.location.href = `/resourse/${domain}/${e.target.value}`)
+                    }
+                    value={resourse || ''}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <option value="" disabled>
+                      Select a Resource
+                    </option>
+                    {Object.keys(resourceComponents).map((resourceKey, index) => (
+                      <option key={index} value={resourceKey}>
+                        {resourceKey}
+                      </option>
+                    ))}
+                  </motion.select>
                 </div>
+              </div>
             </motion.div>
+          )}
+        </AnimatePresence>
 
-            {/* Right Side Content */}
-            <div
-                className="flex-1 p-4 overflow-auto bg-white"
-                style={{ marginLeft: '0%' }} // Pushes content right for desktop
-            >
-                {ResourceComponent ? (
-                    <ResourceComponent />
-                ) : (
-                    <Domain_details domain={domainDetails[domain]} />
-                )}
+
+
+        {/* Left Side Navigation */}
+        <div className={`col-md-3 col-12 ${isMobileMenuOpen ? 'd-none' : 'd-none d-md-block'}`}>
+          <div className="p-3 bg-light border rounded vh-100">
+            {/* Domain Dropdown */}
+            <div className="mb-4">
+              <h5 className="d-flex align-items-center justify-content-between" onClick={toggleDropdown}>
+                Domains
+         
+              </h5>
+              <select
+                className="form-select mt-2"
+                onChange={(e) => (window.location.href = `/resourse/${e.target.value}`)}
+                value={domain || ''}
+              >
+                <option value="" disabled>
+                  Select a Domain
+                </option>
+                {domainnames.map((domainItem, index) => (
+                  <option key={index} value={domainItem}>
+                    {domainItem}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            {/* Mobile Menu Icon */}
-            <div className="d-lg-none position-fixed top-4 left-4 z-index-10">
-                <button onClick={toggleMobileMenu} className="text-dark">
-                    {isMobileMenuOpen ? (
-                        <XIcon className="w-6 h-6" />
-                    ) : (
-                        <MenuIcon className="w-6 h-6" />
-                    )}
-                </button>
+            {/* Resources Dropdown */}
+            <div className="mb-4">
+              <h5 className="d-flex align-items-center justify-content-between" onClick={toggleDropdown}>
+                Resources
+                
+              </h5>
+              <select
+                className="form-select mt-2"
+                onChange={(e) => (window.location.href = `/resourse/${domain}/${e.target.value}`)}
+                value={resourse || ''}
+              >
+                <option value="" disabled>
+                  Select a Resource
+                </option>
+                {Object.keys(resourceComponents).map((resourceKey, index) => (
+                  <option key={index} value={resourceKey}>
+                    {resourceKey}
+                  </option>
+                ))}
+              </select>
             </div>
+          </div>
         </div>
-    );
+
+        {/* Right Side Content */}
+        <div className="col-md-9 col-12 mt-3 mt-md-0 vh-100">
+          {ResourceComponent ? (
+            <ResourceComponent />
+          ) : (
+            <Domain_details domain={domainDetails[domain]} />
+          )}
+        </div>
+
+       
+      </div>
+    </div>
+  );
 };
 
 export default DomainRoute;
