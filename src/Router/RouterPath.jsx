@@ -27,7 +27,7 @@ import DomainRoute from '../Components/Resource/domain/DomainRoute.jsx';
 import PdfViewer from '../Components/Resource/pdfview/PdfViewer.jsx';
 import NoteViewer from '../Components/Resource/pdfview/NoteViewer.jsx';
 import { DomainContext } from '../Components/Resource/domain/DomainContext.jsx'
-
+import {ProtectedRoute} from '../Components/ProtectedRoute/ProtectedRoute.jsx'
 export const RouterPath = () => {
 
   const domainnames = ["InternetOfThings", "CyberSecurity", "BlockchainTechnology"];
@@ -68,7 +68,11 @@ export const RouterPath = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Home />} />
-        <Route path="/People/Students/Profile/Edit" element={<Seperate_student_Edit />} />
+        <Route path="/People/Students/Profile/Edit" element={
+          <ProtectedRoute>
+              <Seperate_student_Edit />
+          </ProtectedRoute> 
+        } />
 
 
 

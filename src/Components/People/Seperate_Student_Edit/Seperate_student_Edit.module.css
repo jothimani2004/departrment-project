@@ -9,6 +9,26 @@
 
 }
 
+.edit_button{
+    padding: 7px 15px;
+    border-radius: 7px;
+    font-size: large;
+    color: white;
+}
+
+.custom_textarea {
+    height: 200px; /* Adjust as needed */
+    width: 100%; /* Optional: Full width */
+    resize: vertical; /* Allow vertical resizing (remove for fixed size) */
+  }
+  
+
+.texting_div{
+    display: flex;
+    justify-content: end;
+    padding-right:4.3rem ;
+}
+
 .content{
     margin:2em 4em;
     margin-top: 1em;
