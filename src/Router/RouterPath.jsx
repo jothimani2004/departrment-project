@@ -6,6 +6,7 @@ import {Home} from '../Components/Home/Home/Home.jsx';
 import Calander_show from "../Components/Academic/Calender/Calander.jsx";
 import { Calander, Time_tables } from "../Content/Academic.js";
 import Seperate_student from "../Components/People/Seperate_Student/Seperate_student.jsx";
+import Seperate_student_Edit from "../Components/People/Seperate_Student_Edit/Seperate_student_Edit.jsx";
 import Event_show from "../Components/Event/MajorEvent/Event_show.jsx";
 import Event_Seperate_page from "../Components/Event/Seperate_event/Event_Seperate_page.jsx";
 import  FacultyList from '../Components/People/Faculty/FacultyList.js';
@@ -26,6 +27,7 @@ import DomainRoute from '../Components/Resource/domain/DomainRoute.jsx';
 import PdfViewer from '../Components/Resource/pdfview/PdfViewer.jsx';
 import NoteViewer from '../Components/Resource/pdfview/NoteViewer.jsx';
 import { DomainContext } from '../Components/Resource/domain/DomainContext.jsx'
+import {ProtectedRoute} from '../Components/ProtectedRoute/ProtectedRoute.jsx'
 import Admin_page from "../Components/Admin_page/Admin_page.jsx";
 
 export const RouterPath = () => {
@@ -69,6 +71,11 @@ export const RouterPath = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Home />} />
+        <Route path="/People/Students/Profile/Edit" element={
+          <ProtectedRoute>
+              <Seperate_student_Edit />
+          </ProtectedRoute> 
+        } />
 
 
 
