@@ -111,14 +111,14 @@ const Conferences = () => {
             )}
             {conference.doi && (
               <Card.Text style={{ color: '#495057' }}>
-                <strong>DOI:</strong>
+                <strong>DOI:  </strong>
                 <a
                   href={`https://doi.org/${conference.doi}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ textDecoration: 'none', color: '#495057' }}
+                  style={{  color: '#495057' }}
                 >
-                  {conference.doi}
+                   {conference.doi}
                 </a>
               </Card.Text>
             )}

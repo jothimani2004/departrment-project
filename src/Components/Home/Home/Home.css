@@ -1,4 +1,9 @@
-
+  /* background color for slide */
+  
+  .b_g_s{
+    background-color: #155E95;
+   
+  }
   
   .custom-carousel .carousel-inner {
     height: 85vh; /* Ensure the images inside the carousel stretch to match the parent container's height */
@@ -11,12 +16,12 @@
   
  .about-container{
     width: 100%;
-  padding: 8rem 15rem;
+  padding: 8rem 10rem;
  }  
 
  .main-content-con{
 
-  padding: 1rem;
+  padding: 1em;
   display: flex;
   flex-direction:column ;
   gap: 25px;
@@ -26,11 +31,14 @@
   display: flex;
   justify-content: center;
   gap: 25px;
+  padding:1em;
  }
  .text-con{
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 1em;
+
  }
  .text-con p{
   font-size: 1.1rem;
@@ -41,25 +49,30 @@
   font-size: 1.1rem;
   line-height: 32px;
   text-align: justify;
+   padding: 0em 1em;
  }
 
  .img-con{
-    width: 450rem;
+    min-width: 40em;
     box-shadow: 2px 2px 10px;
     margin: 10px;
+    
  }
+
 
 .dept-img{
   width: 100%;
-  height: 100%;
+height: 100%;
 
 }
 
 
 .about-container-vm{
   width: 100%;
-  padding: 3rem 15rem 14rem 15rem;
+  padding: 3rem 15rem 8rem 15rem;  
 } 
+
+
 
 .main-content-con-vm{
   padding: 1rem;
@@ -83,6 +96,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding:0em 1em;
  }
 
  
@@ -103,10 +117,13 @@
   gap: 5px;
   justify-content: center;
   align-items: center;
+  font-weight: 600;
+  color:rgb(213, 232, 255);
 }
 
 .stat-item p{
   font-size: 2rem;
+  font-weight: 600;
 }
 
 
@@ -118,7 +135,7 @@
 
 .about-container-welcome{
   width: 100%;
-  padding: 14rem 15rem;
+  padding: 8rem 15rem;
 } 
 
 .main-content-con-welcome{
@@ -175,6 +192,10 @@
   gap: 25px;
  }
 
+ .main-content-con-welcome{
+  padding:2em;
+ }
+
  .main-content{
   display: flex;
   gap: 1rem;
@@ -200,8 +221,6 @@
   padding: 1rem;
   width: 100%;
   padding: 3rem 1rem;
-
-
  }
 
 .syllabus-buttons{
@@ -212,6 +231,13 @@
 
 }
 
+.col{
+   color:rgb(213, 232, 255);
+}
+.faculty-conn{
+  color:rgb(213, 232, 255);
+}
+
  .button-syllabi{
   /* border: 1px solid black; */
   padding: 10px;
@@ -220,16 +246,17 @@
   color: white;
   width: 80%;
   cursor: pointer;
+  transition: all .2s;
   
  }
 
 .button-syllabi:hover{
-  background-color: rgb(202, 228, 242);
+  background-color: #abb4dc;
 }
 
 .faculty-main-conn{
   margin: 8rem 0rem;
-  background-color: rgb(152, 152, 239);
+ background-color: #155E95;
 }
 
 .faculty-img{
@@ -239,7 +266,7 @@
 .about-container-contact{
   width: 100%;
   padding: 4rem 15rem;
-  padding-bottom: 13rem;
+  padding-bottom: 8rem;
 } 
 
 .main-content-con-contact{
@@ -257,7 +284,7 @@
  }
 
 
- @media (min-width: 1200px) and (max-width: 1440px ) {
+ @media (min-width: 1200px) and (max-width: 1500px ) {
   .about-container-vm{
    width: 100%;
    padding: 2rem 10rem;
@@ -282,6 +309,14 @@
   width: 100%;
   padding: 0rem 10rem;
 } 
+.top-con{
+  display: flex;
+  flex-direction: column;
+}
+.img-con{
+  width: auto;
+  box-shadow: 2px 2px 10px;
+}
 
  }
 
@@ -311,6 +346,14 @@
   width: 100%;
   padding: 0rem 4rem;
 } 
+.top-con{
+  display: flex;
+  flex-direction: column;
+}
+.img-con{
+  width: auto;
+  box-shadow: 2px 2px 10px;
+}
 }
 
 

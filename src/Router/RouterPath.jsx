@@ -26,6 +26,7 @@ import DomainRoute from '../Components/Resource/domain/DomainRoute.jsx';
 import PdfViewer from '../Components/Resource/pdfview/PdfViewer.jsx';
 import NoteViewer from '../Components/Resource/pdfview/NoteViewer.jsx';
 import { DomainContext } from '../Components/Resource/domain/DomainContext.jsx'
+import Admin_page from "../Components/Admin_page/Admin_page.jsx";
 
 export const RouterPath = () => {
 
@@ -37,10 +38,11 @@ export const RouterPath = () => {
   return (
     <>
       <Navbar/>
-    <div className="p_b p-1">
+    <div className="p_b ">
       <Routes>
 
-
+        {/* Admin page */}
+        <Route path="/Admin_page/Edit" element={<Admin_page/>} />
        
         <Route path="/Academic/courses" element={<Courses />} />
         <Route path="/Academic/calander" element={ <Calander_show keys={Calander}/> } />

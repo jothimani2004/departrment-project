@@ -1,15 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root{
-    --primary_color:#ffffffca;
-    --secondary_color:#bfe9ff;
-    --text_color:#122123;
-    --second_card_color:#cde1b7;
-    --slide:#6ee0f56d;
+    --primary_color:#eeeff4 ;
+    --secondary_color:#b7c2f3 ;
+    --text_color:#030a15  ;
+    --second_card_color:#D2DAFF ;
+    --slide:#D2DAFF ;
 }
 *{
     font-family: "Poppins", serif;
 }
-
 
 .p_b{
     background-color: var(--primary_color);
@@ -25,7 +24,6 @@
 
 .s2_b{
     background-color: var(--second_card_color);
-   
 }
 
 .si_b{

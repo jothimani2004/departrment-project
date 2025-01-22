@@ -114,7 +114,7 @@ export const Home = () =>{
 
           
 
-        <div className="stats-container si_b t_c">
+        <div className="stats-container b_g_s t_c">
           
             <div className="stat-item">
               <h3>Graudation</h3>
@@ -149,7 +149,7 @@ export const Home = () =>{
             </div>
         </div>
 
-        <div className="about-container-welcome">
+        <div className="about-container-welcome shadow">
             <div className="main-content-con-welcome shadow-lg  s_b t_c rounded-3">
           <div className="heading-name">
             <h2>Welcome Message</h2>
@@ -170,7 +170,7 @@ export const Home = () =>{
         </div>
         </div>
         
-        <div className="about-container-syllabus">  
+        <div className="about-container-syllabus shadow">  
           <div className="main-content-con-syllabus shadow-lg  s_b t_c rounded-3">
                 <h2>CURRICULAM</h2>
                 <div className="main-content">
@@ -195,12 +195,12 @@ export const Home = () =>{
         </div>
 
 
-<div className="w-100 py-3 faculty-main-conn si_b t_c" style={{ overflow: 'hidden', position: 'relative'}}>
-      <h2 className="text-center mb-4 py-2">Faculty Members</h2>
+<div className="w-100 py-3 faculty-main-conn " style={{ overflow: 'hidden', position: 'relative'}}>
+      <h2 className="text-center mb-4 py-2 col">Faculty Members</h2>
       <div style={{ position: 'relative' }} >
         {/* Custom Left and Right Buttons */}
         <button
-          className="btn btn-primary rounded-1"
+          className="btn btn-primary rounded-1 "
           style={{
             position: 'absolute',
             top: '39%', // Center vertically
@@ -231,7 +231,7 @@ export const Home = () =>{
           {staffData.map((staff) => (
             <div key={staff.id} className="faculty-conn">
               <img
-                src={staff.image}
+                src="/images/event_page/elan.jpeg"
                 className="rounded-circle faculty-img"
                 alt={staff.name}
               />
