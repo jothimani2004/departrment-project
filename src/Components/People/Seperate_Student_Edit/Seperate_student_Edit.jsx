@@ -4,6 +4,8 @@ import { Spinner } from "react-bootstrap";
 import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie.jsx";
 import { FaCreativeCommonsPdAlt } from "react-icons/fa";
 import { formToJSON } from "axios";
+import BufferToBase64 from '../../BufferToBase64/BufferToBase64.jsx'
+
 
 export default function Seperate_student_Edit({ title }) {
   const [editContent, setEditContent] = useState(null);
@@ -49,11 +51,7 @@ export default function Seperate_student_Edit({ title }) {
           profileResume: data.resume || "", // Assuming resume is a buffer
         });
 
-        // Set PDF source for iframe
-        if (data.resume) {
-          const pdfBase64 = btoa(String.fromCharCode(...new Uint8Array(data.resume.data))); // Assuming the buffer is in `data.resume.data`
-          setPdfSrc(`data:application/pdf;base64,${pdfBase64}`);
-        }
+
 
         setEditContentUpload({
           _id: data._id,
@@ -66,6 +64,7 @@ export default function Seperate_student_Edit({ title }) {
           leetcode_link: data.leetcode_link,
           resume: data.resume || ""
         });
+         await BufferToBase64({Buffer :data.resume})
       } catch (error) {
         console.error("Error fetching profile data:", error);
       }
@@ -237,11 +236,11 @@ export default function Seperate_student_Edit({ title }) {
           <h1>Resume</h1>
           <div className={style.card_size}>
           <iframe
-              src={pdfSrc} // Use the Base64 encoded PDF source here
-              width="100%"
-              height="1120px"
-              title="PDF Viewer"
-            ></iframe>
+            title="Embedded Content"
+            width="100%"
+            height="500px"
+            src={pdfSrc}
+          />   
           </div>
         </div>
       </div>
