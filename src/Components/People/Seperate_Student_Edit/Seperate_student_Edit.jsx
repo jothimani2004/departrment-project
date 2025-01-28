@@ -13,7 +13,7 @@ export default function Seperate_student_Edit({ title }) {
   const [imageSrc, setImageSrc] = useState(
     "https://assets.leetcode.com/users/Hirthick_Gowtham-G/avatar_1728091794.png"
   );
-
+  const [pdfSrc, setPdfSrc] = useState("");
   useEffect(() => {
     const userData = checkJwtCookie();
     if (!userData) {
@@ -29,7 +29,7 @@ export default function Seperate_student_Edit({ title }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ reg: userData.jwtPayload.reg }),
+          body: JSON.stringify({ ids: userData.jwtPayload._id }),
         });
 
         if (!response.ok) {
@@ -39,16 +39,24 @@ export default function Seperate_student_Edit({ title }) {
         console.log(data);
 
         setEditContent({
+          _id: data._id,
           profilePhoto: data.profile_photo || "",
           profileSummary: data.profile_desc,
           linkedinLink: data.linkedin_link,
           githubLink: data.github_link,
           gmailLink: data.email,
           leedcodeLink: data.leetcode_link,
-          profileResume: data.resume
+          profileResume: data.resume || "", // Assuming resume is a buffer
         });
 
+        // Set PDF source for iframe
+        if (data.resume) {
+          const pdfBase64 = btoa(String.fromCharCode(...new Uint8Array(data.resume.data))); // Assuming the buffer is in `data.resume.data`
+          setPdfSrc(`data:application/pdf;base64,${pdfBase64}`);
+        }
+
         setEditContentUpload({
+          _id: data._id,
           profile_photo: data.profile_photo || "",
           register_no: data.register_no,
           profile_desc: data.profile_desc,
@@ -77,17 +85,23 @@ export default function Seperate_student_Edit({ title }) {
   const handleFileChange = (e, type) => {
     const file = e.target.files[0];
     if (type === "profile_photo") {
-      setEditContentUpload((prevContent) => ({
-        ...prevContent,
-        profile_photo: file,
-      }));
+      // Only update the profile photo if a file is selected
+      if (file) {
+        setEditContentUpload((prevContent) => ({
+          ...prevContent,
+          profile_photo: file, // Update with the new file
+        }));
+      }
     } else if (type === "resume") {
+      if (file) {
       setEditContentUpload((prevContent) => ({
         ...prevContent,
-        resume: file,
+        resume: file, // Update resume if a file is selected
       }));
     }
+    }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -104,38 +118,37 @@ export default function Seperate_student_Edit({ title }) {
     }
   
     const formData = new FormData();
-  
-    // If profile photo is updated, append it to formData
-    if (EditContentUpload.profile_photo) {
-      formData.append("profile_photo", EditContentUpload.profile_photo);
-    }
-  
+    // If profile photo exists, append it to formData
+    formData.append("profile_photo", EditContentUpload.profile_photo); // Ensure this is a File object
+    formData.append("resume", EditContentUpload.resume); // Ensure this is a File object
+    formData.append("_id", EditContentUpload._id);
     formData.append("register_no", EditContentUpload.register_no);
     formData.append("profile_desc", EditContentUpload.profile_desc);
     formData.append("linkedin_link", EditContentUpload.linkedin_link);
     formData.append("github_link", EditContentUpload.github_link);
     formData.append("email", EditContentUpload.email);
     formData.append("leetcode_link", EditContentUpload.leetcode_link);
-  
+    
+
     try {
       const response = await fetch('http://localhost:5000/editProfile', {
         method: 'POST',
         body: formData,
       });
-  
+    
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
+      } else {
+        const data = await response.json();
+        console.log("Profile updated successfully:", data);
+        window.location.reload()
       }
-  
-      const responseData = await response.json();
-      console.log('Profile updated successfully:', responseData);
-      // Optionally, update the initial state after a successful update
-      setEditContent({ ...EditContentUpload });
     } catch (error) {
-      console.error('Error updating profile:', error);
+      console.error("Error updating profile:", error);
     }
+    
   };
-  
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -147,11 +160,25 @@ export default function Seperate_student_Edit({ title }) {
     return <Spinner animation="border" />;
   }
 
+  const popUpHandle = (o) =>{
+    setEditContentUpload((prev)=>({
+      ...prev,
+      profile_photo: editContent.profilePhoto || "",
+      profile_desc: editContent.profileSummary,
+      linkedin_link: editContent.linkedinLink,
+      github_link: editContent.githubLink,
+      email: editContent.gmailLink,
+      leetcode_link: editContent.leedcodeLink,
+      resume: editContent.profileResume || ""
+    }));
+    setShowPopup(o);
+  }
+
   return (
     <>
       <div className={style.con}>
         <div className={style.texting_div}>
-          <button className={style.edit_button} onClick={() => setShowPopup(true)}>
+          <button className={style.edit_button} onClick={() => popUpHandle(true)}>
             Edit Your Profile
           </button>
         </div>
@@ -163,16 +190,24 @@ export default function Seperate_student_Edit({ title }) {
               <p>{editContent.profileSummary}</p>
               <div className={style.option}>
                 <li>
+                  <a href={editContent.linkedinLink} target="blank">
                   <img src="/images/student_seperate_page/linked_in.png" alt="linkedin" height="10px" /> Linked in
+                  </a>
                 </li>
                 <li>
+                <a href={editContent.githubLink} target="blank">
                   <img src="/images/student_seperate_page/github.png" alt="github" height="10px" /> Github
+                  </a>
                 </li>
                 <li>
+                <a href={editContent.gmailLink} target="blank">
                   <img src="/images/student_seperate_page/mail.png" alt="mail" height="10px" /> Gmail
+                  </a>
                 </li>
                 <li>
+                <a href={editContent.leedcodeLink} target="blank">
                   <img src="/images/student_seperate_page/leetcode.png" alt="leet code" height="10px" /> Leet code
+                  </a>
                 </li>
               </div>
             </div>
@@ -183,6 +218,8 @@ export default function Seperate_student_Edit({ title }) {
                     <embed
                       src={`data:image/jpeg;base64,${editContent.profilePhoto}`}
                       width="100%"
+                      height="100%"
+                      style={{ borderRadius: '10px' }}
                       type="image/jpeg"
                     />
                   ) : (
@@ -199,8 +236,8 @@ export default function Seperate_student_Edit({ title }) {
         <div className={style.pdf_container}>
           <h1>Resume</h1>
           <div className={style.card_size}>
-            <iframe
-              src="/assets/HIRTHICK GOWTHAM 1.pdf"
+          <iframe
+              src={pdfSrc} // Use the Base64 encoded PDF source here
               width="100%"
               height="1120px"
               title="PDF Viewer"
@@ -282,12 +319,22 @@ export default function Seperate_student_Edit({ title }) {
                       className="form-control"
                     />
                   </div>
+                <div className="form-group mb-3">
+                  <label>Upload Your Resume (PDF)</label>
+                  <input
+                    type="file"
+                    name="resume"
+                    accept="application/pdf"  // Only allows PDF files
+                    onChange={(e) => handleFileChange(e, "resume")}  // Handle the file change
+                    className="form-control"
+                    />
                 </div>
+                    </div>
                 <div className="modal-footer">
                   <button
                     type="button"
                     className="btn btn-secondary"
-                    onClick={() => setShowPopup(false)}
+                    onClick={() => popUpHandle(false)}
                   >
                     Close
                   </button>
