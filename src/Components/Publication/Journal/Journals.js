@@ -21,8 +21,12 @@ const Journals = () => {
 
       setShowPopup(true)
       console.log(val)
-
-      setNewVideo( { videoId: "", title: val[0], authors: val[1] ,journal:val[2],volume:val[3],year:val[4],index:val[5],abstract:val[6]} )
+      
+      if (val.length != 0){
+        setNewVideo( { videoId: "", title: val[0], authors: val[1] ,journal:val[2],volume:val[3],year:val[4],index:val[5],abstract:val[6]} )
+      }else{
+          setNewVideo({ videoId: "", title: "", authors: "" ,journal:"",volume:"",year:"",index:"",abstract:""})
+        }
 
       // [journal.title,journal.authors,journal.journal,journal.volume,journal.year,journal.index,journal.abstract]
 
@@ -30,26 +34,6 @@ const Journals = () => {
 
 
 
-
-
-
-
-
-
-
-   const fetchVideos = async () => {
-    try {
-      const response = await axios.get("/videos");
-      setVideos(response.data.videos);
-      
-    } catch (error) {
-      console.error("Error fetching videos:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchVideos();
-  }, []);
 
 
    const handleInputChange = (e) => {
@@ -63,45 +47,36 @@ const Journals = () => {
    const handleSubmit = async (val,e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
-    // if (!newVideo.videoId || !newVideo.title || !newVideo.description) {
-    //   setMessage("All fields are required.");
-    //   return;
-    // }
+    
     console.log(val)
 
-    try {
-      const cookieValue = "2020202002";
-      await axios.post("/addvideo", { newVideo, cookieValue });
-      setMessage("Video added successfully");
-      setNewVideo({ videoId: "", title: "", description: "" });
-      setShowPopup(false); // Close the popup after successful submission
-      fetchVideos(); // Fetch updated video list after adding
-    } catch (error) {
-      console.error("Error adding video:", error);
-      setMessage("Error adding video");
-    }
+  
   }
 
   const handleDelete = async (jol,object_id,e) => {
 
-    alert(`Do you want to delete this journal: ${jol}`)
+    const confirmDelete = window.confirm(`Do you want to delete this journal: ${jol}`);
+    if (confirmDelete) {
 
     console.log(object_id)
 
 
-    // try {
-    //   await axios.delete(`/videodelete/${videoid}`);
-    //   setMessage("Video deleted successfully");
-    //   fetchVideos(); // Fetch updated video list after deletion
-    // } catch (error) {
-    //   console.error("Error deleting video:", error);
-    // }
+  
+    }
   };
 
 
   return (<>
     <Container className="mt-0 pt-4 border-0">
-      <h2 className="mb-4 text-center">Journals</h2>
+    <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="h1"> Journals</h1>
+        <div>
+        {role =="Admin"?<button class="btn btn-primary mx-1 my-3 "
+            onClick={()=> setting_pop_field([])}
+            >Add New Journals</button>:null}
+        </div>
+      </div>
+    
       {journals.map((journal, index) => (
         <Card
           key={index}
@@ -140,7 +115,7 @@ const Journals = () => {
             >Edit</button>:null}
 
             {role =="Admin"?<button class="btn btn-danger mx-1"
-            onClick={(e)=>handleDelete(journal.journal,"object_id",e)}
+            onClick={(e)=>handleDelete(journal.title,"object_id",e)}
             >
                   <i class="bi bi-trash"></i> Delete
                 </button>:null}
@@ -164,7 +139,7 @@ const Journals = () => {
           <div className="modal-dialog modal-dialog-centered" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Edit Detail</h5>
+                <h5 className="modal-title">Enter Detail</h5>
                 
               </div>
               <form onSubmit={handleSubmit}>

@@ -4,10 +4,10 @@ import "./Faculty.css";
 const FacultyCard = ({ photo, name, degree, role, joiningDate, description, animationDelay }) => {
   return (
     <div
-      className="card faculty-card mb-4 p-4 border-2 rounded-4 fade-in-up t_c"
+      className="card faculty-card mb-4 p-4 border-0 rounded-4 fade-in-up t_c "
       style={{
         animationDelay: `${animationDelay}s`, 
-        background:"#E1F7F5",
+        background:"#b7c2f3",
         // Delay for staggered animation
       }}
     >
