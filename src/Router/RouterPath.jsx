@@ -78,11 +78,6 @@ export const RouterPath = () => {
         } />
 
 
-
-
-
-
-
         <Route
           path="resourse/:domain"
           element={

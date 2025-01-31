@@ -7,7 +7,7 @@ export default function Event_Seperate_page({title}){
 
     return(
         <>
-      <div className="container my-5 s_b px-4 py-3 rounded-3 t_c shadow">
+      <div className="container my-5 s_b px-4 py-4 rounded-3 t_c shadow px-5">
       {/* Event Header */}
       <header className="text-center mb-4">
         <h1 className="display-4 fw-normal">Elan 2025: Annual Cultural Festival</h1>
