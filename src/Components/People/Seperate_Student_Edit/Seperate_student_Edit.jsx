@@ -64,7 +64,7 @@ export default function Seperate_student_Edit({ title }) {
           leetcode_link: data.leetcode_link,
           resume: data.resume || ""
         });
-         await BufferToBase64({Buffer :data.resume})
+        
       } catch (error) {
         console.error("Error fetching profile data:", error);
       }
@@ -213,17 +213,18 @@ export default function Seperate_student_Edit({ title }) {
             <div className={style.image_cover}>
               <div className={style.image}>
                 <div className={style.image_size}>
-                  {imageSrc ? (
-                    <embed
-                      src={`data:image/jpeg;base64,${editContent.profilePhoto}`}
-                      width="100%"
-                      height="100%"
-                      style={{ borderRadius: '10px' }}
-                      type="image/jpeg"
-                    />
-                  ) : (
-                    <Spinner />
-                  )}
+                {imageSrc ? (
+                <img
+                  src={`data:image/jpeg;base64,${editContent.profilePhoto}`}
+                  alt="Profile Photo"
+                  width="100%"
+                  height="100%"
+                  style={{ borderRadius: '10px' }}
+                />
+              ) : (
+                <Spinner />
+              )}
+
                 </div>
               </div>
             </div>
@@ -236,11 +237,11 @@ export default function Seperate_student_Edit({ title }) {
           <h1>Resume</h1>
           <div className={style.card_size}>
           <iframe
-            title="Embedded Content"
-            width="100%"
-            height="500px"
-            src={pdfSrc}
-          />   
+          src={`data:application/pdf;base64,${editContent.profileResume}`}
+          className="w-100"
+          style={{ height: "1200px" }}
+/>
+
           </div>
         </div>
       </div>
