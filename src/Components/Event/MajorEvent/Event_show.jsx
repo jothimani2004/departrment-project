@@ -1,35 +1,70 @@
 import style from "./Event_show.module.css"
 import { useState, useEffect } from "react";
-
+import { Spinner } from 'react-bootstrap';
+import UseApiPost from "../../../Custom_hook/apiPostCall";
+import UseApiPut from "../../../Custom_hook/apiPutCall";
+import UseApiGet from "../../../Custom_hook/apiGetCall";
 
 export default function Event_show({title}){
 
 
-     const role = "Admin"
+    const role = "Admin"
+    const [showPopup, setShowPopup] = useState(false);
+    const [selectFile,setSelectFile] = useState(null)
+    const [calander,setCalander] = useState(null)
+    let val;
+
+
+    useEffect(()=>{
+       
+    async function call(){
+
+        val = await UseApiGet(`/file_upload?title=${title}`);
+      
+
+    setCalander(val.buffer);  
+      }
+    call()
     
-            const [showPopup, setShowPopup] = useState(false);
+
+    },[])
+
+
+
     
-            function setting_pop_field(val){
+    function setting_pop_field(val){
+
+        setShowPopup(true)
+        console.log(val)
+       
+    }
+
+    const handleFileChange = async(e) =>{
+      const file = e.target.files[0]
+      setSelectFile(file)
+      console.log(file)
+    }
+
     
-                setShowPopup(true)
-                console.log(val)
-                // if (val.length != 0){
-                
-                // }else{
-                  
-                // }
-                // [patent.title,patent.applicationNumber,patent.grantNumber,patent.dateGranted,patent.patentee]
-          
-            }
+    const handleSubmit = async (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
     
-    
-            const handleSubmit = async (val,e) => {
-                e.preventDefault(); // Prevent default form submission behavior
-            
-                console.log(val)
-            
-               
-              }
+        if (!selectFile) {
+          alert("Please select a file first!");
+          return;
+        }
+      
+        const formData = new FormData();
+        formData.append("file", selectFile); // Key should match backend
+        formData.append("title",title)
+
+        // console.log(formData.file)
+        const result = await UseApiPut({path:"/file_upload",body:formData})  
+        
+        console.log(result)
+        window.location.reload()
+        
+      }
             
 
     return(
@@ -46,11 +81,17 @@ export default function Event_show({title}){
                         >Edit {title}</button>:null}
                     </div>
                 </div>
-
-                <div className={style.card_size}>
-                <iframe src="/assets/HIRTHICK GOWTHAM 1.pdf" width="100%" height="1120px" title="PDF Viewer"></iframe>
-                </div>
-
+                      {calander?
+                      <div className={style.card_size}>
+                      <iframe  src={`data:application/pdf;base64,${calander}`} width="100%" height="700px" title="PDF Viewer"></iframe>
+                      </div>
+                      :
+                      <div className="pdf-container d-flex justify-content-center align-items-center py-3 rounded-3" style={{background:"#fff"}}>
+              <h3 style={{color:"hsl(207, 51.40%, 43.50%)"}}> Fetching &nbsp;</h3>
+              <Spinner animation="border" variant="primary" />
+            </div>
+                      }
+                
             </div>
 
 
@@ -76,9 +117,9 @@ export default function Event_show({title}){
                   
                     <input
                       type="file"
-                      name="profile_photo"
+                      name="file"
                       accept="file/*"
-                    //   onChange={(e) => handleFileChange(e, "profile_photo")}
+                      onChange={(e) => handleFileChange(e)}
                       className="form-control"
                     />
 
@@ -96,7 +137,7 @@ export default function Event_show({title}){
                     Cancel
                   </button>
                   
-                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit("object_id",e)}>
+                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit(e)}>
                     Submit
                   </button>
                 </div>

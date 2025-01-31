@@ -1,10 +1,11 @@
 import React from "react";
 import { Card, Container } from "react-bootstrap";
 import './Conference.css';
-import { journals, conferences } from "../../../Content/publication";
 import { useState, useEffect } from "react";
-import axios from "axios";
-
+import UseApiPost from "../../../Custom_hook/apiPostCall";
+import UseApiGet from "../../../Custom_hook/apiGetCall";
+import UseApiDelete from "../../../Custom_hook/apiDeleteCall";
+import UseApiPut from "../../../Custom_hook/apiPutCall";
 
 const Conferences = () => {
  
@@ -12,58 +13,94 @@ const Conferences = () => {
   const role = "Admin"
 
   const [isTeacher, setIsTeacher] = useState(false);
-   const [showPopup, setShowPopup] = useState(false);
-   const [newVideo, setNewVideo] = useState({ videoId: "", title: "", authors: "" ,conference:"",location:"",year:"",index:"",abstract:""});
-   const [message, setMessage] = useState("");
-   const [videos, setVideos] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [newVideo, setNewVideo] = useState({ videoId: "", title: "", authors: "" ,conference:"",location:"",year:"",index:"",abstract:""});
+  const [editContent, setEditContent] = useState({ videoId: "", title: "", authors: "" ,conference:"",location:"",year:"",index:"",abstract:""});
+  const [message, setMessage] = useState("");
+  const [videos, setVideos] = useState([]);
+  let val;
+  const [conferences,setConferences] = useState([])
+
+
+
+  useEffect(()=>{
+  
+      async function call(){
+  
+          val = await UseApiGet("/paper");
+          setConferences(val)
+          console.log(val)
+        }
+      call()
+      
+  
+      },[])
+
 
 
   function setting_pop_field(val){
 
       setShowPopup(true)
-      console.log(val)
+      // console.log(val)
 
      
       if (val.length != 0){
-        setNewVideo( { videoId: "", title: val[0], authors: val[1] ,conference:val[2],location:val[3],year:val[4],dio:val[5]} )
+        setNewVideo( { videoId: val[6], title: val[0], authors: val[1] ,conference:val[2],location:val[3],year:val[4],doi:val[5]} )
+        setEditContent( { videoId: val[6], title: val[0], authors: val[1] ,conference:val[2],location:val[3],year:val[4],doi:val[5]} )
+
       }else{
-          setNewVideo({ videoId: "", title: "", authors: "" ,conference:"",location:"",year:"",index:"",abstract:""} )
+
+          setNewVideo({ videoId: "", title: "", authors: "" ,conference:"",location:"",year:"",doi:""} )
+          setEditContent({ videoId: "", title: "", authors: "" ,conference:"",location:"",year:"",doi:""} )
+
         }
 
       // [conference.title,conference.authors,conference.conference,conference.location,conference.year,conference.pages,conference.dio]
 
   }
 
-
-
-
-  
-
+ 
 
    const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewVideo((prevVideo) => ({
+
+
+    setEditContent((prevVideo) => ({
       ...prevVideo,
       [name]: value,
     }));
+    console.log(editContent)
   };
 
-   const handleSubmit = async (val,e) => {
+
+
+   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
-    console.log(val)
+    if (editContent.videoId === ""){
+          const result  = await UseApiPost({path:"/paper",body:editContent})
+        }else{
+          const result  = await UseApiPut({path:"/paper",body:editContent})
+        }
 
-   
+    console.log(editContent.videoId)
+
+   window.location.reload()
   }
 
   const handleDelete = async (jol,object_id,e) => {
 
-   
+    console.log(object_id)
     const confirmDelete = window.confirm(`Do you want to delete this conference:  ${jol}`);
+
     if (confirmDelete) {
-     
+     console.log(object_id)
+         const result = await UseApiDelete({path:"/paper",body:{object:object_id}})
+           console.log(result)
       
     }
+    window.location.reload()
+
    
   };
 
@@ -81,7 +118,10 @@ const Conferences = () => {
       </div>
     
       
-      {conferences.map((conference, index) => (
+      {
+      conferences.length > 0 ?
+      
+      conferences.map((conference, index) => (
         <Card
           key={index}
           className="conference-card mb-5 shadow-lg pt-0  border-0"
@@ -128,11 +168,11 @@ const Conferences = () => {
 
             {role =="Admin"?<button class="btn btn-primary mx-1"
               id ={`ej_${index}`}
-            onClick={()=> setting_pop_field([conference.title,conference.authors,conference.conference,conference.location,conference.year,conference.doi])}
+            onClick={()=> setting_pop_field([conference.title,conference.authors,conference.conference,conference.location,conference.year,conference.doi,conference._id])}
             >Edit</button>:null}
 
             {role =="Admin"?<button class="btn btn-danger mx-1"
-            onClick={(e)=>handleDelete(conference.title,"object_id",e)}
+            onClick={(e)=>handleDelete(conference.title,conference._id,e)}
             >
                   <i class="bi bi-trash"></i> Delete
                 </button>:null}
@@ -140,7 +180,15 @@ const Conferences = () => {
 
           </Card.Body>
         </Card>
-      ))}
+      )):<Card.Body>
+      
+      
+                 <Card.Text>
+                    <h2 className="text-center" style={{color:"rgba(233, 48, 48, 0.89)"}}><strong>No Content found</strong></h2>
+                  </Card.Text>
+      
+              </Card.Body>
+      }
     </Container>
 
 
@@ -165,7 +213,7 @@ const Conferences = () => {
                     <input
                       type="text"
                       name="title"
-                      value={newVideo.title}
+                      value={editContent.title}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -174,8 +222,8 @@ const Conferences = () => {
                     <label>Author :</label>
                     <input
                       type="text"
-                      name="Author"
-                      value={newVideo.authors}
+                      name="authors"
+                      value={editContent.authors}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -184,8 +232,8 @@ const Conferences = () => {
                     <label>Conference :</label>
                     <input
                       type="text"
-                      name="Conference"
-                      value={newVideo.conference}
+                      name="conference"
+                      value={editContent.conference}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -194,8 +242,8 @@ const Conferences = () => {
                     <label>Location :</label>
                     <input
                       type="text"
-                      name="Location"
-                      value={newVideo.location}
+                      name="location"
+                      value={editContent.location}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -204,8 +252,8 @@ const Conferences = () => {
                     <label>Year :</label>
                     <input
                       type="text"
-                      name="Year"
-                      value={newVideo.year}
+                      name="year"
+                      value={editContent.year}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -214,8 +262,8 @@ const Conferences = () => {
                     <label>DOI :</label>
                     <input
                       type="text"
-                      name="DOI"
-                      value={newVideo.dio }
+                      name="doi"
+                      value={editContent.doi }
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -232,7 +280,7 @@ const Conferences = () => {
                     Cancel
                   </button>
                   
-                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit("object_id",e)}>
+                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit(e)}>
                     Submit
                   </button>
                 </div>
