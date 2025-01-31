@@ -2,7 +2,7 @@ export const events = [
     {
       id: 1,
       title: "Annual Tech Conference",
-      description: "A gathering of tech enthusiasts and industry leaders.",
+      description: "A gathering of tech enthus A gathering of tech enthusiasts and industry leaders.asdddddddddddddddddddddddddddttttttttttttttttttttttttttttttttttttttttttnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnntttttttttttttttttttttttttttttttttttttttttttttttnnnnnnnnnnnnnnnnnnnnnnniasts and industry leaders.asdddddddddddddddddddddddddddttttttttttttttttttttttttttttttttttttttttttnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnntttttttttttttttttttttttttttttttttttttttttttttttnnnnnnnnnnnnnnnnnnnnnnnn",
       image: "https://www.toppersnotes.com/wp-content/uploads/2016/08/maxresdefault.jpg",
       status: "upcoming",
     },

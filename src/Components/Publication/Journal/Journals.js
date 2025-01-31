@@ -2,19 +2,40 @@ import React from "react";
 import { Card, Container } from "react-bootstrap";
 import './Journal.css';
 import { useState, useEffect } from "react";
-import { journals } from "../../../Content/publication";
-import axios from "axios";
-
-
+// import { journals } from "../../../Content/publication";
+import UseApiPost from "../../../Custom_hook/apiPostCall";
+import UseApiGet from "../../../Custom_hook/apiGetCall";
+import UseApiDelete from "../../../Custom_hook/apiDeleteCall";
+import UseApiPut from "../../../Custom_hook/apiPutCall";
+import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie.jsx";
 const Journals = () => {
 
-  const role = "Admin"
+  const role = checkJwtCookie({returnme:"role"})
 
   const [isTeacher, setIsTeacher] = useState(false);
-   const [showPopup, setShowPopup] = useState(false);
-   const [newVideo, setNewVideo] = useState({ videoId: "", title: "", authors: "" ,journal:"",volume:"",year:"",index:"",abstract:""});
-   const [message, setMessage] = useState("");
-   const [videos, setVideos] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [newVideo, setNewVideo] = useState({ videoId: "", title: "", authors: "" ,journal:"",volume:"",year:"",index:"",abstract:""});
+  const [editContent, setEditContent] = useState({ videoId: "", title: "", authors: "" ,journal:"",volume:"",year:"",index:"",abstract:""});
+  const [message, setMessage] = useState("");
+  const [videos, setVideos] = useState([]);
+  let val;
+  const [journals,setJournals] = useState([])
+
+
+
+    useEffect(()=>{
+
+    async function call(){
+
+        val = await UseApiGet("/journal");
+        setJournals(val)
+      }
+    call()
+    
+
+    },[])
+
+
 
 
   function setting_pop_field(val){
@@ -23,9 +44,11 @@ const Journals = () => {
       console.log(val)
       
       if (val.length != 0){
-        setNewVideo( { videoId: "", title: val[0], authors: val[1] ,journal:val[2],volume:val[3],year:val[4],index:val[5],abstract:val[6]} )
+        setNewVideo( { videoId: val[7], title: val[0], authors: val[1] ,journal:val[2],volume:val[3],year:val[4],index:val[5],abstract:val[6]} )
+        setEditContent( { videoId: val[7], title: val[0], authors: val[1] ,journal:val[2],volume:val[3],year:val[4],index:val[5],abstract:val[6]} )
       }else{
           setNewVideo({ videoId: "", title: "", authors: "" ,journal:"",volume:"",year:"",index:"",abstract:""})
+          setEditContent({ videoId: "", title: "", authors: "" ,journal:"",volume:"",year:"",index:"",abstract:""} )
         }
 
       // [journal.title,journal.authors,journal.journal,journal.volume,journal.year,journal.index,journal.abstract]
@@ -38,18 +61,27 @@ const Journals = () => {
 
    const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewVideo((prevVideo) => ({
-      ...prevVideo,
+
+    setEditContent((preContent) => ({
+      ...preContent,
       [name]: value,
     }));
+
+    console.log(journals)
+
   };
 
-   const handleSubmit = async (val,e) => {
+   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
+    
+    if (editContent.videoId === ""){
+      const result  = await UseApiPost({path:"/journal",body:editContent})
+    }else{
+      const result  = await UseApiPut({path:"/journal",body:editContent})
+    }
 
     
-    console.log(val)
-
+    window.location.reload()
   
   }
 
@@ -59,11 +91,14 @@ const Journals = () => {
     if (confirmDelete) {
 
     console.log(object_id)
+    const result = await UseApiDelete({path:"/journal",body:{object:object_id}})
+      console.log(result)
 
-
-  
     }
+    window.location.reload()
   };
+
+
 
 
   return (<>
@@ -77,7 +112,10 @@ const Journals = () => {
         </div>
       </div>
     
-      {journals.map((journal, index) => (
+      {
+      journals.length > 0 ?
+
+      journals.map((journal, index) => (
         <Card
           key={index}
           className="journal-card mb-5 shadow pt-0 border-0"
@@ -88,6 +126,7 @@ const Journals = () => {
         >
           <Card.Body className="s_b rounded-3 t_c">
             <Card.Title className="fw-bold">{journal.title}</Card.Title>
+            
             <Card.Text>
               <strong>Authors:</strong> {journal.authors}
             </Card.Text>
@@ -111,11 +150,11 @@ const Journals = () => {
             </Card.Text>
             {role =="Admin"?<button class="btn btn-primary mx-1"
               id ={`ej_${index}`}
-            onClick={()=> setting_pop_field([journal.title,journal.authors,journal.journal,journal.volume,journal.year,journal.index,journal.abstract])}
+            onClick={()=> setting_pop_field([journal.title,journal.authors,journal.journal,journal.volume,journal.year,journal.index,journal.abstract,journal._id])}
             >Edit</button>:null}
 
             {role =="Admin"?<button class="btn btn-danger mx-1"
-            onClick={(e)=>handleDelete(journal.title,"object_id",e)}
+            onClick={(e)=>handleDelete(journal.title,journal._id,e)}
             >
                   <i class="bi bi-trash"></i> Delete
                 </button>:null}
@@ -126,7 +165,14 @@ const Journals = () => {
 
           </Card.Body>
         </Card>
-      ))}
+      )):<Card.Body>
+
+
+           <Card.Text>
+              <h2 className="text-center" style={{color:"rgba(233, 48, 48, 0.89)"}}><strong>No Content found</strong></h2>
+            </Card.Text>
+
+        </Card.Body>}
     </Container>
 
     {showPopup && (
@@ -149,7 +195,7 @@ const Journals = () => {
                     <input
                       type="text"
                       name="title"
-                      value={newVideo.title}
+                      value={editContent.title}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -158,8 +204,8 @@ const Journals = () => {
                     <label>Author</label>
                     <input
                       type="text"
-                      name="Author"
-                      value={newVideo.authors}
+                      name="authors"
+                      value={editContent.authors}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -168,8 +214,8 @@ const Journals = () => {
                     <label>Journal</label>
                     <input
                       type="text"
-                      name="Journal"
-                      value={newVideo.journal}
+                      name="journal"
+                      value={editContent.journal}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -178,8 +224,8 @@ const Journals = () => {
                     <label>Volume</label>
                     <input
                       type="text"
-                      name="Volume"
-                      value={newVideo.volume}
+                      name="volume"
+                      value={editContent.volume}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -188,8 +234,8 @@ const Journals = () => {
                     <label>Year</label>
                     <input
                       type="text"
-                      name="Year"
-                      value={newVideo.year}
+                      name="year"
+                      value={editContent.year}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -197,8 +243,8 @@ const Journals = () => {
                   <div className="form-group">
                     <label>Abstract</label>
                     <textarea
-                      name="Abstract"
-                      value={newVideo.abstract}
+                      name="abstract"
+                      value={editContent.abstract}
                       onChange={handleInputChange}
                       className="form-control"
                     ></textarea>
@@ -213,7 +259,7 @@ const Journals = () => {
                     Cancel
                   </button>
                   
-                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit("object_id",e)}>
+                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit(e)}>
                     Submit
                   </button>
                 </div>

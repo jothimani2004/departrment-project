@@ -1,39 +1,79 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from "./calender.module.css"
 import { useState, useEffect } from "react";
-
+import UseApiPost from "../../../Custom_hook/apiPostCall";
+import UseApiPut from "../../../Custom_hook/apiPutCall";
+import UseApiGet from "../../../Custom_hook/apiGetCall";
+import { Spinner } from 'react-bootstrap';
+import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie.jsx";
 
 
 
 export default function Calander_show({keys:{pfd_path,title}}){
-
-        const role = "Admin"
-
+  
+  const role = checkJwtCookie({ returnme: "role" }) || "Guest";  
+      
         const [showPopup, setShowPopup] = useState(false);
+        const [selectFile,setSelectFile] = useState(null)
+        const [calander,setCalander] = useState(null)
+        let val;
+
+
+
+    useEffect(()=>{
+   
+       async function call(){
+   
+           val = await UseApiGet(`/file_upload?title=${title}`);
+          
+
+        setCalander(val.buffer);  
+         }
+       call()
+       
+   
+       },[])
+
+
 
         function setting_pop_field(val){
 
             setShowPopup(true)
             console.log(val)
-            // if (val.length != 0){
-            
-            // }else{
-              
-            // }
-            // [patent.title,patent.applicationNumber,patent.grantNumber,patent.dateGranted,patent.patentee]
-      
+           
         }
 
 
-        const handleSubmit = async (val,e) => {
-            e.preventDefault(); // Prevent default form submission behavior
-        
-            console.log(val)
-        
-           
+        const handleFileChange = async(e) =>{
+          const file = e.target.files[0]
+          setSelectFile(file)
+          console.log(file)
+        }
+
+
+
+      const handleSubmit = async (e) => {
+          e.preventDefault(); // Prevent default form submission behavior
+
+          if (!selectFile) {
+            alert("Please select a file first!");
+            return;
           }
         
+          const formData = new FormData();
+          formData.append("file", selectFile); // Key should match backend
+          formData.append("title",title)
 
+          // console.log(formData.file)
+          const result = await UseApiPut({path:"/file_upload",body:formData})  
+          
+        
+          // console.log(result)
+      
+          window.location.reload()
+
+        }
+        
 
   
     return (
@@ -56,17 +96,25 @@ export default function Calander_show({keys:{pfd_path,title}}){
                 </div>
             </div>
 
+            {
+              calander?
             <div className="pdf-container d-flex justify-content-center align-items-center py-3">
                 <div className="card shadow-lg w-100 rounded-3" style={{ maxWidth: '90%' }}>
                     <iframe
-                        src={pfd_path}
+                        src={`data:application/pdf;base64,${calander}`}
                         width="100%"
                         height="600px"
-                        title="PDF Viewer"
+                        title={title}
+                        download={`${title}.pdf`}
                         className="rounded-3"
                     ></iframe>
                 </div>
+            </div>:<div className="pdf-container d-flex justify-content-center align-items-center py-3 rounded-3" style={{background:"#fff"}}>
+              <h3 style={{color:"hsl(207, 51.40%, 43.50%)"}}> Fetching &nbsp;</h3>
+              <Spinner animation="border" variant="primary" />
             </div>
+            }
+
         </div>
 
 
@@ -93,9 +141,9 @@ export default function Calander_show({keys:{pfd_path,title}}){
                   
                     <input
                       type="file"
-                      name="profile_photo"
+                      name="file"
                       accept="file/*"
-                    //   onChange={(e) => handleFileChange(e, "profile_photo")}
+                      onChange={(e) => handleFileChange(e)}
                       className="form-control"
                     />
 
@@ -113,7 +161,7 @@ export default function Calander_show({keys:{pfd_path,title}}){
                     Cancel
                   </button>
                   
-                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit("object_id",e)}>
+                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit(e)}>
                     Submit
                   </button>
                 </div>

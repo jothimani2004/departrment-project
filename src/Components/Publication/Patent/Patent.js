@@ -1,61 +1,99 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import './Patent.css'
-import {  patents} from "../../../Content/publication";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import UseApiPost from "../../../Custom_hook/apiPostCall";
+import UseApiGet from "../../../Custom_hook/apiGetCall";
+import UseApiDelete from "../../../Custom_hook/apiDeleteCall";
+import UseApiPut from "../../../Custom_hook/apiPutCall";
+import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie.jsx";
 
 
 const Patents = () => {
 
 
-       const role = "Admin"
-      
-        const [isTeacher, setIsTeacher] = useState(false);
-         const [showPopup, setShowPopup] = useState(false);
-         const [newVideo, setNewVideo] = useState({ videoId: "", title: "", applicationNumber: "" ,grantNumber:"",dateGranted:"",patentee:"",});
-         const [message, setMessage] = useState("");
-         const [videos, setVideos] = useState([]);
+  const role = checkJwtCookie({returnme:"role"})
+    
+      const [isTeacher, setIsTeacher] = useState(false);
+      const [showPopup, setShowPopup] = useState(false);
+      const [newVideo, setNewVideo] = useState({ videoId: "", title: "", applicationNumber: "" ,grantNumber:"",dateGranted:"",patentee:"",});
+      const [editContent, setEditContent] = useState({ videoId: "", title: "", applicationNumber: "" ,grantNumber:"",dateGranted:"",patentee:"",});
+      const [message, setMessage] = useState("");
+      const [videos, setVideos] = useState([]);
+      let val;
+      const [patents,setPatents] = useState([])
 
 
-         function setting_pop_field(val){
 
-          setShowPopup(true)
-          console.log(val)
-          if (val.length != 0){
-          setNewVideo( { videoId: "", title: val[0], applicationNumber: val[1] ,grantNumber:val[2],dateGranted:val[3],patentee:val[4]} )
-          }else{
-            setNewVideo({ videoId: "", title: "", applicationNumber: "" ,grantNumber:"",dateGranted:"",patentee:"",} )
+    useEffect(()=>{
+    
+        async function call(){
+    
+            val = await UseApiGet("/patent");
+            setPatents(val)
+            console.log(val)
           }
-          // [patent.title,patent.applicationNumber,patent.grantNumber,patent.dateGranted,patent.patentee]
+        call()
+        
     
-      }
-    
-       const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewVideo((prevVideo) => ({
-          ...prevVideo,
-          [name]: value,
-        }));
-      };
-    
-       const handleSubmit = async (val,e) => {
-        e.preventDefault(); // Prevent default form submission behavior
-    
-        console.log(val)
-    
-      }
-    
-      const handleDelete = async (jol,object_id,e) => {
-    
-       
-        const confirmDelete = window.confirm(`Do you want to delete this conference:  ${jol}`);
-        if (confirmDelete) {
-         
-          console.log(confirmDelete)
+        },[])
+
+
+
+
+
+  function setting_pop_field(val){
+
+  setShowPopup(true)
+
+  console.log(val)
+  if (val.length != 0){
+  setNewVideo( { videoId: val[5], title: val[0], applicationNumber: val[1] ,grantNumber:val[2],dateGranted:val[3],patentee:val[4]} )
+  setEditContent( { videoId: val[5], title: val[0], applicationNumber: val[1] ,grantNumber:val[2],dateGranted:val[3],patentee:val[4]} )
+
+  }else{
+    setNewVideo({ videoId: "", title: "", applicationNumber: "" ,grantNumber:"",dateGranted:"",patentee:"",} )
+    setEditContent({ videoId: "", title: "", applicationNumber: "" ,grantNumber:"",dateGranted:"",patentee:"",} )
+
+  }
+  // [patent.title,patent.applicationNumber,patent.grantNumber,patent.dateGranted,patent.patentee]
+
+  }
+
+  const handleInputChange = (e) => {
+  const { name, value } = e.target;
+      setEditContent((prevVideo) => ({
+        ...prevVideo,
+        [name]: value,
+      }));
+
+    };
+
+  const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent default form submission behavior
+
+        if (editContent.videoId === ""){
+          const result  = await UseApiPost({path:"/patent",body:editContent})
+        }else{
+          const result  = await UseApiPut({path:"/patent",body:editContent})
         }
-       
-      };
+
+  
+  window.location.reload()
+
+  }
+
+  const handleDelete = async (jol,object_id,e) => {
+
+    console.log(object_id)
+    const confirmDelete = window.confirm(`Do you want to delete this conference:  ${jol}`);
+    if (confirmDelete) {
+       console.log(object_id)
+        const result = await UseApiDelete({path:"/patent",body:{object:object_id}})
+          console.log(result)
+    }
+    window.location.reload()
+  };
 
       
 
@@ -73,7 +111,10 @@ const Patents = () => {
       </div>
 
       <Row>
-        {patents.map((patent, index) => (
+        {
+        patents.length > 0 ?
+        
+        patents.map((patent, index) => (
           <Col key={index} xs={12}>
             <Card
               className="patent-card mb-4 border-0 rounded-lg overflow-hidden"
@@ -100,11 +141,11 @@ const Patents = () => {
 
                 {role =="Admin"?<button class="btn btn-primary mx-1"
                   id ={`ej_${index}`}
-                onClick={()=> setting_pop_field([patent.title,patent.applicationNumber,patent.grantNumber,patent.dateGranted,patent.patentee])}
+                onClick={()=> setting_pop_field([patent.title,patent.applicationNumber,patent.grantNumber,patent.dateGranted,patent.patentee,patent._id])}
                 >Edit</button>:null}
 
                 {role =="Admin"?<button class="btn btn-danger mx-1"
-                onClick={(e)=>handleDelete(patent.title,"object_id",e)}
+                onClick={(e)=>handleDelete(patent.title,patent._id,e)}
                 >
                       <i class="bi bi-trash"></i> Delete
                     </button>:null}
@@ -113,7 +154,12 @@ const Patents = () => {
               </Card.Body>
             </Card>
           </Col>
-        ))}
+        )):<Card.Body>
+            <Card.Text>
+              <h2 className="text-center" style={{color:"rgba(233, 48, 48, 0.89)"}}><strong>No Content found</strong></h2>
+            </Card.Text>
+
+        </Card.Body>}
       </Row>
     </Container>
 
@@ -138,7 +184,7 @@ const Patents = () => {
                     <input
                       type="text"
                       name="title"
-                      value={newVideo.title}
+                      value={editContent.title}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -147,8 +193,8 @@ const Patents = () => {
                     <label>Application Number :</label>
                     <input
                       type="text"
-                      name="Application_Number"
-                      value={newVideo.applicationNumber}
+                      name="applicationNumber"
+                      value={editContent.applicationNumber}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -157,8 +203,8 @@ const Patents = () => {
                     <label>Grant Number :</label>
                     <input
                       type="text"
-                      name="Grant_Number"
-                      value={newVideo.grantNumber}
+                      name="grantNumber"
+                      value={editContent.grantNumber}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -167,8 +213,8 @@ const Patents = () => {
                     <label>Date Granted :</label>
                     <input
                       type="text"
-                      name="Date_Granted"
-                      value={newVideo.dateGranted}
+                      name="dateGranted"
+                      value={editContent.dateGranted}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -177,8 +223,8 @@ const Patents = () => {
                     <label>Patentee:</label>
                     <input
                       type="text"
-                      name="Patentee"
-                      value={newVideo.patentee}
+                      name="patentee"
+                      value={editContent.patentee}
                       onChange={handleInputChange}
                       className="form-control"
                     />
@@ -196,7 +242,7 @@ const Patents = () => {
                     Cancel
                   </button>
                   
-                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit("object_id",e)}>
+                  <button type="submit" className="btn btn-primary" onClick={(e)=>handleSubmit(e)}>
                     Submit
                   </button>
                 </div>
