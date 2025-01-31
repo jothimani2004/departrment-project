@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
+import { useParams } from 'react-router-dom';
+
+
+
+
 
 const LinkComponent = () => {
+
+  const d="http://localhost:5000";
+
+  const { domain } = useParams();
+
+
   const [links, setLinks] = useState([]);
   const [isTeacher, setIsTeacher] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [newLink, setNewLink] = useState({ name: "", url: "", description: "" });
   const [message, setMessage] = useState("");
 
+
   useEffect(() => {
     // Fetch the links and user role (teacher/student)
     const fetchLinks = async () => {
       try {
-        const response = await axios.get("/links");
+        const response = await axios.get(`${d}/links`, {
+          params: { domain: domain }
+        });
         setLinks(response.data.links);
         setIsTeacher(response.data.isTeacher);
       } catch (error) {
@@ -43,8 +57,11 @@ const LinkComponent = () => {
   
     try {
       const cookieValue = "2020202002"; // Simulated cookie value
-      const response = await axios.post("/addlink", {
+      console.log(domain);
+      
+      const response = await axios.post(`${d}/addlink`, {
         newLink,
+        domain,
         cookieValue
       });
 
@@ -55,17 +72,19 @@ const LinkComponent = () => {
       setShowPopup(false);
       setMessage("Link added successfully");
       setNewLink({ name: "", url: "", description: "" });
+      window.location.reload();
     } catch (error) {
       console.error("Error adding link:", error);
       setMessage("Error adding link.");
     }
   };
 
-  const handleDelete = async (linktitle) => {
+  const handleDelete = async (linkid) => {
     try {
-      const response = await axios.delete(`/deletelinks/${encodeURIComponent(linktitle)}`);
-      setLinks(links.filter((link) => link.linktitle !== linktitle)); // Match the correct property name
+      const response = await axios.delete(`${d}/deletelinks/${linkid}`);
+      setLinks(links.filter((link) =>link._id !== linkid)); // Match the correct property name
       setMessage(response.data.message || "Link deleted successfully");
+     
     } catch (error) {
       console.error("Error deleting link:", error);
     }
@@ -73,10 +92,11 @@ const LinkComponent = () => {
 
   return (
     <div className="container m-2 ">
-      <div className="flex justify-content-between align-items-center">
-        <h1 className="xl:text-3xl font-bold mb-6 text-start text-gray-800">Links Resources</h1>
 
-        {/* Teacher can add links */}
+<div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="h3"> Links Resources</h1>
+        <div>
+           {/* Teacher can add links */}
         {true && (
           <motion.button
             onClick={() => setShowPopup(true)}
@@ -87,30 +107,36 @@ const LinkComponent = () => {
             Add New Link
           </motion.button>
         )}
+        
+        </div>
       </div>
 
-      <ul>
+
+
+
+      <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
         {links.map((link) => (
           <li key={link.name} className="my-4 p-4 bg-white shadow rounded-lg">
             <div className="d-flex justify-content-between align-items-center">
-              <h3 className="font-weight-bold">{link.linktitle}</h3>
+              <h3 className="font-weight-bold">{link.link.name}</h3>
               <button
-                onClick={() => handleDelete(link.linktitle)}
+                onClick={() => handleDelete(link._id)}
                 className="btn btn-sm btn-danger"
               >
                 Delete
               </button>
             </div>
-            <p className="mt-2">{link.linkdesc}</p>
+            <p className="mt-2">{link.link.description}</p>
             <a
-              href={link.url}
+              href={link.link.url}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary"
             >
               <button className="btn btn-link">Get Link</button>
             </a>
-            <p className="text-muted">Uploaded by: {link.uploaded_by}</p>
+            
+       
           </li>
         ))}
       </ul>

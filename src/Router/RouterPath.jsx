@@ -124,7 +124,7 @@ export const RouterPath = () => {
 
 
 <Route
-  path="resourse/notes"
+  path="resourse/:domain/:resourse/notesview"
   element={<NoteViewer />}
 />
 

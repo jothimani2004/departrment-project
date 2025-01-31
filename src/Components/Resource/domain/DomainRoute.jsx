@@ -34,7 +34,7 @@ const DomainRoute = ({ domainnames, domainDetails, resources }) => {
 
       {/* Mobile Menu Button */}
 <div className="d-block d-md-none p-0 ">
-  <button className="w-2" onClick={toggleMobileMenu}>
+  <button className="w-2 btn btn-link" onClick={toggleMobileMenu}>
     {isMobileMenuOpen ? (
       <FontAwesomeIcon icon={faTimes} />
     ) : (

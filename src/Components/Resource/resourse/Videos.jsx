@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useParams } from 'react-router-dom';
 
 const VideoComponent = () => {
+
+  
+  const d="http://localhost:5000";
+
+    const { domain } = useParams();
+
   const [isTeacher, setIsTeacher] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [newVideo, setNewVideo] = useState({ videoId: "", title: "", description: "" });
@@ -12,7 +19,9 @@ const VideoComponent = () => {
   // Fetch videos and user role (teacher or student)
   const fetchVideos = async () => {
     try {
-      const response = await axios.get("/videos");
+      const response = await axios.get(`${d}/videos`, {
+        params: { domain: domain }
+      });
       setVideos(response.data.videos);
       
     } catch (error) {
@@ -41,7 +50,7 @@ const VideoComponent = () => {
 
     try {
       const cookieValue = "2020202002";
-      await axios.post("/addvideo", { newVideo, cookieValue });
+      await axios.post(`${d}/addvideo`, { newVideo,domain, cookieValue });
       setMessage("Video added successfully");
       setNewVideo({ videoId: "", title: "", description: "" });
       setShowPopup(false); // Close the popup after successful submission
@@ -54,7 +63,7 @@ const VideoComponent = () => {
 
   const handleDelete = async (videoid) => {
     try {
-      await axios.delete(`/videodelete/${videoid}`);
+      await axios.delete(`${d}/videodelete/${videoid}`);
       setMessage("Video deleted successfully");
       fetchVideos(); // Fetch updated video list after deletion
     } catch (error) {
@@ -64,19 +73,23 @@ const VideoComponent = () => {
 
   return (
     <div className="container m-2">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Video Resources</h1>
-        {true && (
-          <motion.button
-            onClick={() => setShowPopup(true)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="btn btn-primary"
-          >
-            Add New Video
-          </motion.button>
-        )}
-      </div>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+              <h1 className="h3"> videos Resources</h1>
+              <div>
+                 {/* Teacher can add links */}
+              {true && (
+                <motion.button
+                  onClick={() => setShowPopup(true)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn btn-primary"
+                >
+                  Add New video
+                </motion.button>
+              )}
+              
+              </div>
+            </div>
 
       <div className="row">
         {videos.map((video) => (
@@ -102,7 +115,7 @@ const VideoComponent = () => {
                 <p className="card-text">{video.description}</p>
                 {true && (
                   <motion.button
-                    onClick={() => handleDelete(video.videoid)}
+                  onClick={() => handleDelete(video._id)}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="btn btn-danger"

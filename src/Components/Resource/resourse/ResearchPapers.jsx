@@ -6,6 +6,12 @@ import { motion } from 'framer-motion';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 const IEEEPapers = () => {
+
+  const d="http://localhost:5000";
+
+ 
+
+
   const { year, domain, resourse } = useParams();
   const [pdfData, setPdfData] = useState([]);
   const [selectedPdf, setSelectedPdf] = useState(null);
@@ -22,18 +28,19 @@ const IEEEPapers = () => {
   useEffect(() => {
     
 
-
-
+   
+   
 
     const fetchPdfData = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/researchpaper/${year || currentYear}`);
         setPdfData(response.data.pdfs || []);
-        const cookieValue = Cookies.get('Access');
-        if (cookieValue) {
-          const userRole = JSON.parse(cookieValue).role;
-          setIsTeacher(userRole === 'teacher');
-        }
+
+        // const cookieValue = Cookies.get('Access');
+        // if (cookieValue) {
+        //   const userRole = JSON.parse(cookieValue).role;
+        //   setIsTeacher(userRole === 'teacher');
+        // }
       } catch (error) {
         console.error('Error fetching PDF data:', error);
       }
@@ -58,6 +65,7 @@ const IEEEPapers = () => {
 
   const handleFileUpload = async (e) => {
     e.preventDefault();
+    
     if (!uploadFile) {
       setMessage('Please select a file to upload.');
       return;
@@ -68,7 +76,10 @@ const IEEEPapers = () => {
     formData.append('year', year || currentYear);
 
     try {
-      const response = await axios.post('/researchpapers', formData);
+  
+      console.log("come tom upload");
+      const response = await axios.post(`${d}/researchpapers`, formData);
+      console.log(response);
       setMessage(response.data.message || 'PDF uploaded successfully.');
       setPdfData([...pdfData, response.data.pdf]);
       setShowModal(false);
@@ -114,29 +125,29 @@ const IEEEPapers = () => {
         </div>
       </div>
 
-      <ul className="list-group">
-        {pdfData.length > 0 ? (
-          pdfData.map((pdf) => (
-            <li key={pdf.id} className="list-group-item d-flex justify-content-between align-items-center">
-              <span>
-                <strong>Title:</strong> {pdf.title}
-              </span>
-              <div>
-                <button className="btn btn-success btn-sm me-2" onClick={() => handlePdfSelect(pdf.title)}>
-                  Email Paper
-                </button>
-                {isTeacher && (
-                  <button className="btn btn-danger btn-sm" onClick={() => handleFileDelete(pdf.title)}>
-                    Delete
-                  </button>
-                )}
-              </div>
-            </li>
-          ))
-        ) : (
-          <li className="list-group-item">No PDFs available.</li>
-        )}
-      </ul>
+     <ul className="list-group">
+  {pdfData.length > 0 ? (
+    pdfData.map((pdf) => (
+      <li key={pdf._id} className="list-group-item d-flex justify-content-between align-items-center">
+        <span>
+          <strong>Title:</strong> {pdf.title}
+        </span>
+        <div>
+          <button className="btn btn-success btn-sm me-2" onClick={() => handlePdfSelect(pdf.title)}>
+            Email Paper
+          </button>
+          {isTeacher && (
+            <button className="btn btn-danger btn-sm" onClick={() => handleFileDelete(pdf.title)}>
+              Delete
+            </button>
+          )}
+        </div>
+      </li>
+    ))
+  ) : (
+    <li className="list-group-item">No PDFs available.</li>
+  )}
+</ul>
 
       {/* Modal for Upload */}
       {showModal && (

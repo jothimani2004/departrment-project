@@ -2,8 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import NoteViewer from "../pdfview/NoteViewer";
+
 
 const Documents = () => {
+
+  const d="http://localhost:5000";
+
+  const { domain } = useParams();
+
+
   const [notes, setNotes] = useState([]);
   const [isTeacher, setIsTeacher] = useState(false);
   const [file, setFile] = useState(null);
@@ -11,24 +20,39 @@ const Documents = () => {
   const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);  // Add loading state
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("/notes");
-        setNotes(response.data.notes);
+        const cookieValue = "2020202002";
+        const response = await axios.get(`${d}/notes`, {
+          params: {
+            cookieValue: cookieValue, // Send cookie value
+            domain: domain,           // Send domain
+          }
+        });
+        console.log(response.data);
+        setNotes(response.data);  // Ensure notes is always an array
+       
         setIsTeacher(response.data.isTeacher);
       } catch (error) {
         console.error("Error fetching notes:", error);
+      }finally {
+        setLoading(false);
       }
     };
 
     fetchNotes();
   }, []);
 
+
+ 
+
+
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    setFile(e.target.files);
   };
 
   const handleUpload = async (e) => {
@@ -38,14 +62,24 @@ const Documents = () => {
       setMessage("Please fill out all fields and select a file.");
       return;
     }
-
+    const cookieValue = "2020202002";
     const formData = new FormData();
-    formData.append("file", file);
     formData.append("title", title);
     formData.append("description", description);
+    formData.append("domain", domain);
+    formData.append("cookieValue", cookieValue);
+    
+  
+    // Append all files to FormData
+    Array.from(file).forEach((fileItem) => {
+      formData.append("files", fileItem);
+    });
+
 
     try {
-      const response = await axios.post("/uploadnotes", formData, {
+   // Simulated cookie value
+
+      const response = await axios.post(`${d}/uploadnotes`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
@@ -61,70 +95,107 @@ const Documents = () => {
     }
   };
 
-  const handleNoteClick = async (notes_title) => {
-    try {
-      navigate(`/notes?title=${encodeURIComponent(notes_title)}`);
-    } catch (error) {
-      console.error("Error fetching the note:", error);
-    }
+  const handleFileClick = (fileName, id) => {
+    navigate(`/resourse/${domain}/notes/notesview?title=${encodeURIComponent(fileName)}&id=${encodeURIComponent(id)}`);
   };
 
-  const handleDelete = async (notes_title) => {
+  const handleDelete = async (noteId, notes_title) => {
     try {
-      const response = await axios.delete(`/delete/notes/${encodeURIComponent(notes_title)}`);
+      const response = await axios.delete(`${d}/delete/notes/${noteId}/${encodeURIComponent(notes_title)}`);
       setMessage(response.data.message || "Note deleted successfully");
       window.location.reload();
     } catch (error) {
       console.error("Error deleting the note:", error);
     }
   };
+  
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  return (
-    <div className="w-full m-2">
-      <div className="flex justify-between items-center mt-8 xl:mt-0 mb-3">
-        <h1 className="xl:text-3xl font-bold mb-6 text-start text-gray-800">Notes</h1>
-        {true && (
-          <div className="text-sm xl:mb-4">
-            <motion.button
-              onClick={() => toggleModal(true)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="btn btn-primary"
-            >
-              Upload New Notes
-            </motion.button>
-          </div>
-        )}
-      </div>
+if(loading){
+  return <p>Loading...</p>;
+}
 
-      {/* List of Notes */}
-      <ul>
-        {notes.map((note) => (
-          <li key={note.name} className="mb-4">
-            <h3 className="font-bold">{note.notes_name}</h3>
-            <p>{note.notes_desc}</p>
-            <p>{note.notes_title}</p>
-            <button
-              className="btn btn-info"
-              onClick={() => handleNoteClick(note.notes_title)}
-            >
-              View Note
-            </button>
+
+  return (
+    <div className="container m-2 ">
+ <h1 className="font-bold my-4 text-center">{domain }</h1> {/* Display domain */}
+    <div className="d-flex justify-content-between align-items-center mb-4">
+   
+            <h1 className="h3"> Notes Resources</h1>
+            <div>
+               {/* Teacher can add links */}
             {true && (
-              <button
-                className="btn btn-danger ml-2"
-                onClick={() => handleDelete(note.notes_title)}
+              <motion.button
+                onClick={() => toggleModal(true)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="btn btn-primary"
               >
-                Delete Note
-              </button>
+                Add New notes
+              </motion.button>
             )}
-          </li>
-        ))}
-      </ul>
+            
+            </div>
+          </div>
+    
+     {/* List of Notes */}
+     <ul className="list-unstyled">
+  {notes.notes.length > 0 ? (
+    notes.notes.map((note, index) => (
+      <li key={index} className="mb-4 p-3 border rounded shadow-lg">
+        <div className="d-flex justify-content-between align-items-center mb-4">
+        <h4 className="fw-bold">{note.noteDetails?.[0]?.title}</h4>
+        {/* Render title and description */}
+        {true && (
+                <button
+                  className="btn btn-danger btn-sm ms-2 "
+                  onClick={() => handleDelete(note._id)}
+                >
+                  Delete
+                </button>
+              )}
+       
+        </div>
+        <p className="text-muted">{note.noteDetails?.[1]?.description}</p>
+    
+        {/* Render files using FileViewer Component */}
+        <div className="row mt-2">
+          {note.noteDetails?.slice(2).map((file, fileIndex) => (
+             <p key={fileIndex}>
+             <button
+               className="btn btn-link"
+               onClick={() => handleFileClick(file.originalName,note._id)} // Trigger fetch and display
+             >
+               {file.originalName}
+
+             </button>
+
+              {/* Delete Button (Visible only to Teachers) */}
+              {true && (
+                <button
+                  className="btn btn-danger btn-sm ms-2"
+                  onClick={() => handleDelete(note._id, file.originalName)}
+                >
+                  Delete
+                </button>
+              )}
+
+
+           </p>
+          ))}
+        </div>
+
+      
+      </li>
+    ))
+  ) : (
+    <p className="text-muted">No notes available</p>
+  )}
+</ul>
+
 
       {/* Modal for Uploading Notes */}
       {isModalOpen && (
@@ -178,10 +249,12 @@ const Documents = () => {
                   <div className="form-group">
                     <label>File</label>
                     <input
-                      type="file"
-                      className="form-control"
-                      onChange={handleFileChange}
-                    />
+  type="file"
+  className="form-control"
+  multiple
+  onChange={handleFileChange}
+/>
+
                   </div>
                 </form>
               </div>

@@ -265,10 +265,7 @@ app.post('/addlink', async (req, res) => {
 
   // Insert into the database (make sure your query matches the table structure)
   try {
-    const result = await db.query(
-      `INSERT INTO links (url, linktitle, linkdesc, uploaded_by) VALUES ($1, $2, $3, $4) RETURNING *`, 
-      [newLink.url, newLink.name, newLink.description, cookieValue]
-    );
+   
     
     // Respond with success
     res.json({ message: 'Successfully uploaded link', newLink: result.rows[0] });
