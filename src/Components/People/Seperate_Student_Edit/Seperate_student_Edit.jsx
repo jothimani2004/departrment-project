@@ -17,7 +17,7 @@ export default function Seperate_student_Edit({ title }) {
   );
   const [pdfSrc, setPdfSrc] = useState("");
   useEffect(() => {
-    const userData = checkJwtCookie();
+    const userData = checkJwtCookie({returnme:"stud"});
     if (!userData) {
       console.error("No JWT data found");
       return;

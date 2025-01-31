@@ -1,9 +1,15 @@
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
-export const checkJwtCookie = () => {
+
+
+
+
+
+export const checkJwtCookie = ({returnme}) => {
   // Get the JWT from cookies
   const jwtCookie = Cookies.get('jwtToken');
+  console.log(returnme)
 
   if (jwtCookie) {
     console.log('JWT Cookie found:', jwtCookie);
@@ -19,8 +25,13 @@ export const checkJwtCookie = () => {
         console.error('JWT token has expired');
         return null; // return null or handle the expired token case
       }
-
+      if(returnme == "role"){
+        console.log("this is admin account ")
+        return decodedToken.jwtPayload.role; // Return the decoded token if it's valid
+      }
+      console.log("this is student page")
       return decodedToken; // Return the decoded token if it's valid
+
     } catch (error) {
       console.error('Invalid JWT:', error.message);
       return null; // Return null in case of an error
@@ -30,3 +41,4 @@ export const checkJwtCookie = () => {
     return null; // Return null if JWT is not found
   }
 }
+ 

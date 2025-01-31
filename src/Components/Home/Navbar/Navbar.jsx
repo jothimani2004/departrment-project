@@ -1,8 +1,22 @@
-import React from 'react';
+import React ,{useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import './Navbar.css';
+import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie.jsx";
 
 export const Navbar = () => {
+  const [accountStatus, setAccountStatus] = useState('Login'); // Default to 'Login'
+
+  useEffect(() => {
+    // Check if JWT exists in cookies and update the account status accordingly
+    const isLoggedIn = checkJwtCookie({ returnme: "buttonStatus" });
+    if (isLoggedIn) {
+      setAccountStatus("Logout");
+    } else {
+      setAccountStatus("Login");
+    }
+  }, []);
+
+  
   return (
     <nav className="navbar  navbar-expand-xxl navbar-light sticky-top">
       <div className="container-fluid">
@@ -135,7 +149,7 @@ export const Navbar = () => {
 
             <li className="nav-item mx-3 sign-up">
                 <a className="nav-link btn btn-lg custom-login-btn" href="/login">
-              Log IN
+              {accountStatus}
             </a>
             </li>
           </ul>

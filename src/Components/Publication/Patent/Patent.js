@@ -6,13 +6,13 @@ import UseApiPost from "../../../Custom_hook/apiPostCall";
 import UseApiGet from "../../../Custom_hook/apiGetCall";
 import UseApiDelete from "../../../Custom_hook/apiDeleteCall";
 import UseApiPut from "../../../Custom_hook/apiPutCall";
-
+import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie.jsx";
 
 
 const Patents = () => {
 
 
-      const role = "Admin"
+  const role = checkJwtCookie({returnme:"role"})
     
       const [isTeacher, setIsTeacher] = useState(false);
       const [showPopup, setShowPopup] = useState(false);

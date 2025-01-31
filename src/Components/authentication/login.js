@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
@@ -16,6 +16,17 @@ const Login = () => {
   const [resetLinkSent, setResetLinkSent] = useState(false);
   const [accountLocked, setAccountLocked] = useState(false); // Track if the account is locked
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const logout = async ()=>{
+      await fetch("http://localhost:5000/logout", {
+        method: "POST",
+        credentials: "include", // Important for cookies
+      });
+      localStorage.removeItem("token");
+      }
+    logout()
+  })
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);

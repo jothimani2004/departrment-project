@@ -5,12 +5,14 @@ import UseApiPost from "../../../Custom_hook/apiPostCall";
 import UseApiPut from "../../../Custom_hook/apiPutCall";
 import UseApiGet from "../../../Custom_hook/apiGetCall";
 import { Spinner } from 'react-bootstrap';
+import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie.jsx";
 
 
 
 export default function Calander_show({keys:{pfd_path,title}}){
-
-        const role = "Admin"
+  
+  const role = checkJwtCookie({ returnme: "role" }) || "Guest";  
+      
         const [showPopup, setShowPopup] = useState(false);
         const [selectFile,setSelectFile] = useState(null)
         const [calander,setCalander] = useState(null)
