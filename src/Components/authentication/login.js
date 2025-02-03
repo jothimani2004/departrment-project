@@ -46,7 +46,7 @@ const Login = () => {
         const token = Cookies.get('jwtToken');
         const decodedToken = jwtDecode(token);
         console.log(decodedToken.jwtPayload.reg)
-        if(decodedToken.jwtPayload.role == 'admin'){
+        if(decodedToken.jwtPayload.role == 'Admin'){
           navigate('/Admin_page/Edit')
         }else{
           navigate(`/People/Students/Profile/Edit?register_no=${decodedToken.jwtPayload.reg}`);

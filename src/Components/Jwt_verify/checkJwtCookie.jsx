@@ -1,15 +1,16 @@
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
-
+import { useEffect } from 'react';
 
 
 
 
 export const checkJwtCookie = ({returnme}) => {
-  // Get the JWT from cookies
   const jwtCookie = Cookies.get('jwtToken');
-  console.log(returnme)
+
+  // Get the JWT from cookies
+
 
   if (jwtCookie) {
     console.log('JWT Cookie found:', jwtCookie);
