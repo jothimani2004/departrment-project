@@ -42,7 +42,7 @@ const IEEEPapers = () => {
   const handlePdfSelect = async (_id) => {
     try {
       const result = await axios.post('http://localhost:5000/schedule-email', {
-        email: 'gowthamhirthick@gmail.com',
+        email: 'brutalicongaming@gmail.com',
         _id: _id,
       });
   
