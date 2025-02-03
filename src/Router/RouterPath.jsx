@@ -13,7 +13,7 @@ import  FacultyList from '../Components/People/Faculty/FacultyList.js';
 import Journals from '../Components/Publication/Journal/Journals.js';
 import Conferences from '../Components/Publication/Paper/Conferences.js';
 import Patents from '../Components/Publication/Patent/Patent.js';
-
+import { GlobalContextProvider } from "../Components/GlobalContext/globalContext.jsx";
 import MajorEvents from '../Components/Event/MajorEvent/MajorEvents.js'
 
 import {Footer} from '../Components/Home/Footer/Footer.jsx'
@@ -39,7 +39,9 @@ export const RouterPath = () => {
 
   return (
     <>
+        <GlobalContextProvider>
       <Navbar/>
+      </GlobalContextProvider>
     <div className="p_b ">
       <Routes>
 
@@ -129,6 +131,7 @@ export const RouterPath = () => {
       </Routes>
     </div>
       <Footer/>
+
     </>
   );
 };

@@ -22,7 +22,7 @@ export default function Seperate_student_Edit({ title }) {
       console.error("No JWT data found");
       return;
     }
-
+ 
     const fetchData = async () => {
       try {
         console.log("Fetching data for reg:", userData.jwtPayload.reg);

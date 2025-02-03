@@ -11,6 +11,7 @@ import { DomainProvider } from "./Components/Resource/domain/DomainContext.jsx";
 
 
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -19,7 +20,6 @@ root.render(
       <RouterPath />
     </BrowserRouter>
     </DomainProvider>
-   
   </React.StrictMode>
 );
 
