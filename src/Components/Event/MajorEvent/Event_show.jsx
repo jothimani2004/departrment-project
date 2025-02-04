@@ -59,7 +59,7 @@ export default function Event_show({title}){
         formData.append("title",title)
 
         // console.log(formData.file)
-        const result = await UseApiPost({path:"/file_upload",body:formData})  
+        const result = await UseApiPut({path:"/file_upload",body:formData})  
         
         console.log(result)
         window.location.reload()

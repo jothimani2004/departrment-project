@@ -39,9 +39,9 @@ const Journals = () => {
 
 
   function setting_pop_field(val){
-
+      console.log("summa show popup")
       setShowPopup(true)
-      console.log(val)
+      console.log(val[7])
       
       if (val.length != 0){
         setNewVideo( { videoId: val[7], title: val[0], authors: val[1] ,journal:val[2],volume:val[3],year:val[4],index:val[5],abstract:val[6]} )
@@ -73,7 +73,7 @@ const Journals = () => {
 
    const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-    
+    console.log(editContent.videoId)
     if (editContent.videoId === ""){
       const result  = await UseApiPost({path:"/journal",body:editContent})
     }else{
