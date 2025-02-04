@@ -65,7 +65,7 @@ export default function Calander_show({keys:{pfd_path,title}}){
           formData.append("title",title)
 
           // console.log(formData.file)
-          const result = await UseApiPut({path:"/file_upload",body:formData})  
+          const result = await UseApiPost({path:"/file_upload",body:formData})  
           
         
           // console.log(result)
