@@ -403,3 +403,49 @@ height: 100%;
     flex-direction: column;
   }
 }
+
+
+
+
+
+/* jothimani */
+/* Positioning the container */
+.carousel-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Image hover effect - Dim and slightly blur */
+.carousel-image {
+  transition: all 0.5s ease-in-out;
+}
+
+.carousel-image-container:hover .carousel-image {
+  filter: brightness(50%) blur(2px); /* Dim and slightly blur the image */
+  transform: scale(1.05); /* Slight zoom for a professional look */
+}
+
+/* Caption styling */
+.carousel-caption {
+  position: absolute;
+  bottom: -50px; /* Initially hidden below the image */
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75); /* Dark background with transparency */
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+  width: 80%;
+  backdrop-filter: blur(5px); /* Glass effect */
+}
+
+/* Move text up when hovering */
+.carousel-image-container:hover .carousel-caption {
+  opacity: 1;
+  bottom: 10%; /* Moves up into position */
+}

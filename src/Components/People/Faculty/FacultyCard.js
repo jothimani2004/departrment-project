@@ -19,8 +19,8 @@ const FacultyCard = ({ photo, name, degree, role, joiningDate, description, anim
             alt={`${name}'s profile`}
             className="img-fluid rounded-circle"
             style={{
-              width: "120px",
-              height: "120px",
+              width: "150px",
+              height: "150px",
               objectFit: "cover",
               border: "3px solid #f0f0f0",
             }}

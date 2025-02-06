@@ -5,8 +5,7 @@ export const journals = [
       title: "A Study on Data Science Trends and Machine Learning Algorithms",
       authors: "John Doe, Jane Smith, Emily White",
       journal: "Journal of Computer Science and Technology",
-      volume: "24",
-      pages: "123-130",
+     
       year: "2023",
       index: "SCI",
       abstract: "This paper explores the latest trends in data science, including emerging machine learning algorithms, and their real-world applications across industries such as healthcare, finance, and technology.",
