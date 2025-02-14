@@ -188,26 +188,26 @@ export default function Seperate_student_Edit({ title }) {
             <div>
               <p>{editContent.profileSummary}</p>
               <div className={style.option}>
-                <li>
                   <a href={editContent.linkedinLink} target="blank">
+                <li>
                   <img src="/images/student_seperate_page/linked_in.png" alt="linkedin" height="10px" /> Linked in
-                  </a>
                 </li>
-                <li>
+                  </a>
                 <a href={editContent.githubLink} target="blank">
+                <li>
                   <img src="/images/student_seperate_page/github.png" alt="github" height="10px" /> Github
-                  </a>
                 </li>
-                <li>
+                  </a>
                 <a href={editContent.gmailLink} target="blank">
-                  <img src="/images/student_seperate_page/mail.png" alt="mail" height="10px" /> Gmail
-                  </a>
-                </li>
                 <li>
-                <a href={editContent.leedcodeLink} target="blank">
-                  <img src="/images/student_seperate_page/leetcode.png" alt="leet code" height="10px" /> Leet code
-                  </a>
+                  <img src="/images/student_seperate_page/mail.png" alt="mail" height="10px" /> Gmail
                 </li>
+                  </a>
+                <a href={editContent.leedcodeLink} target="blank">
+                <li>
+                  <img src="/images/student_seperate_page/leetcode.png" alt="leet code" height="10px" /> Leet code
+                </li>
+                  </a>
               </div>
             </div>
             <div className={style.image_cover}>
