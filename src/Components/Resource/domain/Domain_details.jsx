@@ -9,12 +9,15 @@ const Domain_details = () => {
   console.log(domain);
 
   return (
-    <div className="p-4 bg-white rounded shadow">
-      <>
-        <h3 className="display-1 text-dark mb-4">{domainDetails[domain].title}</h3>
-        <p className="text-muted mb-5 lead">{domainDetails[domain].details}</p>
-      </>
-    </div>
+<div className="p-4 bg-white rounded shadow">
+  <>
+    <h3 className="display-1 text-dark mb-4">{domainDetails[domain].title}</h3>
+    <p className="text-muted mb-5 lead fs-5 text-wrap text-break">
+      {domainDetails[domain].details}
+    </p>
+  </>
+</div>
+
   );
 };
 

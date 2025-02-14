@@ -29,8 +29,10 @@ const DomainRoute = ({ domainnames, domainDetails, resources }) => {
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
 
   return (
-    <div className="container-fluid vh-100">
-      <div className="row">
+<div className="container-fluid vh-100" style={{ width: "90%" }}>
+
+
+      <div className="row ">
 
       {/* Mobile Menu Button */}
 <div className="d-block d-md-none p-0 ">
@@ -167,13 +169,14 @@ const DomainRoute = ({ domainnames, domainDetails, resources }) => {
         </div>
 
         {/* Right Side Content */}
-        <div className="col-md-9 col-12 mt-3 mt-md-0 vh-100">
-          {ResourceComponent ? (
-            <ResourceComponent />
-          ) : (
-            <Domain_details domain={domainDetails[domain]} />
-          )}
-        </div>
+        <div className="col-md-9 col-12 mt-3 mt-md-0 vh-100 overflow-auto">
+  {ResourceComponent ? (
+    <ResourceComponent />
+  ) : (
+    <Domain_details domain={domainDetails[domain]} />
+  )}
+</div>
+
 
        
       </div>

@@ -4,9 +4,13 @@ import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import NoteViewer from "../pdfview/NoteViewer";
+import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
+
 
 
 const Documents = () => {
+
+
 
   const d="http://localhost:5000";
 
@@ -22,6 +26,7 @@ const Documents = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);  // Add loading state
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -45,7 +50,24 @@ const Documents = () => {
     };
 
     fetchNotes();
+    const role = checkJwtCookie({ returnme: "role" });
+    console.log(role);
+ if(role === "Admin"){
+  setIsTeacher(true);
+  console.log("come to check role ");
+  
+
+ }
+
   }, []);
+
+  
+ 
+  
+  console.log(isTeacher);
+
+  
+  
 
 
  
@@ -101,6 +123,7 @@ const Documents = () => {
 
   const handleDelete = async (noteId, notes_title) => {
     try {
+      alert("click ok to delete")
       const response = await axios.delete(`${d}/delete/notes/${noteId}/${encodeURIComponent(notes_title)}`);
       setMessage(response.data.message || "Note deleted successfully");
       window.location.reload();
@@ -120,25 +143,25 @@ if(loading){
 
 
   return (
-    <div className="container m-2 ">
+    <div className="container m-2">
  <h1 className="font-bold my-4 text-center">{domain }</h1> {/* Display domain */}
     <div className="d-flex justify-content-between align-items-center mb-4">
    
             <h1 className="h3"> Notes Resources</h1>
-            <div>
-               {/* Teacher can add links */}
-            {true && (
-              <motion.button
-                onClick={() => toggleModal(true)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn btn-primary"
-              >
-                Add New notes
-              </motion.button>
-            )}
-            
-            </div>
+            <div className="d-flex justify-content-center my-3">
+  {/* Teacher can add links */}
+  {isTeacher && (
+    <motion.button
+      onClick={() => toggleModal(true)}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="btn btn-primary btn-md py-2 px-4"
+    >
+       Add New Notes
+    </motion.button>
+  )}
+</div>
+
           </div>
     
      {/* List of Notes */}
@@ -149,14 +172,16 @@ if(loading){
         <div className="d-flex justify-content-between align-items-center mb-4">
         <h4 className="fw-bold">{note.noteDetails?.[0]?.title}</h4>
         {/* Render title and description */}
-        {true && (
-                <button
-                  className="btn btn-danger btn-sm ms-2 "
-                  onClick={() => handleDelete(note._id)}
-                >
-                  Delete
-                </button>
-              )}
+        {isTeacher && (
+  <button
+    className="btn btn-danger btn-sm ms-2 d-flex align-items-center"
+    onClick={() => handleDelete(note._id)}
+    aria-label="Delete Note"
+  >
+    🗑️ Remove
+  </button>
+)}
+
        
         </div>
         <p className="text-muted">{note.noteDetails?.[1]?.description}</p>
@@ -165,21 +190,22 @@ if(loading){
         <div className="row mt-2">
           {note.noteDetails?.slice(2).map((file, fileIndex) => (
              <p key={fileIndex}>
-             <button
-               className="btn btn-link"
-               onClick={() => handleFileClick(file.originalName,note._id)} // Trigger fetch and display
-             >
-               {file.originalName}
+            <button
+  className="btn btn-link btn-sm text-truncate"
+  style={{ maxWidth: "100%", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+  onClick={() => handleFileClick(file.originalName, note._id)} 
+>
+   {file.originalName}
+</button>
 
-             </button>
 
               {/* Delete Button (Visible only to Teachers) */}
-              {true && (
+              {isTeacher && (
                 <button
                   className="btn btn-danger btn-sm ms-2"
                   onClick={() => handleDelete(note._id, file.originalName)}
                 >
-                  Delete
+                 🗑️
                 </button>
               )}
 

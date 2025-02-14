@@ -129,6 +129,7 @@ const IEEEPapers = () => {
 
   return (
       <div className="container m-2 ">
+         <h1 className="font-bold my-4 text-center">{domain }</h1> {/* Display domain */}
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h1 className="h4">{year || currentYear} Year Research Papers</h1>
           <div>
