@@ -4,11 +4,12 @@ import { Spinner } from 'react-bootstrap';
 import UseApiPost from "../../../Custom_hook/apiPostCall";
 import UseApiPut from "../../../Custom_hook/apiPutCall";
 import UseApiGet from "../../../Custom_hook/apiGetCall";
+import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie";
 
 export default function Event_show({title}){
 
 
-    const role = "Admin"
+    const [role,setRole] = useState(checkJwtCookie({returnme:"role"})) 
     const [showPopup, setShowPopup] = useState(false);
     const [selectFile,setSelectFile] = useState(null)
     const [calander,setCalander] = useState(null)

@@ -2,23 +2,30 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import UseApiGet from "../../../Custom_hook/apiGetCall";
 
 const StudentTable = () => {
   const [students, setStudents] = useState([]);
   const [courseFilter, setCourseFilter] = useState('');
   const [yearFilter, setYearFilter] = useState('');
+  const [mockData,setMockData] = useState([])
 
   // Fetch students data from the backend (using mock data for now)
   useEffect(() => {
     // Sample data
-    const mockData = [
-      { registerNumber: 'S12345', name: 'John Doe',  year: '1' },
-      { registerNumber: 'S12346', name: 'Jane Smith',  year: '2' },
-      { registerNumber: 'S12347', name: 'Sam Brown',  year: '3' },
-      { registerNumber: 'S12348', name: 'Anna Taylor', year: '4' },
-      { registerNumber: 'S12349', name: 'Michael Johnson', year: '1' },
-    ];
-    setStudents(mockData);
+    // const mockData = [
+    //   { registerNumber: 'S12345', name: 'John Doe',  year: '1' },
+    //   { registerNumber: 'S12346', name: 'Jane Smith',  year: '2' },
+    //   { registerNumber: 'S12347', name: 'Sam Brown',  year: '3' },
+    //   { registerNumber: 'S12348', name: 'Anna Taylor', year: '4' },
+    //   { registerNumber: 'S12349', name: 'Michael Johnson', year: '1' },
+    // ];
+    async function call(){
+          const result = await UseApiGet("/user_detail")
+          setStudents(result);
+    }
+
+    call()
   }, []);
 
   // Filter students based on course type and year
@@ -64,13 +71,13 @@ const StudentTable = () => {
         </thead>
         <tbody>
           {filteredStudents.length > 0 ? filteredStudents.map(student => (
-            <tr key={student.registerNumber}>
-              <td>{student.registerNumber}</td>
+            <tr key={student.register_no}>
+              <td>{student.register_no}</td>
               <td>{student.name}</td>
               
               <td>{student.year}</td>
               <td>
-                <Link to={`/People/Students/Profile?register_no=${student.registerNumber}`} className="btn btn-primary btn-sm">
+                <Link to={`/People/Students/Profile?register_no=${student.register_no}`} className="btn btn-primary btn-sm">
                   View Details
                 </Link>
               </td>
