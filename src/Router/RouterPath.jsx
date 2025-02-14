@@ -39,10 +39,10 @@ export const RouterPath = () => {
 
   return (
     <>
+    <div className="p_b ">
         <GlobalContextProvider>
       <Navbar/>
       </GlobalContextProvider>
-    <div className="p_b ">
       <Routes>
 
         {/* Admin page */}
@@ -129,8 +129,8 @@ export const RouterPath = () => {
 
 
       </Routes>
-    </div>
       <Footer/>
+    </div>
 
     </>
   );

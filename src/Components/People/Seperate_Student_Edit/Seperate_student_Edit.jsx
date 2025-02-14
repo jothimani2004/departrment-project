@@ -12,10 +12,7 @@ export default function Seperate_student_Edit({ title }) {
   const [EditContentUpload, setEditContentUpload] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
-  const [imageSrc, setImageSrc] = useState(
-    "https://assets.leetcode.com/users/Hirthick_Gowtham-G/avatar_1728091794.png"
-  );
-  const [pdfSrc, setPdfSrc] = useState("");
+
   useEffect(() => {
     const userData = checkJwtCookie({returnme:"stud"});
     if (!userData) {
@@ -213,7 +210,7 @@ export default function Seperate_student_Edit({ title }) {
             <div className={style.image_cover}>
               <div className={style.image}>
                 <div className={style.image_size}>
-                {imageSrc ? (
+                {editContent.profilePhoto ? (
                 <img
                   src={`data:image/jpeg;base64,${editContent.profilePhoto}`}
                   alt="Profile Photo"

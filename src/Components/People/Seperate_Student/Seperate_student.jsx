@@ -11,7 +11,7 @@ export default function Seperate_student({title}){
     const userId = searchParams.get("register_no");
     const [studentDetail,setStudentDetail] = useState({})
     console.log(userId)
-    const [imageSrc,setImageSrc] = useState("https://assets.leetcode.com/users/Hirthick_Gowtham-G/avatar_1728091794.png");
+   
     
 
     useEffect(()=>{
@@ -69,7 +69,7 @@ export default function Seperate_student({title}){
 
                         <div className={style.image}>
                             <div className={style.image_size}>
-                                {imageSrc ? (
+                                {studentDetail.profile_photo ? (
                                     <img src={`data:image/jpeg;base64,${studentDetail.profile_photo}`} alt="Fetched Image" width="100%"
                                     height="100%"
                                     style={{ borderRadius: '10px' }} />

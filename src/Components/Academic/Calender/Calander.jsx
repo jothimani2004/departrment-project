@@ -64,11 +64,9 @@ export default function Calander_show({keys:{pfd_path,title}}){
           formData.append("file", selectFile); // Key should match backend
           formData.append("title",title)
 
-          // console.log(formData.file)
+     
           const result = await UseApiPut({path:"/file_upload",body:formData})  
           
-        
-          // console.log(result)
       
           window.location.reload()
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { checkJwtCookie } from "../Jwt_verify/checkJwtCookie"
 import { useNavigate } from "react-router-dom";
-
+import { edit_pages } from "../../Content/admin_page";
 
 export default function(){
 
@@ -13,51 +13,6 @@ export default function(){
             navigate("/login")
         }
     },[])
-
-
-    const edit_pages = [
-        {
-            "title":"Acadimic calander",
-            "content": "Click to Change the acadimic calander pdf.",
-            "link":"/Academic/calander"
-        },
-        {
-            "title":"Acadimic time table",
-            "content":  "Click to Change the time table pdf.",
-            "link":"/Academic/Time_table"
-        },
-        {
-            "title":"Journal Publication ",
-            "content": "Click to update the journal.",
-            "link":"/Publications/journals"
-        },
-        {
-            "title":" Paper Publication",
-            "content": "Click to update the paper.",
-            "link":"/Publications/conferences"
-        },
-        {
-            "title":"Patent Publication",
-            "content": "Click to update the patent.",
-            "link":"/Publications/patents"
-        },
-        {
-            "title":"Major events",
-            "content": "Edit Major events schedule.",
-            "link":"/Event/Major_events"
-        },
-        {
-            "title":"CoCurricular events",
-            "content": "Edit CoCurricular events schedule.",
-            "link":"/Event/Cocurrcular_events"
-        },
-        {
-            "title":"Extra Curricular events",
-            "content": "Edit Extra Curricular events schedule.",
-            "link":"/Event/Extra_Curricular_events"
-        }
-    ]
-
 
     return (
         <>
