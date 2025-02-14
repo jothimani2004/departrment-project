@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import NoteViewer from "../pdfview/NoteViewer";
 import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
+import { FaFilePdf, FaFileImage, FaFileWord, FaFileAlt } from "react-icons/fa";
 
 
 
@@ -26,6 +27,7 @@ const Documents = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);  // Add loading state
   const navigate = useNavigate();
+  const [expandedNote, setExpandedNote] = useState(null);
 
 
   useEffect(() => {
@@ -50,27 +52,40 @@ const Documents = () => {
     };
 
     fetchNotes();
-    const role = checkJwtCookie({ returnme: "role" });
-    console.log(role);
- if(role === "Admin"){
-  setIsTeacher(true);
-  console.log("come to check role ");
-  
-
- }
+   
 
   }, []);
 
   
+
+ console.log(isTeacher);
+
+  
+  
+
+ useEffect(() => {
+  const role = checkJwtCookie({ returnme: "role" });
+  console.log(role);
+if(role === "Admin"){
+setIsTeacher(true);
+
+}
+ })
  
-  
-  console.log(isTeacher);
 
-  
-  
-
-
- 
+ //get icon of the file
+ const getFileIcon = (fileName) => {
+  const ext = fileName.split(".").pop().toLowerCase();
+  if (["pdf"].includes(ext)) return <FaFilePdf size={30} className="text-danger " />;
+  if (["png", "jpg", "jpeg", "gif"].includes(ext)) return <FaFileImage size={30} className="text-primary" />;
+  if (["doc", "docx"].includes(ext)) return <FaFileWord size={30} className="text-info" />;
+  return <FaFileAlt size={30}  className="text-secondary" />; // Default icon
+};
+//good fine name
+const formatFileName = (fileName) => {
+  const nameWithoutExt = fileName.split(".").slice(0, -1).join(".");
+  return nameWithoutExt.length > 15 ? nameWithoutExt.substring(0, 12) + "..." : nameWithoutExt;
+};
 
 
   const handleFileChange = (e) => {
@@ -137,6 +152,12 @@ const Documents = () => {
     setIsModalOpen(!isModalOpen);
   };
 
+
+  const toggleDropdown = (index) => {
+    setExpandedNote(expandedNote === index ? null : index);
+  };
+
+
 if(loading){
   return <p>Loading...</p>;
 }
@@ -169,53 +190,88 @@ if(loading){
   {notes.notes.length > 0 ? (
     notes.notes.map((note, index) => (
       <li key={index} className="mb-4 p-3 border rounded shadow-lg">
-        <div className="d-flex justify-content-between align-items-center mb-4">
-        <h4 className="fw-bold">{note.noteDetails?.[0]?.title}</h4>
-        {/* Render title and description */}
-        {isTeacher && (
-  <button
-    className="btn btn-danger btn-sm ms-2 d-flex align-items-center"
-    onClick={() => handleDelete(note._id)}
-    aria-label="Delete Note"
-  >
-    🗑️ Remove
-  </button>
+   <div
+  className="d-flex justify-content-between align-items-center p-3 "
+  onClick={() => toggleDropdown(index)}
+  style={{
+    cursor: "pointer",
+    transition: "background 0.3s ease",
+  }}
+
+>
+  <h5 className="fw-semibold text-primary m-0">{note.noteDetails?.[0]?.title}</h5>
+
+  <div className="d-flex align-items-center">
+    {isTeacher && (
+      <button
+        className="btn btn-outline-danger btn-sm me-2"
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent dropdown toggle on delete click
+          handleDelete(note._id);
+        }}
+        aria-label="Delete Note"
+      >
+        🗑️ Remove
+      </button>
+    )}
+    <span
+      style={{
+        transition: "transform 0.3s ease",
+        transform: expandedNote === index ? "rotate(180deg)" : "rotate(0deg)",
+      }}
+    >
+      ▼
+    </span>
+  </div>
+</div>
+
+<p className="text-left">{note.noteDetails?.[1]?.description}</p>
+
+      {/* File List (Dropdown) */}
+      {expandedNote === index && (
+  <div className="row mt-2">
+    {note.noteDetails?.slice(2).map((file, fileIndex) => (
+      <div key={fileIndex} className="col-12 ">
+        <div className="card p-3 mb-3 shadow-sm border-2">
+          <div className="d-flex justify-content-between align-items-center">
+            {/* File icon & name */}
+            <div className="d-flex align-items-center gap-2 flex-grow-1">
+              <span className="fs-5">{getFileIcon(file.originalName)}</span>
+              <div
+                className=" "
+                 // Adjust max-width as needed
+                title={file.originalName}
+              >
+                {file.originalName.split(".").slice(0, -1).join(".")}
+              </div>
+            </div>
+
+            {/* Delete Button (for teacher) */}
+            {isTeacher && (
+              <button
+                className="btn btn-outline-danger btn-sm"
+                onClick={() => handleDelete(note._id, file.originalName)}
+              >
+                🗑️
+              </button>
+            )}
+          </div>
+
+          {/* File Open Button */}
+          <button
+            className="btn btn-primary btn-sm mt-2 w-100"
+            onClick={() => handleFileClick(file.originalName, note._id)}
+          >
+            Open File
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
 )}
 
-       
-        </div>
-        <p className="text-muted">{note.noteDetails?.[1]?.description}</p>
-    
-        {/* Render files using FileViewer Component */}
-        <div className="row mt-2">
-          {note.noteDetails?.slice(2).map((file, fileIndex) => (
-             <p key={fileIndex}>
-            <button
-  className="btn btn-link btn-sm text-truncate"
-  style={{ maxWidth: "100%", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
-  onClick={() => handleFileClick(file.originalName, note._id)} 
->
-   {file.originalName}
-</button>
 
-
-              {/* Delete Button (Visible only to Teachers) */}
-              {isTeacher && (
-                <button
-                  className="btn btn-danger btn-sm ms-2"
-                  onClick={() => handleDelete(note._id, file.originalName)}
-                >
-                 🗑️
-                </button>
-              )}
-
-
-           </p>
-          ))}
-        </div>
-
-      
-      </li>
+    </li>
     ))
   ) : (
     <p className="text-muted">No notes available</p>
