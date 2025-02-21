@@ -16,7 +16,7 @@
   
  .about-container{
     width: 100%;
-  padding: 8rem 10rem;
+   padding: 8rem 10rem;
  }  
 
  .main-content-con{
@@ -248,6 +248,7 @@ height: 100%;
   cursor: pointer;
   transition: all .2s;
   
+
  }
 
 .button-syllabi:hover{
@@ -266,7 +267,7 @@ height: 100%;
 .about-container-contact{
   width: 100%;
   padding: 4rem 15rem;
-  padding-bottom: 8rem;
+  padding-bottom: 28rem;
 } 
 
 .main-content-con-contact{
@@ -366,6 +367,9 @@ height: 100%;
     width: auto;
     box-shadow: 2px 2px 10px;
  }
+ .vm-con{
+  font-size: 0.5rem;
+ }
  .about-container{
   width: 100%;
   padding: 5rem 1rem;
@@ -401,6 +405,57 @@ height: 100%;
   .name{
     display: flex;
     flex-direction: column;
+  }
+  .text-con p{
+    font-size: 0.8rem;
+   }
+   .bottom-con{
+    font-size: 0.8rem;
+   }
+   .vm-con{
+    font-size: 0.8rem;
+   }
+   .font-styling{
+    font-size: 0.8rem;
+   }
+   
+    .img-con{
+      min-width: 20em;
+      box-shadow: 2px 2px 10px;
+      margin: 10px;
+   }
+
+   .Core-Competencies ul li{
+    font-size: 0.8rem;
+  }
+  .Core-Competencies ul{
+    font-size: 1rem;
+  }
+  .button-syllabi {
+    font-size: 0.8rem;
+  }
+  
+
+  .main-content-con-welcome p {
+    font-size: 0.8rem;
+   }
+
+   .main-content-con-contact p {
+    font-size: 0.8rem;
+   }
+
+   .stat-item p{
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+  .detial p{
+    font-size: 0.8rem;
+  }
+  .detial h3{
+    font-size: 1.1rem;
+  }
+  .heading-name h3{
+    font-size: 1.1rem;
   }
 }
 
