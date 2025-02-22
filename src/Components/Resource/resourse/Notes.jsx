@@ -6,7 +6,8 @@ import { useParams } from 'react-router-dom';
 import NoteViewer from "../pdfview/NoteViewer";
 import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
 import { FaFilePdf, FaFileImage, FaFileWord, FaFileAlt } from "react-icons/fa";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 
 const Documents = () => {
@@ -158,9 +159,16 @@ const formatFileName = (fileName) => {
   };
 
 
-if(loading){
-  return <p>Loading...</p>;
+if (loading) {
+  return (
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  );
 }
+
 
 
   return (
@@ -214,14 +222,17 @@ if(loading){
         🗑️ Remove
       </button>
     )}
-    <span
-      style={{
-        transition: "transform 0.3s ease",
-        transform: expandedNote === index ? "rotate(180deg)" : "rotate(0deg)",
-      }}
-    >
-      ▼
-    </span>
+<FontAwesomeIcon
+  icon={faChevronDown}
+  style={{
+    transition: "transform 0.3s ease",
+    transform: expandedNote === index ? "rotate(180deg)" : "rotate(0deg)",
+    border: "2px solid #333", // Border color
+    borderRadius:"50%",// Make it circular
+    padding: "5px", // Space inside the border
+    fontSize: "16px", // Adjust size
+  }}
+/>
   </div>
 </div>
 

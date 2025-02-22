@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+  import React, { useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import "./Navbar.css";
 import { GlobalContext } from "../../GlobalContext/globalContext.jsx";

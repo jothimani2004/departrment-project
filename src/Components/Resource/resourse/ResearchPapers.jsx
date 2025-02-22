@@ -3,9 +3,11 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
 import AlertMessage from "./AlertMessage";
+import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
 
 const IEEEPapers = () => {
   const d = "http://localhost:5000";
+  const [isTeacher, setIsTeacher] = useState(false);
   const { year, domain, resourse } = useParams();
   const [pdfData, setPdfData] = useState([]);
   const [selectedPdf, setSelectedPdf] = useState(null);
@@ -28,6 +30,20 @@ const IEEEPapers = () => {
     };
     fetchPdfData();
   }, []);
+
+
+  //check admin
+
+  useEffect(() => {
+    const role = checkJwtCookie({ returnme: "role" });
+    console.log(role);
+  if(role === "Admin"){
+  setIsTeacher(true);
+  
+  }
+   })
+
+
 
   useEffect(() => {
     if (messages.length > 0 && currentMessageIndex < messages.length) {
@@ -133,7 +149,9 @@ const IEEEPapers = () => {
         <div className="d-flex justify-content-between align-items-center mb-4">
           <h1 className="h4">{year || currentYear} Year Research Papers</h1>
           <div>
-            <button className="btn btn-primary me-2" onClick={() => setShowModal(true)}>Upload PDF</button>
+            {isTeacher && (
+              <button className="btn btn-primary me-2" onClick={() => setShowModal(true)}>Upload Research Paper</button>
+            )}
             <button className="btn btn-secondary" onClick={() => setShowFilterModal(true)}>Filter by Year</button>
           </div>
         </div>
@@ -150,9 +168,13 @@ const IEEEPapers = () => {
                   <button className="btn btn-success btn-sm me-2" onClick={() => handlePdfSelect(pdf._id)}>
                     Email Paper
                   </button>
-                  <button className="btn btn-danger btn-sm" onClick={() => handleFileDelete(pdf._id)}>
+                  {isTeacher && (
+                    <button className="btn btn-danger btn-sm" onClick={() => handleFileDelete(pdf._id)}>
                     Delete
                   </button>
+
+                  )}
+                  
                 </div>
               </li>
             ))
