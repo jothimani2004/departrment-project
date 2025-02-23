@@ -75,6 +75,25 @@ export const Navbar = () => {
               </ul>
             </li>
 
+               {/* ACADEMICS (Hover Dropdown) */}
+               <li
+              className="nav-item dropdown mx-3"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+             
+             <div className="nav-link text-dark dropdown-toggle fs-6">
+
+                RESOURCE
+             </div>
+              
+              <ul className="dropdown-menu">
+                <li><a className="dropdown-item" href="/resourse/CyberSecurity">Cyber Security</a></li>
+                <li><a className="dropdown-item" href="/resourse/InternetOfThings">Internet Of Things</a></li>
+                <li><a className="dropdown-item" href="/resourse/BlockchainTechnology">BlockChain Technology</a></li>
+              </ul>
+            </li>
+
             {/* PEOPLE (Hover Dropdown) */}
             <li
               className="nav-item dropdown mx-3"

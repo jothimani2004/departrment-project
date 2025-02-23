@@ -1,6 +1,9 @@
   import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useSearchParams } from "react-router-dom";
+import './noteview.css';
+import { Card } from "react-bootstrap";
+
 
 const FileViewer = () => {
   const { domain } = useParams();
@@ -65,11 +68,11 @@ const FileViewer = () => {
               aria-valuemin="0"
               aria-valuemax="100"
             >
-              {progress}%
+              
             </div>
           </div>
 
-          <p className="text-muted mt-2">Loading file... {progress}%</p>
+          <p className="text-muted mt-2">Loading file... </p>
         </div>
       );
     }
@@ -80,7 +83,11 @@ const FileViewer = () => {
     if (fileType.includes("pdf")) {
       return <iframe src={fileSrc} className="w-100" style={{ height: "100vh" }} />;
     } else if (fileType.includes("image")) {
-      return <img src={fileSrc} alt={fileName} className=" m-4 w-100" style={{ height: "100vh" }} />;
+      return <div className="image-container">
+      <img src={fileSrc} alt={fileName} className="responsive-img" />
+    </div>
+    
+
     } else if (fileType.includes("video")) {
       return <video controls src={fileSrc} className="w-100 rounded shadow" />;
     } else {
