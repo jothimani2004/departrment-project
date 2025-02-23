@@ -269,7 +269,7 @@ height: 100%;
 .about-container-contact{
   width: 100%;
   padding: 4rem 15rem;
-  padding-bottom: 28rem;
+  
 } 
 
 .main-content-con-contact{
@@ -310,7 +310,8 @@ height: 100%;
 }
 .about-container-contact{
   width: 100%;
-  padding: 0rem 10rem;
+  padding: 1rem 10rem;
+  padding-bottom:2em ;
 } 
 .top-con{
   display: flex;
@@ -348,6 +349,7 @@ height: 100%;
 .about-container-contact{
   width: 100%;
   padding: 0rem 4rem;
+  padding-bottom:2em ;
 } 
 .top-con{
   display: flex;
@@ -400,6 +402,7 @@ height: 100%;
 .about-container-contact{
   width: 100%;
   padding: 0rem 1rem;
+  padding-bottom:1em ;
 } 
 }
 

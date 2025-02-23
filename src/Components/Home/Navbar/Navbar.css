@@ -4,11 +4,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .navbar {
   box-shadow: 1px 1px 10px;
   background-color: #FBF8EF !important; /* Ensures consistent background */
+  padding: 2em;
 }
 
 /* Set background color of collapse content */
@@ -29,7 +31,7 @@
   border-radius: 5px;  /* Rounded edges */
   padding: 8px 15px;  /* Add some padding */
   transition: all 0.3s ease-in-out;  /* Smooth transition */
-}
+  }
 
 
 .navbar-nav .nav-item:last-child .nav-link:hover {

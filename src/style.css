@@ -8,6 +8,8 @@
 }
 *{
     font-family: "Poppins", serif;
+    list-style: none;
+    text-decoration: none;
 }
 
 .p_b{

@@ -95,6 +95,7 @@
     justify-content: center;
     align-items: center;
     background-color: rgb(229, 226, 223);
+    text-decoration: none;
 }
 
 .option img{

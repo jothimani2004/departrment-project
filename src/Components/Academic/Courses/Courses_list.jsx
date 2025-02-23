@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Form, Spinner, Container } from 'react-bootstrap';
 import { Core,Elective } from '../../../Content/course';
+import './course.css';
 
 const CourseTable = () => {
   const [courses, setCourses] = useState([]);
@@ -76,7 +77,7 @@ const CourseTable = () => {
             {courses.length > 0 ? (
               courses.map((course, index) => (
                 <tr key={index}>
-                  <td>{course.Course_Code}</td>
+                  <td>{course.Course_Code.replace(/\s+/g, ' ')}</td>
                   <td>{course.Course_Title}</td>
                 </tr>
               ))

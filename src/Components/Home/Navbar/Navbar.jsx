@@ -19,7 +19,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-xxl navbar-light sticky-top">
+    <nav className="navbar navbar-expand-xxl navbar-light sticky-top ">
       <div className="container-fluid">
         <a className="navbar-brand text-dark" href="/">
           Department of ICB
@@ -43,14 +43,14 @@ export const Navbar = () => {
           <ul className="navbar-nav ms-auto">
             {/* HOME */}
             <li className="nav-item mx-3">
-              <a className="nav-link text-dark" href="/">
+              <a className="nav-link text-dark fs-6" href="/">
                 HOME
               </a>
             </li>
 
             {/* ABOUT US */}
             <li className="nav-item dropdown">
-              <a className="nav-link text-dark" href="/About_us">
+              <a className="nav-link text-dark fs-6" href="/About_us">
                 ABOUT US
               </a>
             </li>
@@ -61,9 +61,12 @@ export const Navbar = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <a className="nav-link text-dark dropdown-toggle" href="/">
+             
+             <div className="nav-link text-dark dropdown-toggle fs-6">
+
                 ACADEMICS
-              </a>
+             </div>
+              
               <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href="/Academic/calander">Calendar</a></li>
                 <li><a className="dropdown-item" href="/Academic/courses">Courses</a></li>
@@ -78,9 +81,9 @@ export const Navbar = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <a className="nav-link text-dark dropdown-toggle" href="/">
+             <div className="nav-link text-dark dropdown-toggle fs-6">
                 PEOPLE
-              </a>
+              </div>
               <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href="/People/Students">Students</a></li>
                 <li><a className="dropdown-item" href="/People/Faculty">Faculty</a></li>
@@ -94,9 +97,11 @@ export const Navbar = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <a className="nav-link text-dark dropdown-toggle" href="#">
+             <div className="nav-link text-dark dropdown-toggle fs-6">
+
                 PUBLICATION
-              </a>
+             </div>
+              
               <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href="/Publications/journals">Journal</a></li>
                 <li><a className="dropdown-item" href="/Publications/conferences">Paper</a></li>
@@ -110,9 +115,11 @@ export const Navbar = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <a className="nav-link text-dark dropdown-toggle" href="#">
+              <div className="nav-link text-dark dropdown-toggle fs-6" >
+
                 EVENTS
-              </a>
+              </div>
+              
               <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href="/Event/Major_events">Major Events</a></li>
                 <li><a className="dropdown-item" href="/Event/Cocurrcular_events">CoCurricular Events</a></li>
@@ -122,14 +129,14 @@ export const Navbar = () => {
 
             {/* CONTACT US */}
             <li className="nav-item dropdown mx-3">
-              <a className="nav-link text-dark" href="#Contact">
+              <a className="nav-link text-dark fs-6" href="#Contact">
                 CONTACT US
               </a>
             </li>
 
             {/* LOGIN BUTTON */}
             <li className="nav-item mx-3 sign-up">
-              <a className="nav-link btn btn-lg custom-login-btn" href="/login">
+              <a className="nav-link btn btn-lg custom-login-btn fs-6" href="/login">
                 {display}
               </a>
             </li>

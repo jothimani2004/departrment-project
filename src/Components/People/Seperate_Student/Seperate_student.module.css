@@ -64,6 +64,13 @@
     display: flex;
     flex-wrap: wrap;
     margin: .5em 0em;
+    text-decoration: none;
+    
+}
+
+.option a {
+    text-decoration: none; /* Removes underline from links */
+    color: black;
 }
 
 .option li{
@@ -75,6 +82,8 @@
     justify-content: center;
     align-items: center;
     background-color: rgb(229, 226, 223);
+    text-decoration: none;
+   
 }
 
 .option img{
