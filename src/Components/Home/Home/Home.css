@@ -278,7 +278,12 @@ height: 100%;
   flex-direction:column;
   gap: 25px;
   align-items: center;
+  justify-content: center;
  }
+
+.main-content-con-contact h2{
+    margin: auto;
+} 
 
  .main-content-con-contact p{
   text-align: center;
@@ -442,12 +447,10 @@ height: 100%;
     font-size: 0.8rem;
    }
 
-   .main-content-con-contact p {
-    font-size: 0.8rem;
-   }
+
 
    .stat-item p{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
   }
   .detial p{
@@ -459,7 +462,54 @@ height: 100%;
   .heading-name h3{
     font-size: 1.1rem;
   }
+  .text-con p{
+    line-height: 29px;
+   }
+   .buttom-con {
+    line-height: 29px;
+   }
+   .font-styling{
+    line-height: 29px;
+   }
+   .text-con h2{
+    text-align: center;
+   }
+   .syllabus-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  .main-content-con-contact{
+    padding: 2rem;
+    display: flex;
+    flex-direction:column;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+   }
+  
+   .main-content-con-contact p {
+    font-size: 0.8rem;
+    line-height: 29px;
+   }
+   
+.main-content-con-vm{
+  padding: 0.5rem;
 
+ }
+
+ .stats-container{
+  width: 100%;
+  padding: 1.5rem;
+  gap: 2rem;
+}
+.Core-Competencies h2 {
+    text-align: center;
+    margin: auto ;
+ }
 }
 
 
