@@ -15,14 +15,11 @@ import Conferences from '../Components/Publication/Paper/Conferences.js';
 import Patents from '../Components/Publication/Patent/Patent.js';
 import { GlobalContextProvider } from "../Components/GlobalContext/globalContext.jsx";
 import MajorEvents from '../Components/Event/MajorEvent/MajorEvents.js'
-
 import {Footer} from '../Components/Home/Footer/Footer.jsx'
 import Login from '../Components/authentication/login.js'
 import About_us from "../Components/About_us/About_us.jsx";
 import ResetPassword from '../Components/authentication/resetpassword.js'
-
 import React, { useContext } from 'react';
-
 import DomainRoute from '../Components/Resource/domain/DomainRoute.jsx';
 import PdfViewer from '../Components/Resource/pdfview/PdfViewer.jsx';
 import NoteViewer from '../Components/Resource/pdfview/NoteViewer.jsx';
