@@ -233,12 +233,15 @@ export default function Seperate_student_Edit({ title }) {
         <div className={style.pdf_container}>
           <h1>Resume</h1>
           <div className={style.card_size}>
-          <iframe
-          src={`data:application/pdf;base64,${editContent.profileResume}`}
-          className="w-100"
-          style={{ height: "1200px" }}
-/>
-
+          <div className="pdf-container d-flex justify-content-center align-items-center py-3">
+              <div className="card shadow-lg w-100 rounded-3">
+                  <iframe
+                      src={`data:application/pdf;base64,${editContent.profileResume}`}
+                      title={title}
+                      className="rounded-3"
+                  ></iframe>
+              </div>
+              </div>
           </div>
         </div>
       </div>
