@@ -45,19 +45,6 @@ const MajorEvents = () => {
           </button>
         )}
       </div>
-  return (<>
-
-    <Container className="mt-5 mb-5  pt-4">
-          
-          <div className="d-flex justify-content-between align-items-center mb-4 w-100 px-5">
-
-          <h1 className="h1 text-center"> Upcomming Events</h1>
-            <div>
-            {role =="Admin"?<button class="btn btn-primary mx-1 my-3 "
-                onClick={()=> setting_pop_field([])}
-                >Add New Events </button>:null}
-            </div>
-          </div>
 
       {loading ? (
         <div className="text-center">
@@ -100,50 +87,6 @@ const MajorEvents = () => {
             ))
           ) : (
             <Card.Body>
-
-      <Row xs={1} sm={2} md={2} className="g-5">
-
-        {
-        journals.length >0?
-
-        journals.map((journal, index) => (
-
-          <Col key={index}>
-            <Card className="event-card  pt-0">
-              
-    
-            <img
-                src={`data:${journal.file.mimetype};base64,${journal.file.buffer}`}
-                alt="Event Image"
-                className="event-image"
-            />
-
-              <Card.Body className="s_b t_c rounded-bottom-3">
-                <Card.Title className="event-title">{journal.data.title}</Card.Title>
-                <Card.Text className="event-description">
-                  {journal.data.abstract}
-                </Card.Text>
-                <Card.Text>
-                  <small className="text-muted">
-                    Date: {journal.data.date} | Location: {journal.data.location} | Time: {journal.data.time}
-                  </small>
-                </Card.Text>
-
-                {role =="Admin"?<button class="btn btn-primary mx-1"
-                  id ={`ej_${index}`}
-                onClick={()=> setting_pop_field([journal.data.title,journal.data.location,journal.data.date,journal.data.time,journal.data.abstract,journal._id])}
-                >Edit</button>:null}
-
-                {role =="Admin"?<button class="btn btn-danger mx-1"
-                onClick={(e)=>handleDelete(journal.data.title,journal._id,e)}
-            >
-                  <i class="bi bi-trash"></i> Delete
-                </button>:null}
-                
-              </Card.Body>
-            </Card>
-          </Col>
-        )):<Card.Body>
               <Card.Text>
                 <h2 className="text-center" style={{ color: "rgba(233, 48, 48, 0.89)" }}>
                   <strong>No Content Found</strong>
