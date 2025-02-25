@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { useEffect } from 'react';
+import UseApiPost from '../../Custom_hook/apiPostCall';
 
 
 
@@ -9,6 +10,15 @@ export const checkJwtCookie = ({returnme}) => {
   const jwtCookie = Cookies.get('jwtToken');
 
   // Get the JWT from cookies
+
+  async function Checker(){
+
+    console.log(jwtCookie,"i am funciton");
+    const result = await UseApiPost({path:"/Token",body:{token:jwtCookie}})
+
+    console.log(result.data)
+  }
+
 
 
   if (jwtCookie) {
@@ -26,6 +36,7 @@ export const checkJwtCookie = ({returnme}) => {
         return null; // return null or handle the expired token case
       }
       if(returnme == "role"){
+        Checker()
         console.log("this is admin account ")
         return decodedToken.jwtPayload.role; // Return the decoded token if it's valid
       }

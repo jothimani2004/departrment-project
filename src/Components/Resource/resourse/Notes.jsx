@@ -66,6 +66,7 @@ const Documents = () => {
 
  useEffect(() => {
   const role = checkJwtCookie({ returnme: "role" });
+  
   console.log(role);
 if(role === "Admin"){
 setIsTeacher(true);
