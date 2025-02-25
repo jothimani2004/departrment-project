@@ -132,7 +132,7 @@ const MajorEvents = () => {
           
           <div className="d-flex justify-content-between align-items-center mb-4 w-100 px-5">
 
-          <h1 className="h1"> Upcomming Events</h1>
+          <h1 className="h1 text-center"> Upcomming Events</h1>
             <div>
             {role =="Admin"?<button class="btn btn-primary mx-1 my-3 "
                 onClick={()=> setting_pop_field([])}
@@ -153,12 +153,11 @@ const MajorEvents = () => {
               
     
             <img
-            src={`data:${journal.file.mimetype};base64,${journal.file.buffer}`}
-            alt="Event Image"
-            width="100%"
-            height="400px"
-            className="border rounded-top-3"
-          />
+                src={`data:${journal.file.mimetype};base64,${journal.file.buffer}`}
+                alt="Event Image"
+                className="event-image"
+            />
+
               <Card.Body className="s_b t_c rounded-bottom-3">
                 <Card.Title className="event-title">{journal.data.title}</Card.Title>
                 <Card.Text className="event-description">

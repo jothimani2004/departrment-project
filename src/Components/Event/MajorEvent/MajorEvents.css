@@ -37,3 +37,13 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+
+.event-image {
+  width: 100%; /* Makes the image responsive */
+  max-width: 800px; /* Adjust max width as needed */
+  height: 400px; /* Fixed height */
+  object-fit: cover; /* Ensures the image covers the area without distortion */
+  border-radius: 10px 10px 0 0; /* Matches rounded-top-3 */
+  border: 1px solid #ddd; /* Optional: Adds a light border */
+}

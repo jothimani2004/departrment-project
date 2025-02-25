@@ -41,7 +41,7 @@ const CourseTable = () => {
       </p>
 
       {/* Filter Dropdown */}
-      <div className="d-flex justify-content-end mb-3 ">
+      <div className="d-flex mb-3 option-box">
       <Form.Select
         className="w-auto rounded-3 "
         value={filter}
@@ -69,16 +69,16 @@ const CourseTable = () => {
         <Table striped bordered hover responsive variant="light">
           <thead className="bg-primary text-white">
             <tr>
-              <th>Course Code</th>
-              <th>Course Title</th>
+              <th className='text-center'>Course Code</th>
+              <th className='text-center'>Course Title</th>
             </tr>
           </thead>
           <tbody>
             {courses.length > 0 ? (
               courses.map((course, index) => (
                 <tr key={index}>
-                  <td>{course.Course_Code.replace(/\s+/g, ' ')}</td>
-                  <td>{course.Course_Title}</td>
+                  <td className='left-side'>{course.Course_Code.replace(/\s+/g, ' ')}</td>
+                  <td className='right-side'>{course.Course_Title}</td>
                 </tr>
               ))
             ) : (

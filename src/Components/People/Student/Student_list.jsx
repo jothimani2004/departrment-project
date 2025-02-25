@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Form, Button, Row, Col, Container, InputGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import UseApiGet from "../../../Custom_hook/apiGetCall";
-
+import "./Student_list.css";
 const StudentTable = () => {
   const [students, setStudents] = useState([]);
   const [yearFilter, setYearFilter] = useState('');

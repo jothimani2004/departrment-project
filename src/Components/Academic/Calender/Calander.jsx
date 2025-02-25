@@ -6,8 +6,7 @@ import UseApiPut from "../../../Custom_hook/apiPutCall";
 import UseApiGet from "../../../Custom_hook/apiGetCall";
 import { Spinner } from 'react-bootstrap';
 import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie.jsx";
-
-
+import "./Calender.css"
 
 export default function Calander_show({keys:{pfd_path,title}}){
   
@@ -86,8 +85,8 @@ export default function Calander_show({keys:{pfd_path,title}}){
                         >Edit {title}</button>:null}
                     </div>
                 </div>
-                <div className="para ps-4">
-                    <p className="fs-5">
+                <div className="para">
+                    <p className="desc">
                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta asperiores ipsum dolorem, reprehenderit quisquam placeat illo neque esse iure harum, quod fuga fugiat quibusdam. Officiis hic eius inventore perferendis quis!
                         Dolor earum adipisci placeat, deserunt aperiam corporis saepe nisi tempora ea sequi debitis consequatur? Eaque aut deserunt non aperiam perferendis fuga et aliquam tempora, eos nihil cumque cupiditate, illum itaque!
                     </p>
@@ -96,17 +95,16 @@ export default function Calander_show({keys:{pfd_path,title}}){
 
             {
               calander?
-            <div className="pdf-container d-flex justify-content-center align-items-center py-3">
-                <div className="card shadow-lg w-100 rounded-3" style={{ maxWidth: '90%' }}>
-                    <iframe
-                        src={`data:application/pdf;base64,${calander}`}
-                        width="100%"
-                        height="600px"
-                        title={title}
-                        download={`${title}.pdf`}
-                        className="rounded-3"
-                    ></iframe>
-                </div>
+          <div className="pdf-container d-flex justify-content-center align-items-center py-3">
+              <div className="card shadow-lg w-100 rounded-3">
+                  <iframe
+                      src={`data:application/pdf;base64,${calander}`}
+                      title={title}
+                      className="rounded-3"
+                  ></iframe>
+              </div>
+
+
             </div>:<div className="pdf-container d-flex justify-content-center align-items-center py-3 rounded-3" style={{background:"#fff"}}>
               <h3 style={{color:"hsl(207, 51.40%, 43.50%)"}}> Fetching &nbsp;</h3>
               <Spinner animation="border" variant="primary" />
