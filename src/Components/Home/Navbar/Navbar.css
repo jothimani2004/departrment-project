@@ -10,7 +10,7 @@
 .navbar {
   box-shadow: 1px 1px 10px;
   background-color: #FBF8EF !important; /* Ensures consistent background */
-  padding: 2em;
+  padding: 1em;
 }
 
 /* Set background color of collapse content */

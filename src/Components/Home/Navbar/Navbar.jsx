@@ -1,12 +1,16 @@
-  import React, { useState, useContext } from "react";
+  import React, { useState, useContext, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import "./Navbar.css";
 import { GlobalContext } from "../../GlobalContext/globalContext.jsx";
+import Resize from "../../../Custom_hook/window_resize.jsx";
+
 
 export const Navbar = () => {
   const { checker } = useContext(GlobalContext);
   const [display, setDisplay] = useState(checker());
+  const {width} = Resize()
 
+  console.log(width)
   // Function to handle hover
   const handleMouseEnter = (event) => {
     event.currentTarget.classList.add("show");
@@ -22,7 +26,7 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-xxl navbar-light sticky-top ">
       <div className="container-fluid">
         <a className="navbar-brand text-dark" href="/">
-          Department of ICB
+          <img src={width > 500 ? "/MVIT-logo_full.png" : "/mit_logo.jpg"} alt="" height="85px" />
         </a>
 
         {/* Hamburger Button */}
