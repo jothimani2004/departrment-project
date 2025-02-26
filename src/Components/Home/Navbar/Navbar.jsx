@@ -163,7 +163,7 @@ export const Navbar = () => {
                 {(display === "Login") ? (
                   <a className="nav-link btn btn-lg custom-login-btn fs-6" href="/login">
                     {display}
-                  </a>
+                  </a> 
                 ):(
 
                   <li 
