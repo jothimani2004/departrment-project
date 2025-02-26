@@ -3,14 +3,16 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import "./Navbar.css";
 import { GlobalContext } from "../../GlobalContext/globalContext.jsx";
 import Resize from "../../../Custom_hook/window_resize.jsx";
+import { useLocation } from "react-router-dom";
 
 
 export const Navbar = () => {
   const { checker } = useContext(GlobalContext);
   const [display, setDisplay] = useState(checker());
   const {width} = Resize()
+  const location = useLocation(); // Get current route
 
-  console.log(width)
+
   const [open, setOpen] = useState(false);
   // Function to handle hover
   const handleMouseEnter = (event) => {
@@ -22,6 +24,9 @@ export const Navbar = () => {
     event.currentTarget.classList.remove("show");
     event.currentTarget.querySelector(".dropdown-menu").classList.remove("show");
   };
+  useEffect(() => {
+    setDisplay(checker()); // Run when route changes
+  }, [location.pathname]); // Depend on the route
 
   return (
     <nav className="navbar navbar-expand-xxl navbar-light sticky-top ">
@@ -165,6 +170,7 @@ export const Navbar = () => {
                     {display}
                   </a> 
                 ):(
+                  
 
                   <li 
               className="nav-item dropdown mx-3 "
@@ -174,7 +180,7 @@ export const Navbar = () => {
           <i className="ri-user-fill account-login nav-link text-dark dropdown-toggle fs-6"></i>      
               
               <ul className="dropdown-menu">
-                <li><a className="dropdown-item" href="/Event/Major_events">profile</a></li>
+                <li><a className="dropdown-item" href={display.role == "stud"?`/People/Students/Profile/Edit?register_no=${display.reg}`:"/Admin_page/Edit"}>profile</a></li>
                 <li><a className="dropdown-item" href="/login">Logout</a></li>
               </ul>
             </li>
