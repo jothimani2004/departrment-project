@@ -27,7 +27,11 @@
     "react-router-dom": "^7.1.1",
     "react-scripts": "^5.0.1",
     "react-slick": "^0.30.3",
+<<<<<<< HEAD
     "remixicon": "^4.6.0",
+=======
+    "serve": "^14.2.4",
+>>>>>>> 1d3f8d2a38fa8446b50077b0d285cbadfe120a59
     "slick-carousel": "^1.8.1",
     "stream-browserify": "^3.0.0",
     "util": "^0.12.5",

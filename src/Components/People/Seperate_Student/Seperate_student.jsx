@@ -91,9 +91,16 @@ export default function Seperate_student({title}){
                 <h1>Resume</h1>
 
                 <div className={style.card_size}>
-                <iframe src={`data:application/pdf;base64,${studentDetail.resume}`} width="100%" height="1120px" title="PDF Viewer"></iframe>
+                <div className="pdf-container d-flex justify-content-center align-items-center py-3">
+              <div className="card shadow-lg w-100 rounded-3">
+                  <iframe
+                      src={`data:application/pdf;base64,${studentDetail.resume}`}
+                      title={title}
+                      className="rounded-3"
+                  ></iframe>
+              </div>
                 </div>
-
+</div>
             </div>
 
 
