@@ -6,7 +6,7 @@ import { GlobalContext } from "../../GlobalContext/globalContext.jsx";
 export const Navbar = () => {
   const { checker } = useContext(GlobalContext);
   const [display, setDisplay] = useState(checker());
-
+  const [open, setOpen] = useState(false);
   // Function to handle hover
   const handleMouseEnter = (event) => {
     event.currentTarget.classList.add("show");
@@ -155,9 +155,41 @@ export const Navbar = () => {
 
             {/* LOGIN BUTTON */}
             <li className="nav-item mx-3 sign-up">
-              <a className="nav-link btn btn-lg custom-login-btn fs-6" href="/login">
-                {display}
-              </a>
+                {(display === "Login") ? (
+                  <a className="nav-link btn btn-lg custom-login-btn fs-6" href="/login">
+                    {display}
+                  </a>
+                ):(
+
+                  <li 
+              className="nav-item dropdown mx-3 "
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+          <i className="ri-user-fill account-login nav-link text-dark dropdown-toggle fs-6"></i>      
+              
+              <ul className="dropdown-menu">
+                <li><a className="dropdown-item" href="/Event/Major_events">profile</a></li>
+                <li><a className="dropdown-item" href="/login">Logout</a></li>
+              </ul>
+            </li>
+            // <div 
+            //   className="profile-container dropdown"
+            //   onMouseEnter={() => setOpen(true)}
+            //   onMouseLeave={() => setOpen(false)}
+            // >
+            //   <i className="ri-user-fill account-login"></i>
+            //   <ul className={`dropdown-menu ${open ? "show" : ""}`}>
+            //     <li>
+            //       <a className="dropdown-item" href="/profile">Profile</a>
+            //     </li>
+            //     <li>
+            //       <a className="dropdown-item" href="/logout">Logout</a>
+            //     </li>
+            //   </ul>
+            // </div>
+
+                )}            
             </li>
           </ul>
         </div>
