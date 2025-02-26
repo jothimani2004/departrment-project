@@ -8,7 +8,7 @@ import NoteViewer from "../pdfview/NoteViewer";
 
 const Documents = () => {
 
-  const d="http://localhost:5000";
+  const d="http://208.73.204.40:5000";
 
   const { domain } = useParams();
 
