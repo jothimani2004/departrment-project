@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 
 export const Navbar = () => {
   const { checker } = useContext(GlobalContext);
-  const [display, setDisplay] = useState(checker());
+  const [display, setDisplay] = useState(false);
   const {width} = Resize()
   const location = useLocation(); // Get current route
 
@@ -24,9 +24,27 @@ export const Navbar = () => {
     event.currentTarget.classList.remove("show");
     event.currentTarget.querySelector(".dropdown-menu").classList.remove("show");
   };
+
+
   useEffect(() => {
-    setDisplay(checker()); // Run when route changes
-  }, [location.pathname]); // Depend on the route
+    const updateDisplay = async () => {
+      const result = await checker(); // Ensure checker() updates correctly
+      setDisplay(result);
+    };
+    if(location.pathname == "/login"){
+      updateDisplay();
+    }
+  });
+
+  useEffect(() => {
+    const updateDisplay = async () => {
+      const result = await checker(); // Ensure checker() updates correctly
+      setDisplay(result);
+    };
+
+    updateDisplay();
+    console.log("path of the page ",location.pathname);
+  }, [location.pathname]);
 
   return (
     <nav className="navbar navbar-expand-xxl navbar-light sticky-top ">
