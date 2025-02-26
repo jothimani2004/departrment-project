@@ -1,80 +1,54 @@
-.navbar-nav .dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0; /* Adjust as needed */
-}
-.dropdown-item:hover{
-  background-color: blue;
-  color: white;
-}
-
-.navbar{
-  box-shadow: 1px 1px 10px;
-  background-color: #FBF8EF;
-}
-
-/* Customize font size */
+/* Ensure navbar and collapsed menu have the same background */
 .navbar .nav-link {
   font-size: 0.8rem; /* Increase font size */
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
-.container-fluid{
-  margin: 2rem ;
-
-  width: 100%;
+.navbar {
+  box-shadow: 1px 1px 10px;
+  background-color: #FBF8EF !important; /* Ensures consistent background */
+  padding: 1em;
 }
 
+/* Set background color of collapse content */
+.navbar-collapse {
+  background-color: #FBF8EF !important; /* Same as navbar */
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Dropdown menu background */
 .dropdown-menu {
-  padding: 10px; /* Add padding if needed */
-  height:auto;
-  font-size: 1.05rem; /* Increase font size */
-  background-color: aliceblue;
+  background-color: aliceblue !important;
+  font-size: 1.05rem;
 }
 
-/* Set text color to black */
-.navbar-nav .nav-link, .navbar-brand {
-  color: black !important;
+.navbar-nav .nav-item:last-child .nav-link {
+  background-color: blue !important;  /* Blue background */
+  color: white !important;  /* White text */
+  border-radius: 5px;  /* Rounded edges */
+  padding: 8px 15px;  /* Add some padding */
+  transition: all 0.3s ease-in-out;  /* Smooth transition */
+  }
+
+
+.navbar-nav .nav-item:last-child .nav-link:hover {
+  background-color: darkblue !important;  /* Darker blue on hover */
 }
 
-/* Set background color of collapse content to white */
-.navbar-collapse {
-  background-color: white;
-}
+/* .navbar .nav-item.sign-up .nav-link.custom-login-btn:hover {
+  background-color: #000;
+  color: white !important;
+} */
 
-/* Set text color to black */
-/* Set text color to black */
-.navbar-nav .nav-link, .navbar-brand {
-  color: black !important;
-}
+@media (max-width: 991px) { /* Apply styles only when navbar is collapsed */
+  .navbar-collapse {
+    padding: 10px; /* Add some padding */
+  }
 
-/* Set background color of collapse content to white */
-.navbar-collapse {
-  background-color: white;
-}
-
-
-.nav-item{
-  background-color: #D9EAFD;
-  border-radius: 10px;
-  padding: 1px;
-  
-}
-
-
-/* Apply styles specifically to the 'Login/SignUp' button only */
-.navbar .nav-item.sign-up .nav-link.custom-login-btn {
-  font-size: 1rem; /* Increase font size */
-  border: 2px solid #000; /* Optional: Add border */
-  border-radius: 5px; /* Optional: Round edges */
-  background-color: #f8f9fa; /* Light background color */
-  color: #000; /* Text color */
-  transition: all 0.3s ease; /* Smooth hover effect */
-}
-
-/* Apply hover effect to 'Login/SignUp' button */
-.navbar .nav-item.sign-up .nav-link.custom-login-btn:hover {
-  background-color: #000; /* Background color on hover */
-  color: white !important; /* Force white text color on hover */
+  .nav-item {
+    background-color: transparent; /* Remove the background for better visibility */
+  }
 }

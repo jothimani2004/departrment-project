@@ -1,5 +1,8 @@
+.desc{
+    font-size: 1.4rem;
+}
 .pdf-container {
-    width: 80%; /* Adjust max width as needed */
+    width: 100%; /* Adjust max width as needed */
     margin: auto;
 }
 
@@ -13,8 +16,16 @@
     height: 900px; /* Adjust height as needed */
     border-radius: 10px; /* Optional: Rounded corners */
 }
-@media (max-width: 800px ){
 
+
+@media (max-width: 800px ){
+    .para{
+        padding-left: none;
+        text-align: center;
+    }
+    .desc{
+        font-size: 0.8rem;
+    }
     .pdf-container iframe {
         height: 300px; /* Adjust height as needed */
     }

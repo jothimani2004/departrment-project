@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useParams } from 'react-router-dom';
+import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
 
 const VideoComponent = () => {
 
@@ -32,6 +33,18 @@ const VideoComponent = () => {
   useEffect(() => {
     fetchVideos();
   }, []);
+
+
+    //check admin
+
+    useEffect(() => {
+      const role = checkJwtCookie({ returnme: "role" });
+      console.log(role);
+    if(role === "Admin"){
+    setIsTeacher(true);
+    
+    }
+     })
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -73,11 +86,12 @@ const VideoComponent = () => {
 
   return (
     <div className="container m-2">
+       <h1 className="font-bold my-4 text-center">{domain }</h1> {/* Display domain */}
       <div className="d-flex justify-content-between align-items-center mb-4">
               <h1 className="h3"> videos Resources</h1>
               <div>
                  {/* Teacher can add links */}
-              {true && (
+              {isTeacher && (
                 <motion.button
                   onClick={() => setShowPopup(true)}
                   whileHover={{ scale: 1.05 }}
@@ -91,43 +105,43 @@ const VideoComponent = () => {
               </div>
             </div>
 
-      <div className="row">
-        {videos.map((video) => (
-          <div className="col-md-6 mb-4" key={video.videoid}>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="card shadow-sm"
+            <div className="row g-4">
+  {videos.map((video) => (
+    <div key={video.videoid} className="col-12">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="card shadow rounded-3 border"
+      >
+        <div className="ratio ratio-16x9">
+          <iframe
+            src={`https://www.youtube.com/embed/${video.videoid}`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title={video.title}
+            className="rounded-top"
+          ></iframe>
+        </div>
+        <div className="card-body text-center">
+          <h5 className="card-title">{video.title}</h5>
+          <p className="card-text">{video.description}</p>
+          {isTeacher && (
+            <motion.button
+              onClick={() => handleDelete(video._id)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="btn btn-danger ml-1"
             >
-              <div className="card-body">
-                <h5 className="card-title">{video.title}</h5>
-                <iframe
-                  width="100%"
-                  height="200"
-                  src={`https://www.youtube.com/embed/${video.videoid}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  title={video.title}
-                  className="mb-3"
-                ></iframe>
-                <p className="card-text">{video.description}</p>
-                {true && (
-                  <motion.button
-                  onClick={() => handleDelete(video._id)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="btn btn-danger"
-                  >
-                    Delete
-                  </motion.button>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        ))}
-      </div>
+              Delete
+            </motion.button>
+          )}
+        </div>
+      </motion.div>
+    </div>
+  ))}
+</div>
+
 
       {/* Bootstrap Modal for Adding New Video */}
       {showPopup && (

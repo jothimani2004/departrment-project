@@ -10,7 +10,7 @@ import './style.css';
 import { DomainProvider } from "./Components/Resource/domain/DomainContext.jsx";
 
 
-
+ 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

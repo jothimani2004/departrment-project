@@ -12,10 +12,7 @@ export default function Seperate_student_Edit({ title }) {
   const [EditContentUpload, setEditContentUpload] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
-  const [imageSrc, setImageSrc] = useState(
-    "https://assets.leetcode.com/users/Hirthick_Gowtham-G/avatar_1728091794.png"
-  );
-  const [pdfSrc, setPdfSrc] = useState("");
+
   useEffect(() => {
     const userData = checkJwtCookie({returnme:"stud"});
     if (!userData) {
@@ -188,32 +185,32 @@ export default function Seperate_student_Edit({ title }) {
             <div>
               <p>{editContent.profileSummary}</p>
               <div className={style.option}>
-                <li>
                   <a href={editContent.linkedinLink} target="blank">
+                <li>
                   <img src="/images/student_seperate_page/linked_in.png" alt="linkedin" height="10px" /> Linked in
-                  </a>
                 </li>
-                <li>
+                  </a>
                 <a href={editContent.githubLink} target="blank">
+                <li>
                   <img src="/images/student_seperate_page/github.png" alt="github" height="10px" /> Github
-                  </a>
                 </li>
-                <li>
+                  </a>
                 <a href={editContent.gmailLink} target="blank">
-                  <img src="/images/student_seperate_page/mail.png" alt="mail" height="10px" /> Gmail
-                  </a>
-                </li>
                 <li>
-                <a href={editContent.leedcodeLink} target="blank">
-                  <img src="/images/student_seperate_page/leetcode.png" alt="leet code" height="10px" /> Leet code
-                  </a>
+                  <img src="/images/student_seperate_page/mail.png" alt="mail" height="10px" /> Gmail
                 </li>
+                  </a>
+                <a href={editContent.leedcodeLink} target="blank">
+                <li>
+                  <img src="/images/student_seperate_page/leetcode.png" alt="leet code" height="10px" /> Leet code
+                </li>
+                  </a>
               </div>
             </div>
             <div className={style.image_cover}>
               <div className={style.image}>
                 <div className={style.image_size}>
-                {imageSrc ? (
+                {editContent.profilePhoto ? (
                 <img
                   src={`data:image/jpeg;base64,${editContent.profilePhoto}`}
                   alt="Profile Photo"
@@ -236,12 +233,15 @@ export default function Seperate_student_Edit({ title }) {
         <div className={style.pdf_container}>
           <h1>Resume</h1>
           <div className={style.card_size}>
-          <iframe
-          src={`data:application/pdf;base64,${editContent.profileResume}`}
-          className="w-100"
-          style={{ height: "1200px" }}
-/>
-
+          <div className="pdf-container d-flex justify-content-center align-items-center py-3">
+              <div className="card shadow-lg w-100 rounded-3">
+                  <iframe
+                      src={`data:application/pdf;base64,${editContent.profileResume}`}
+                      title={title}
+                      className="rounded-3"
+                  ></iframe>
+              </div>
+              </div>
           </div>
         </div>
       </div>

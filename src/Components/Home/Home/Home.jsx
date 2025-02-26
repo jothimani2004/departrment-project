@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import CountUp from 'react-countup';
 import Slider from 'react-slick';
 import About_us from "../../About_us/About_us";
+import { staffData } from "../../../Content/Home";
 
 export const Home = () =>{
     const [isstat,setisstat] = useState(false)
@@ -16,16 +17,6 @@ export const Home = () =>{
         setisstat(false)
       }
     })
-    const staffData = [
-      { id: 1, name: 'Dr. N. Palanivel', role: 'Professor & HOD	', image: '/images/faculity_photo/Palani.jpg' },
-      { id: 2, name: 'Mr.U.Muruganantham', role: 'Assistant Professor', image: '/images/faculity_photo/muruganantham.jpg' },
-      { id: 3, name: 'Kumaraguru', role: 'Assistant Professor', image: '/images/faculity_photo/kumaraguru.jpeg' },
-      { id: 4, name: 'Mrs.K.C Nithyasree', role: 'Assistant Professor', image: '/images/faculity_photo/Nithasri.jpg.jpeg' },
-      { id: 5, name: 'Mrs.K.Kavitha', role: 'Assistant Professor', image: '/images/faculity_photo/Kavitha.jpg' },
-      { id: 6, name: 'Ms..A.Sheerin', role: 'Assistant Professor', image: '/images/faculity_photo/sheerin.jpeg' },
-      { id: 6, name: 'Ms. S.Adolphine Shyni', role: 'Assistant Professor', image: '/images/faculity_photo/Shyni.jpeg' },
-
-    ];
   
     const sliderRef = useRef(null);
   
@@ -165,35 +156,53 @@ export const Home = () =>{
 
         <div className="about-container-welcome shadow">
             <div className="main-content-con-welcome shadow-lg  s_b t_c rounded-3">
-          <div className="heading-name">
-            <h2 className="text-center my-5">Welcome Message</h2>
-            <div className="name">
-            <div
-                className="hod_image m-3"
-                style={{
-                 backgroundImage: `url('/images/faculity_photo/Palani.jpg')`, // Corrected syntax
-                 backgroundSize: 'cover', // Ensure the image covers the div
-                 backgroundPosition: 'center', // Center the image
-                 width: '100px', // Set width (adjust as needed)
-                 height: '100px' // Set height (adjust as needed)
-  }}
->
+            <div className="container d-flex flex-column flex-sm-row align-items-center text-sm-start text-center">
+  {/* Heading */}
+  <div>
+    <h2 className="text-center mx-5 px-5">Welcome Message</h2>
+  </div>
+
+  {/* Wrapper with Responsive Flexbox */}
+  <div className="mx-7 d-flex flex-column flex-lg-row align-items-center text-sm-start text-center">
+    {/* Image Section */}
+    <div
+      className="hod_image m-3 rounded-circle"
+      style={{
+        backgroundImage: `url('/images/faculity_photo/Palani.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: '100px',
+        height: '100px'
+      }}
+    ></div>
+
+    {/* Details Section */}
+    <div className="detial">
+      <h3>Dr. N. PALANIVEL</h3>
+      <p>
+        Professor and Head, Department of IoT and Cyber Security <br />
+        including Blockchain Technology
+      </p>
+    </div>
+  </div>
 </div>
 
-              <div className="detial">
-                <h3>Dr. N. PALANIVEL,</h3>
-                <p>Professor and Head, Department of loT and Cyber security <br></br>
-                  including Block chain Technology</p>
-              </div>
-            </div>
-          </div>
+
+
+
+
           <div class="w-100 border border-dark"></div>
 
 
           <div className="main-content">
-            <p>The Department of CSE(ICB) has been continuously making progress in Teaching and R&D Activities. The Department was started with an intake of 60 students in 2020. The Department is boasts a dedicated department library stocked with the newest Titles, Editions, Journals and Magazines all connected to the internet. To enhance the Technical skills of students and prepare them for Global competition, the Department organizes Seminars, Workshops, and Guest lectures.
-            The fields of Internet of Things (IoT), Cyber Security, and Blockchain represent dynamic and rapidly evolving areas in technology, offering significant career growth opportunities. IoT refers to the interconnected network of devices that communicate and exchange data, driving innovations in smart homes, healthcare, and industrial automation. Cyber Security is critical in protecting these interconnected systems from threats and ensuring data integrity, privacy, and compliance. Blockchain technology, known for its secure and transparent ledger system, is transforming industries such as finance, supply chain, and healthcare by providing decentralized and tamper-proof transactions.
-            Careers in these fields are in high demand, with roles such as IoT architects, Cyber security analysts, and Blockchain developers offering lucrative and fulfilling paths. Professionals in these domains not only contribute to technological advancements but also play a vital role in safeguarding digital ecosystems making them essential in today’s interconnected world. The future for IoT, Cyber Security, and Blockchain departments is bright, with ample opportunities for innovation, application, and professional growth as these technologies continue to evolve and integrate into the fabric of modern society.</p>
+          <p>
+  The Department of CSE (ICB) has been advancing in Teaching and R&D since its inception in 2020 with an intake of 60 students. It features a well-equipped library and regularly organizes Seminars, Workshops, and Guest Lectures to enhance students' technical skills.
+  
+  IoT, Cyber Security, and Blockchain are rapidly evolving fields offering excellent career prospects. IoT drives innovations in smart systems, Cyber Security safeguards digital assets, and Blockchain ensures secure transactions across industries.  
+
+  Demand for IoT architects, Cyber Security analysts, and Blockchain developers is high, making these fields crucial in today’s digital world. With continuous innovation and growth, they present promising career opportunities.  
+</p>
+
           </div>
         </div>
         </div>

@@ -1,6 +1,9 @@
   import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useSearchParams } from "react-router-dom";
+import './noteview.css';
+import { Card } from "react-bootstrap";
+
 
 const FileViewer = () => {
   const { domain } = useParams();
@@ -9,17 +12,33 @@ const FileViewer = () => {
   const fileName = searchParams.get("title");
   const [fileSrc, setFileSrc] = useState(null);
   const [fileType, setFileType] = useState(null);
+  const [progress, setProgress] = useState(0);
+
+
+
+
 
   useEffect(() => {
     const fetchFile = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/getFile/${id}/${fileName}`);
+        const response = await axios.get(`http://localhost:5000/getFile/${id}/${fileName}`, {
+        
+          onDownloadProgress: (progressEvent) => {
+            console.log(progressEvent);
+            if (progressEvent.lengthComputable) {
+
+              const percent = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+              setProgress(percent);
+            }
+          },
+        });
         console.log(response.data.type);
         if (response.data.file && response.data.type) {
           // Create a valid Data URL for rendering
           const fileURL = `data:${response.data.type};base64,${response.data.file}`;
           setFileSrc(fileURL);
           setFileType(response.data.type);
+          setProgress(100);
          
         }
       } catch (error) {
@@ -35,13 +54,40 @@ const FileViewer = () => {
   // Render file based on type
   const renderFile = () => {
     if (!fileType) {
-      return <p className="text-muted">Loading file...</p>;
+      return (
+        <div className="d-flex flex-column align-items-center mt-5">
+          <div className="bg-secondary rounded w-50 p-4 mb-2 placeholder-wave"></div>
+
+          {/* Progress Bar */}
+          <div className="progress w-50">
+            <div
+              className="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar"
+              style={{ width: `${progress}%` }}
+              aria-valuenow={progress}
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              
+            </div>
+          </div>
+
+          <p className="text-muted mt-2">Loading file... </p>
+        </div>
+      );
     }
+
+    
+    
 
     if (fileType.includes("pdf")) {
       return <iframe src={fileSrc} className="w-100" style={{ height: "100vh" }} />;
     } else if (fileType.includes("image")) {
-      return <img src={fileSrc} alt={fileName} className=" m-4" />;
+      return <div className="image-container">
+      <img src={fileSrc} alt={fileName} className="responsive-img" />
+    </div>
+    
+
     } else if (fileType.includes("video")) {
       return <video controls src={fileSrc} className="w-100 rounded shadow" />;
     } else {
@@ -54,7 +100,7 @@ const FileViewer = () => {
   };
 
   return (
-    <div className="container align-center my-4">
+    <div className="container align-center my-4 min-vh-100">
       <h3 className="my-3">Domain: {domain}</h3>
       <h4 className="mb-4">{fileName}</h4>
       {renderFile()}

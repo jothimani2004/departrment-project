@@ -1,17 +1,33 @@
-import React ,{useEffect, useState , useContext} from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import './Navbar.css';
+  import React, { useState, useContext, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import "./Navbar.css";
 import { GlobalContext } from "../../GlobalContext/globalContext.jsx";
+import Resize from "../../../Custom_hook/window_resize.jsx";
+
 
 export const Navbar = () => {
-  const {checker} = useContext(GlobalContext); // Default to 'Login'
-  const [display,setdisplay] = useState(checker())
-  
+  const { checker } = useContext(GlobalContext);
+  const [display, setDisplay] = useState(checker());
+  const {width} = Resize()
+
+  console.log(width)
+  // Function to handle hover
+  const handleMouseEnter = (event) => {
+    event.currentTarget.classList.add("show");
+    event.currentTarget.querySelector(".dropdown-menu").classList.add("show");
+  };
+
+  const handleMouseLeave = (event) => {
+    event.currentTarget.classList.remove("show");
+    event.currentTarget.querySelector(".dropdown-menu").classList.remove("show");
+  };
+
   return (
-    <nav className="navbar  navbar-expand-xxl navbar-light sticky-top">
+    <nav className="navbar navbar-expand-xxl navbar-light sticky-top ">
       <div className="container-fluid">
-        {/* Logo */}
-        <a className="navbar-brand text-dark" href="/">Department of ICB</a>
+        <a className="navbar-brand text-dark" href="/">
+          <img src={width > 500 ? "/MVIT-logo_full.png" : "/mit_logo.jpg"} alt="" height="85px" />
+        </a>
 
         {/* Hamburger Button */}
         <button
@@ -29,118 +45,123 @@ export const Navbar = () => {
         {/* Navbar Links */}
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            {/* Dropdown for HOME */}
+            {/* HOME */}
             <li className="nav-item mx-3">
-              <a
-                className="nav-link text-dark "
-                href="/"
-              >
+              <a className="nav-link text-dark fs-6" href="/">
                 HOME
               </a>
             </li>
 
-            {/* Dropdown for ABOUT US */}
+            {/* ABOUT US */}
             <li className="nav-item dropdown">
-              <a className="nav-link text-dark" href="/About_us">
+              <a className="nav-link text-dark fs-6" href="/About_us">
                 ABOUT US
               </a>
             </li>
 
-            {/* Dropdown for ACADEMICS */}
-            <li className="nav-item dropdown mx-3">
-              <a
-                className="nav-link text-dark dropdown-toggle"
-                href="/"
-                id="academicsDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+            {/* ACADEMICS (Hover Dropdown) */}
+            <li
+              className="nav-item dropdown mx-3"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+             
+             <div className="nav-link text-dark dropdown-toggle fs-6">
+
                 ACADEMICS
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="academicsDropdown">
-                <li><a className="dropdown-item" href="/Academic/calander">Calender</a></li>
+             </div>
+              
+              <ul className="dropdown-menu">
+                <li><a className="dropdown-item" href="/Academic/calander">Calendar</a></li>
                 <li><a className="dropdown-item" href="/Academic/courses">Courses</a></li>
                 <li><a className="dropdown-item" href="/Academic/Time_table">Time Table</a></li>
                 <li><a className="dropdown-item" href="#">Student Data Verification</a></li>
               </ul>
             </li>
 
-            {/* Dropdown for PEOPLE */}
-            <li className="nav-item dropdown mx-3">
-              <a
-                className="nav-link text-dark dropdown-toggle"
-                href="/"
-                id="peopleDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+               {/* ACADEMICS (Hover Dropdown) */}
+               <li
+              className="nav-item dropdown mx-3"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+             
+             <div className="nav-link text-dark dropdown-toggle fs-6">
+
+                RESOURCE
+             </div>
+              
+              <ul className="dropdown-menu">
+                <li><a className="dropdown-item" href="/resourse/CyberSecurity">Cyber Security</a></li>
+                <li><a className="dropdown-item" href="/resourse/InternetOfThings">Internet Of Things</a></li>
+                <li><a className="dropdown-item" href="/resourse/BlockchainTechnology">BlockChain Technology</a></li>
+              </ul>
+            </li>
+
+            {/* PEOPLE (Hover Dropdown) */}
+            <li
+              className="nav-item dropdown mx-3"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+             <div className="nav-link text-dark dropdown-toggle fs-6">
                 PEOPLE
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="peopleDropdown">
+              </div>
+              <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href="/People/Students">Students</a></li>
                 <li><a className="dropdown-item" href="/People/Faculty">Faculty</a></li>
                 <li><a className="dropdown-item" href="/People/Alumni">Alumni</a></li>
               </ul>
             </li>
 
-            {/* Dropdown for RESOURCE */}
-            <li className="nav-item dropdown mx-3">
-              <a className="nav-link text-dark" href="/resourse/CyberSecurity">
-                RESOURCE
-              </a>
-            </li>
+            {/* PUBLICATION (Hover Dropdown) */}
+            <li
+              className="nav-item dropdown mx-3"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+             <div className="nav-link text-dark dropdown-toggle fs-6">
 
-            {/* Dropdown for PUBLICATION */}
-            <li className="nav-item dropdown mx-3">
-              <a
-                className="nav-link text-dark dropdown-toggle"
-                href="#"
-                id="publicationDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
                 PUBLICATION
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="publicationDropdown">
+             </div>
+              
+              <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href="/Publications/journals">Journal</a></li>
                 <li><a className="dropdown-item" href="/Publications/conferences">Paper</a></li>
                 <li><a className="dropdown-item" href="/Publications/patents">Patent</a></li>
               </ul>
             </li>
 
-            {/* Dropdown for EVENTS */}
-            <li className="nav-item dropdown mx-3">
-              <a
-                className="nav-link text-dark dropdown-toggle"
-                href="#"
-                id="eventsDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+            {/* EVENTS (Hover Dropdown) */}
+            <li
+              className="nav-item dropdown mx-3"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <div className="nav-link text-dark dropdown-toggle fs-6" >
+
                 EVENTS
-              </a>
-              <ul className="dropdown-menu" aria-labelledby="eventsDropdown">
+              </div>
+              
+              <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href="/Event/Major_events">Major Events</a></li>
-                <li><a className="dropdown-item" href="/Event/Cocurrcular_events">CoCurricular events</a></li>
+                <li><a className="dropdown-item" href="/Event/Cocurrcular_events">CoCurricular Events</a></li>
                 <li><a className="dropdown-item" href="/Event/Extra_Curricular_events">Extra Curricular Events</a></li>
               </ul>
             </li>
 
-            {/* Dropdown for CONTACT US */}
+            {/* CONTACT US */}
             <li className="nav-item dropdown mx-3">
-              <a className="nav-link text-dark" href="#Contact">
+              <a className="nav-link text-dark fs-6" href="#Contact">
                 CONTACT US
               </a>
             </li>
 
+            {/* LOGIN BUTTON */}
             <li className="nav-item mx-3 sign-up">
-                <a className="nav-link btn btn-lg custom-login-btn" href="/login">
-              {display}
-            </a>
+              <a className="nav-link btn btn-lg custom-login-btn fs-6" href="/login">
+                {display}
+              </a>
             </li>
           </ul>
         </div>

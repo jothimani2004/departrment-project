@@ -29,8 +29,10 @@ const DomainRoute = ({ domainnames, domainDetails, resources }) => {
   const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
 
   return (
-    <div className="container-fluid vh-100">
-      <div className="row">
+<div className="container-fluid vh-100 mt-5" style={{ width: "90%" }}>
+
+
+      <div className="row" style={{ width: "90%" ,height: "90vh"}}>
 
       {/* Mobile Menu Button */}
 <div className="d-block d-md-none p-0 ">
@@ -119,7 +121,7 @@ const DomainRoute = ({ domainnames, domainDetails, resources }) => {
 
         {/* Left Side Navigation */}
         <div className={`col-md-3 col-12 ${isMobileMenuOpen ? 'd-none' : 'd-none d-md-block'}`}>
-          <div className="p-3 bg-light border rounded vh-100">
+          <div className="p-3 bg-light border rounded" style={{ height: "90vh", overflow: "auto" }} >
             {/* Domain Dropdown */}
             <div className="mb-4">
               <h5 className="d-flex align-items-center justify-content-between" onClick={toggleDropdown}>
@@ -167,13 +169,15 @@ const DomainRoute = ({ domainnames, domainDetails, resources }) => {
         </div>
 
         {/* Right Side Content */}
-        <div className="col-md-9 col-12 mt-3 mt-md-0 vh-100">
-          {ResourceComponent ? (
-            <ResourceComponent />
-          ) : (
-            <Domain_details domain={domainDetails[domain]} />
-          )}
-        </div>
+        <div className="col-md-9 col-12 mt-3 mt-md-0" style={{ height: "90vh", overflow: "auto" }}>
+
+  {ResourceComponent ? (
+    <ResourceComponent />
+  ) : (
+    <Domain_details domain={domainDetails[domain]} />
+  )}
+</div>
+
 
        
       </div>

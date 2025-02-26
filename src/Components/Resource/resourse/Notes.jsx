@@ -4,11 +4,17 @@ import { motion } from "framer-motion";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import NoteViewer from "../pdfview/NoteViewer";
+import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
+import { FaFilePdf, FaFileImage, FaFileWord, FaFileAlt } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 
 const Documents = () => {
 
-  const d="http://208.73.204.40:5000";
+
+  const d="http://localhost:5000";
+
 
   const { domain } = useParams();
 
@@ -22,6 +28,8 @@ const Documents = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);  // Add loading state
   const navigate = useNavigate();
+  const [expandedNote, setExpandedNote] = useState(null);
+
 
   useEffect(() => {
     const fetchNotes = async () => {
@@ -45,10 +53,41 @@ const Documents = () => {
     };
 
     fetchNotes();
+   
+
   }, []);
 
+  
 
+ console.log(isTeacher);
+
+  
+  
+
+ useEffect(() => {
+  const role = checkJwtCookie({ returnme: "role" });
+  
+  console.log(role);
+if(role === "Admin"){
+setIsTeacher(true);
+
+}
+ })
  
+
+ //get icon of the file
+ const getFileIcon = (fileName) => {
+  const ext = fileName.split(".").pop().toLowerCase();
+  if (["pdf"].includes(ext)) return <FaFilePdf size={30} className="text-danger " />;
+  if (["png", "jpg", "jpeg", "gif"].includes(ext)) return <FaFileImage size={30} className="text-primary" />;
+  if (["doc", "docx"].includes(ext)) return <FaFileWord size={30} className="text-info" />;
+  return <FaFileAlt size={30}  className="text-secondary" />; // Default icon
+};
+//good fine name
+const formatFileName = (fileName) => {
+  const nameWithoutExt = fileName.split(".").slice(0, -1).join(".");
+  return nameWithoutExt.length > 15 ? nameWithoutExt.substring(0, 12) + "..." : nameWithoutExt;
+};
 
 
   const handleFileChange = (e) => {
@@ -101,6 +140,7 @@ const Documents = () => {
 
   const handleDelete = async (noteId, notes_title) => {
     try {
+      alert("click ok to delete")
       const response = await axios.delete(`${d}/delete/notes/${noteId}/${encodeURIComponent(notes_title)}`);
       setMessage(response.data.message || "Note deleted successfully");
       window.location.reload();
@@ -114,31 +154,44 @@ const Documents = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-if(loading){
-  return <p>Loading...</p>;
+
+  const toggleDropdown = (index) => {
+    setExpandedNote(expandedNote === index ? null : index);
+  };
+
+
+if (loading) {
+  return (
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <div className="spinner-border text-primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  );
 }
 
 
+
   return (
-    <div className="container m-2 ">
+    <div className="container m-2">
  <h1 className="font-bold my-4 text-center">{domain }</h1> {/* Display domain */}
     <div className="d-flex justify-content-between align-items-center mb-4">
    
             <h1 className="h3"> Notes Resources</h1>
-            <div>
-               {/* Teacher can add links */}
-            {true && (
-              <motion.button
-                onClick={() => toggleModal(true)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn btn-primary"
-              >
-                Add New notes
-              </motion.button>
-            )}
-            
-            </div>
+            <div className="d-flex justify-content-center my-3">
+  {/* Teacher can add links */}
+  {isTeacher && (
+    <motion.button
+      onClick={() => toggleModal(true)}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="btn btn-primary btn-md py-2 px-4"
+    >
+       Add New Notes
+    </motion.button>
+  )}
+</div>
+
           </div>
     
      {/* List of Notes */}
@@ -146,50 +199,91 @@ if(loading){
   {notes.notes.length > 0 ? (
     notes.notes.map((note, index) => (
       <li key={index} className="mb-4 p-3 border rounded shadow-lg">
-        <div className="d-flex justify-content-between align-items-center mb-4">
-        <h4 className="fw-bold">{note.noteDetails?.[0]?.title}</h4>
-        {/* Render title and description */}
-        {true && (
-                <button
-                  className="btn btn-danger btn-sm ms-2 "
-                  onClick={() => handleDelete(note._id)}
-                >
-                  Delete
-                </button>
-              )}
-       
+   <div
+  className="d-flex justify-content-between align-items-center p-3 "
+  onClick={() => toggleDropdown(index)}
+  style={{
+    cursor: "pointer",
+    transition: "background 0.3s ease",
+  }}
+
+>
+  <h5 className="fw-semibold text-primary m-0">{note.noteDetails?.[0]?.title}</h5>
+
+  <div className="d-flex align-items-center">
+    {isTeacher && (
+      <button
+        className="btn btn-outline-danger btn-sm me-2"
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent dropdown toggle on delete click
+          handleDelete(note._id);
+        }}
+        aria-label="Delete Note"
+      >
+        🗑️ Remove
+      </button>
+    )}
+<FontAwesomeIcon
+  icon={faChevronDown}
+  style={{
+    transition: "transform 0.3s ease",
+    transform: expandedNote === index ? "rotate(180deg)" : "rotate(0deg)",
+    border: "2px solid #333", // Border color
+    borderRadius:"50%",// Make it circular
+    padding: "5px", // Space inside the border
+    fontSize: "16px", // Adjust size
+  }}
+/>
+  </div>
+</div>
+
+<p className="text-left">{note.noteDetails?.[1]?.description}</p>
+
+      {/* File List (Dropdown) */}
+      {expandedNote === index && (
+  <div className="row mt-2">
+    {note.noteDetails?.slice(2).map((file, fileIndex) => (
+      <div key={fileIndex} className="col-12 ">
+        <div className="card p-3 mb-3 shadow-sm border-2">
+          <div className="d-flex justify-content-between align-items-center">
+            {/* File icon & name */}
+            <div className="d-flex align-items-center gap-2 flex-grow-1">
+              <span className="fs-5">{getFileIcon(file.originalName)}</span>
+              <div
+                className=" "
+                 // Adjust max-width as needed
+                title={file.originalName}
+              >
+                {file.originalName.split(".").slice(0, -1).join(".")}
+              </div>
+            </div>
+
+            {/* Delete Button (for teacher) */}
+            {isTeacher && (
+              <button
+                className="btn btn-outline-danger btn-sm"
+                onClick={() => handleDelete(note._id, file.originalName)}
+              >
+                🗑️
+              </button>
+            )}
+          </div>
+
+          {/* File Open Button */}
+          <button
+            className="btn btn-primary btn-sm mt-2 w-100"
+            onClick={() => handleFileClick(file.originalName, note._id)}
+          >
+            Open File
+          </button>
         </div>
-        <p className="text-muted">{note.noteDetails?.[1]?.description}</p>
-    
-        {/* Render files using FileViewer Component */}
-        <div className="row mt-2">
-          {note.noteDetails?.slice(2).map((file, fileIndex) => (
-             <p key={fileIndex}>
-             <button
-               className="btn btn-link"
-               onClick={() => handleFileClick(file.originalName,note._id)} // Trigger fetch and display
-             >
-               {file.originalName}
-
-             </button>
-
-              {/* Delete Button (Visible only to Teachers) */}
-              {true && (
-                <button
-                  className="btn btn-danger btn-sm ms-2"
-                  onClick={() => handleDelete(note._id, file.originalName)}
-                >
-                  Delete
-                </button>
-              )}
+      </div>
+    ))}
+  </div>
+)}
 
 
-           </p>
-          ))}
-        </div>
-
-      
-      </li>
+    </li>
     ))
   ) : (
     <p className="text-muted">No notes available</p>

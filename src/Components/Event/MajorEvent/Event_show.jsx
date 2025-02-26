@@ -4,11 +4,12 @@ import { Spinner } from 'react-bootstrap';
 import UseApiPost from "../../../Custom_hook/apiPostCall";
 import UseApiPut from "../../../Custom_hook/apiPutCall";
 import UseApiGet from "../../../Custom_hook/apiGetCall";
+import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie";
 
 export default function Event_show({title}){
 
 
-    const role = "Admin"
+    const [role,setRole] = useState(checkJwtCookie({returnme:"role"})) 
     const [showPopup, setShowPopup] = useState(false);
     const [selectFile,setSelectFile] = useState(null)
     const [calander,setCalander] = useState(null)
@@ -74,7 +75,7 @@ export default function Event_show({title}){
             
          <div className="d-flex justify-content-between align-items-center mb-4 w-100 px-5">
 
-                    <h1 className="h1"> {title}</h1>
+                    <h1 className="h1 text-center"> {title}</h1>
                     <div>
                     {role =="Admin"?<button class="btn btn-primary mx-1 my-3 "
                         onClick={()=> setting_pop_field([])}
@@ -83,7 +84,15 @@ export default function Event_show({title}){
                 </div>
                       {calander?
                       <div className={style.card_size}>
-                      <iframe  src={`data:application/pdf;base64,${calander}`} width="100%" height="700px" title="PDF Viewer"></iframe>
+                        <div className="pdf-container d-flex justify-content-center align-items-center py-3">
+                        <div className="card shadow-lg w-100 rounded-3">
+                      <iframe
+                      src={`data:application/pdf;base64,${calander}`}
+                      title={title}
+                      className="rounded-3"
+                  ></iframe>
+                      </div>
+                      </div>
                       </div>
                       :
                       <div className="pdf-container d-flex justify-content-center align-items-center py-3 rounded-3" style={{background:"#fff"}}>

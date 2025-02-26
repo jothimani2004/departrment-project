@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
 import { useParams } from 'react-router-dom';
-
+import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
 
 
 
@@ -37,6 +37,20 @@ const LinkComponent = () => {
 
     fetchLinks();
   }, []);
+
+//check admin
+
+  useEffect(() => {
+    const role = checkJwtCookie({ returnme: "role" });
+    console.log(role);
+  if(role === "Admin"){
+  setIsTeacher(true);
+  
+  }
+   })
+
+
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -92,12 +106,12 @@ const LinkComponent = () => {
 
   return (
     <div className="container m-2 ">
-
+ <h1 className="font-bold my-4 text-center">{domain }</h1> {/* Display domain */}
 <div className="d-flex justify-content-between align-items-center mb-4">
         <h1 className="h3"> Links Resources</h1>
         <div>
            {/* Teacher can add links */}
-        {true && (
+        {isTeacher && (
           <motion.button
             onClick={() => setShowPopup(true)}
             whileHover={{ scale: 1.05 }}
@@ -119,12 +133,16 @@ const LinkComponent = () => {
           <li key={link.name} className="my-4 p-4 bg-white shadow rounded-lg">
             <div className="d-flex justify-content-between align-items-center">
               <h3 className="font-weight-bold">{link.link.name}</h3>
-              <button
-                onClick={() => handleDelete(link._id)}
-                className="btn btn-sm btn-danger"
-              >
-                Delete
-              </button>
+              {isTeacher && (
+                 <button
+                 onClick={() => handleDelete(link._id)}
+                 className="btn btn-sm btn-danger"
+               >
+                 Delete
+               </button>
+
+              )}
+             
             </div>
             <p className="mt-2">{link.link.description}</p>
             <a

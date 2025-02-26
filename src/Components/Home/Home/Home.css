@@ -16,7 +16,7 @@
   
  .about-container{
     width: 100%;
-  padding: 8rem 10rem;
+   padding: 8rem 10rem;
  }  
 
  .main-content-con{
@@ -24,6 +24,8 @@
   padding: 1em;
   display: flex;
   flex-direction:column ;
+  justify-content: center;
+  align-items: center;
   gap: 25px;
  }
  
@@ -248,6 +250,7 @@ height: 100%;
   cursor: pointer;
   transition: all .2s;
   
+
  }
 
 .button-syllabi:hover{
@@ -266,7 +269,7 @@ height: 100%;
 .about-container-contact{
   width: 100%;
   padding: 4rem 15rem;
-  padding-bottom: 8rem;
+  
 } 
 
 .main-content-con-contact{
@@ -275,7 +278,12 @@ height: 100%;
   flex-direction:column;
   gap: 25px;
   align-items: center;
+  justify-content: center;
  }
+
+.main-content-con-contact h2{
+    margin: auto;
+} 
 
  .main-content-con-contact p{
   text-align: center;
@@ -307,7 +315,8 @@ height: 100%;
 }
 .about-container-contact{
   width: 100%;
-  padding: 0rem 10rem;
+  padding: 1rem 10rem;
+  padding-bottom:2em ;
 } 
 .top-con{
   display: flex;
@@ -345,6 +354,7 @@ height: 100%;
 .about-container-contact{
   width: 100%;
   padding: 0rem 4rem;
+  padding-bottom:2em ;
 } 
 .top-con{
   display: flex;
@@ -365,6 +375,9 @@ height: 100%;
   .img-con{
     width: auto;
     box-shadow: 2px 2px 10px;
+ }
+ .vm-con{
+  font-size: 0.5rem;
  }
  .about-container{
   width: 100%;
@@ -394,6 +407,7 @@ height: 100%;
 .about-container-contact{
   width: 100%;
   padding: 0rem 1rem;
+  padding-bottom:1em ;
 } 
 }
 
@@ -402,6 +416,103 @@ height: 100%;
     display: flex;
     flex-direction: column;
   }
+  .text-con p{
+    font-size: 0.8rem;
+   }
+   .bottom-con{
+    font-size: 0.8rem;
+   }
+   .vm-con{
+    font-size: 0.8rem;
+   }
+   .font-styling{
+    font-size: 0.8rem;
+   }
+   
+    .img-con{
+      min-width: 16em;
+      box-shadow: 2px 2px 10px;
+      margin: 10px;
+   }
+
+   .Core-Competencies ul li{
+    font-size: 0.8rem;
+  }
+  .Core-Competencies ul{
+    font-size: 1rem;
+  }
+  .button-syllabi {
+    font-size: 0.8rem;
+  }
+  
+
+  .main-content-con-welcome p {
+    font-size: 0.8rem;
+   }
+
+
+
+   .stat-item p{
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .detial p{
+    font-size: 0.8rem;
+  }
+  .detial h3{
+    font-size: 1.1rem;
+  }
+  .heading-name h3{
+    font-size: 1.1rem;
+  }
+  .text-con p{
+    line-height: 29px;
+   }
+   .buttom-con {
+    line-height: 29px;
+   }
+   .font-styling{
+    line-height: 29px;
+   }
+   .text-con h2{
+    text-align: center;
+   }
+   .syllabus-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+  
+  }
+  .main-content-con-contact{
+    padding: 2rem;
+    display: flex;
+    flex-direction:column;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+   }
+  
+   .main-content-con-contact p {
+    font-size: 0.8rem;
+    line-height: 29px;
+   }
+   
+.main-content-con-vm{
+  padding: 0.5rem;
+
+ }
+
+ .stats-container{
+  width: 100%;
+  padding: 1.5rem;
+  gap: 2rem;
+}
+.Core-Competencies h2 {
+    text-align: center;
+    margin: auto ;
+ }
 }
 
 

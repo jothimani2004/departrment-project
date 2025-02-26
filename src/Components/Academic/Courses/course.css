@@ -1,0 +1,22 @@
+
+  
+  .option-box{
+    display: flex;
+    justify-content: end;
+  }
+
+
+  
+  @media (max-width: 800px ){
+    .option-box{
+        display: flex;
+        justify-content: center;
+      }
+      .left-side{
+        font-size: 0.8rem;
+      }
+      .right-side{
+        font-size: 0.8rem;
+      }
+
+  }
