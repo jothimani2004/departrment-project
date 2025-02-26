@@ -43,6 +43,11 @@
   color: white !important;
 } */
 
+.account-login{
+  font-size: 25px;
+}
+
+
 @media (max-width: 991px) { /* Apply styles only when navbar is collapsed */
   .navbar-collapse {
     padding: 10px; /* Add some padding */
@@ -52,3 +57,18 @@
     background-color: transparent; /* Remove the background for better visibility */
   }
 }
+
+.profile-container {
+  position: relative;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
