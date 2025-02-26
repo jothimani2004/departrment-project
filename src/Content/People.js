@@ -8,7 +8,7 @@ export  const facultyData = [
       degree: "Ph.D.,",
       role: "Professor & HOD",
       joiningDate: "06-06-2011",
-      description:" "
+      description:"Dr. N. Palanivel, M.E., Ph.D., is the Head of the Department (HOD) of Computer Science and Engineering (ICB) at Manakula Vinayagar Institute of Technology, Puducherry, with 17 years of teaching experience. He holds a Ph.D. in Computer Science and Engineering from Manonmaniam Sundaranar University and specializes in platform technology, enterprise solutions, and database management systems. He has published over 25 international journal papers in machine learning, IoT, cybersecurity, and AI applications and has actively contributed as a reviewer, session chair, and research coordinator. He is also involved in AICTE-funded lab modernization, mentoring students, and guiding research scholars while collaborating with industries on emerging technologies. "
     },
     {
       photo: "/images/faculity_photo/muruganantham.jpg",

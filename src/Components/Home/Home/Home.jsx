@@ -56,6 +56,12 @@ export const Home = () =>{
             <div className="carousel-caption">First Event - A Special Moment</div>
           </div>
         </div>
+        <div className="carousel-item">
+          <div className="carousel-image-container">
+            <img src="/images/firstpage_img/balaji_3rdyear.jpg" className="d-block w-100 carousel-image" alt="Project Expo"/>
+            <div className="carousel-caption">We are proud to announce that G.Lakshmi Balaji, a student of MVIT, has won 1st prize in drone workshop. The event focused on drone technology, flight mechanics, and real-world applications. Competing against talented participants, G.Lakshmi Balaji demonstrated exceptional skills in drone navigation, design, and programming. This achievement reflects their dedication to innovation and technology.</div>
+          </div>
+        </div>
 
         <div className="carousel-item">
           <div className="carousel-image-container">

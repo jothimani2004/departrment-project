@@ -7,6 +7,9 @@ import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
 
 const IEEEPapers = () => {
   const d = "http://localhost:5000";
+
+
+
   const [isTeacher, setIsTeacher] = useState(false);
   const { year, domain, resourse } = useParams();
   const [pdfData, setPdfData] = useState([]);
@@ -22,7 +25,7 @@ const IEEEPapers = () => {
   useEffect(() => {
     const fetchPdfData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/researchpaper/${year || currentYear}`);
+        const response = await axios.get(`http://localhost:5000/researchpaper/${year || currentYear}/${domain}`);
         setPdfData(response.data.pdfs || []);
       } catch (error) {
         console.error('Error fetching PDF data:', error);
@@ -96,6 +99,7 @@ const IEEEPapers = () => {
     formData.append('title', uploadForm.name);
     formData.append('abstract', uploadForm.abstract); 
     formData.append('year', year || currentYear);
+    formData.append("domain", domain);
     try {
       const response = await axios.post(`${d}/researchpapers`, formData);
       setMessages(prevMessages => [
