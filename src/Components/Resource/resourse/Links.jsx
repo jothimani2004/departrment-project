@@ -9,7 +9,7 @@ import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
 
 const LinkComponent = () => {
 
-  const d="http://localhost:5000";
+  const d= process.env.REACT_APP_API_URL;
 
   const { domain } = useParams();
 

@@ -13,7 +13,7 @@ const FileViewer = () => {
   const [fileSrc, setFileSrc] = useState(null);
   const [fileType, setFileType] = useState(null);
   const [progress, setProgress] = useState(0);
-
+  const back_api = process.env.REACT_APP_API_URL ;
 
 
 
@@ -21,7 +21,7 @@ const FileViewer = () => {
   useEffect(() => {
     const fetchFile = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/getFile/${id}/${fileName}`, {
+        const response = await axios.get(`${back_api}/getFile/${id}/${fileName}`, {
         
           onDownloadProgress: (progressEvent) => {
             console.log(progressEvent);

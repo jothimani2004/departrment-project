@@ -16,10 +16,11 @@ const Login = () => {
   const [resetLinkSent, setResetLinkSent] = useState(false);
   const [accountLocked, setAccountLocked] = useState(false); // Track if the account is locked
   const navigate = useNavigate();
+  const back_api = process.env.REACT_APP_API_URL ;
 
   useEffect(()=>{
     const logout = async ()=>{
-      await fetch("http://localhost:5000/logout", {
+      await fetch(`${back_api}/logout`, {
         method: "POST",
         credentials: "include", // Important for cookies
       });
@@ -37,7 +38,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/login',
+        `${back_api}/login`,
         { loginInput, password },
         { withCredentials: true }
       );
@@ -73,7 +74,7 @@ const Login = () => {
     setLoading(true); // Start loading
 
     try {
-      const response = await axios.post('http://localhost:5000/forgot-password', { email: emailForReset });
+      const response = await axios.post(`${back_api}/forgot-password`, { email: emailForReset });
 
       if (response.status === 200) {
         setResetLinkSent(true);

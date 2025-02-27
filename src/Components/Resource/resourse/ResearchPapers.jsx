@@ -6,7 +6,7 @@ import AlertMessage from "./AlertMessage";
 import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
 
 const IEEEPapers = () => {
-  const d = "http://localhost:5000";
+  const d =  process.env.REACT_APP_API_URL;
 
 
 
@@ -25,7 +25,7 @@ const IEEEPapers = () => {
   useEffect(() => {
     const fetchPdfData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/researchpaper/${year || currentYear}/${domain}`);
+        const response = await axios.get(`${d}/researchpaper/${year || currentYear}/${domain}`);
         setPdfData(response.data.pdfs || []);
       } catch (error) {
         console.error('Error fetching PDF data:', error);
@@ -60,7 +60,7 @@ const IEEEPapers = () => {
 
   const handlePdfSelect = async (_id) => {
     try {
-      const result = await axios.post('http://localhost:5000/schedule-email', {
+      const result = await axios.post(`${d}/schedule-email`, {
         email: 'brutalicongaming@gmail.com',
         _id: _id,
       });

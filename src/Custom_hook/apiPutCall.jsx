@@ -7,7 +7,7 @@ export default async function UseApiPut(val) {
    console.log(val)
    const path = val.path
    const data = val.body
-   const back_api = "http://localhost:5000"
+   const back_api = process.env.REACT_APP_API_URL;
 
    console.log(data,"from put call")
 

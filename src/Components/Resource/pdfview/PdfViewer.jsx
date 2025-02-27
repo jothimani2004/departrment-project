@@ -8,11 +8,11 @@ const PdfViewer = () => {
   const pdftitle = searchParams.get("pdftitle"); // Get the 'pdfName' query param
 
   const [pdfUrl, setPdfUrl] = useState(null); // State to store the fetched PDF URL
-
+  const back_api = process.env.REACT_APP_API_URL;
   useEffect(() => {
     const fetchPdf = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/resource/pdfview`, {
+        const response = await axios.get(`${back_api}/resource/pdfview`, {
           params: { pdftitle, resourse: resourse },
         });
 

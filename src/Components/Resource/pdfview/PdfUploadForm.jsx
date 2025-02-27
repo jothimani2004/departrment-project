@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 function PdfUploadForm() {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState('');
+  const back_api = process.env.REACT_APP_API_URL;
 
   // Handle file selection
   const handleFileChange = (e) => {
@@ -24,7 +25,7 @@ function PdfUploadForm() {
     console.log(formData)
 
     try {
-      const response = await fetch('http://localhost:5000/upload-pdf', {
+      const response = await fetch(`${back_api}/upload-pdf`, {
         method: 'POST',
         body: formData,
       });

@@ -2,6 +2,7 @@ import axios from "axios";
 
 // Utility function to convert Buffer to Base64
 export default async function BufferToBase64({ buffer }) {
+  const back_api = process.env.REACT_APP_API_URL ;
   try {
     if (!buffer) {
       throw new Error("No buffer provided");
@@ -11,7 +12,7 @@ export default async function BufferToBase64({ buffer }) {
     const serializedBuffer = Array.from(new Uint8Array(buffer));
 
     // Send serialized buffer to backend
-    const response = await axios.post("http://localhost:5000/BufferToBase64", serializedBuffer, {
+    const response = await axios.post(`${back_api}/BufferToBase64`, serializedBuffer, {
       headers: {
         "Content-Type": "application/json",
       },

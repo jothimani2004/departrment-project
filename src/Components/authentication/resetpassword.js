@@ -14,6 +14,8 @@ console.log(token);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
+  const back_api = process.env.REACT_APP_API_URL;
+
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -33,7 +35,7 @@ console.log(token);
     }
 
     try {
-      const response = await fetch('http://localhost:5000/reset-password', {
+      const response = await fetch(`${back_api}/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

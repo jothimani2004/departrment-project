@@ -12,6 +12,7 @@ export default function Seperate_student_Edit({ title }) {
   const [EditContentUpload, setEditContentUpload] = useState(null);
   const [imageFile, setImageFile] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
+  const back_api = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     const userData = checkJwtCookie({returnme:"stud"});
@@ -23,7 +24,7 @@ export default function Seperate_student_Edit({ title }) {
     const fetchData = async () => {
       try {
         console.log("Fetching data for reg:", userData.jwtPayload.reg);
-        const response = await fetch("http://localhost:5000/fetchProfile", {
+        const response = await fetch(`${back_api}/fetchProfile`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -127,7 +128,7 @@ export default function Seperate_student_Edit({ title }) {
     
 
     try {
-      const response = await fetch('http://localhost:5000/editProfile', {
+      const response = await fetch(`${back_api}/editProfile`, {
         method: 'POST',
         body: formData,
       });

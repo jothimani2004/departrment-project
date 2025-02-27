@@ -2,6 +2,10 @@
 
 export default function About_us(){
 
+    const api =  process.env.REACT_APP_API_URL;
+
+ 
+
     return(
         <>
         

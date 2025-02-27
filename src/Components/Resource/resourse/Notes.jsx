@@ -13,7 +13,7 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 const Documents = () => {
 
 
-  const d="http://localhost:5000";
+  const d= process.env.REACT_APP_API_URL;
 
 
   const { domain } = useParams();
