@@ -229,8 +229,18 @@ export const Home = () =>{
                   <div className="Syllabi shadow-lg s2_b rounded-4">
                     <h2>Curriculum and Syllabi</h2>
                     <div className="syllabus-buttons ">
-                      <div className="button-syllabi s_b t_c">UG CURRICULUM AND SYLLABI 2020-2021</div>
-                      <div className="button-syllabi s_b t_c">UG CURRICULUM AND SYLLABI 2023-2024</div>
+                    <div 
+                    className="button-syllabi s_b t_c" 
+                    onClick={() => window.open('IOT_Blockchain_Cybersecurity_Syllabus_23_24.pdf', '_blank')}
+                    >
+                      UG CURRICULUM AND SYLLABI 2020-2021
+                    </div>
+
+                      <div 
+                      className="button-syllabi s_b t_c"
+                      onClick={() => window.open('IOT_Blockchain_Cybersecurity_Syllabus_23_24.pdf', '_blank')}
+
+                      >UG CURRICULUM AND SYLLABI 2023-2024</div>
                     </div>
                   </div>
                 </div>
@@ -288,7 +298,7 @@ export const Home = () =>{
               }}
             />
             <h5 className="mt-3 text-center">{staff.name}</h5>
-            <p className="mt-3 text-center">{staff.role}</p>
+            <p className="mt-0 mb-4 text-center">{staff.role}</p>
           </div>
           
           ))}

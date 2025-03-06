@@ -7,8 +7,8 @@ export const Footer = () =>{
               <div className="col-md-4 mb-3">
                 <h5>About Us</h5>
                 <p>
-                  We are committed to providing the best solutions for your business needs. 
-                  Our team focuses on innovation and quality.
+                Welcome to our college, committed to quality education and innovation.  
+                We empower students through knowledge, research, and community engagement.
                 </p>
               </div>
     
@@ -17,22 +17,18 @@ export const Footer = () =>{
                 <h5>Quick Links</h5>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#home" className="text-white text-decoration-none">
+                    <a href="/" className="text-white text-decoration-none">
                       Home
                     </a>
                   </li>
+                  
                   <li>
-                    <a href="#services" className="text-white text-decoration-none">
-                      Services
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#about" className="text-white text-decoration-none">
+                    <a href="/About_us" className="text-white text-decoration-none">
                       About Us
                     </a>
                   </li>
                   <li>
-                    <a href="#contact" className="text-white text-decoration-none">
+                    <a href="#Contact" className="text-white text-decoration-none">
                       Contact
                     </a>
                   </li>
@@ -43,13 +39,15 @@ export const Footer = () =>{
               <div className="col-md-4 mb-3">
                 <h5>Contact</h5>
                 <p>
-                  <i className="bi bi-geo-alt-fill"></i> 123 Main Street, City, Country
+                  <i className="bi bi-geo-alt-fill">Kalvi Vallal N. Kesavan salai, Medical College Campus, Kalitheerthalkuppam, Puducherry 605107</i> 
                 </p>
                 <p>
-                  <i className="bi bi-telephone-fill"></i> +1 234 567 890
+                  <i className="bi bi-telephone-fill">0413-2643007</i> 
                 </p>
                 <p>
-                  <i className="bi bi-envelope-fill"></i> info@example.com
+                <a href="mailto:cseicb@mvit.edu.in">
+                  <i className="bi bi-envelope-fill">cseicb@mvit.edu.in</i> 
+                </a>
                 </p>
               </div>
             </div>

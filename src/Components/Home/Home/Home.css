@@ -13,6 +13,10 @@
     object-fit: cover; /* Ensure the images fill the carousel while maintaining their aspect ratio */
     height: 85vh; /* Make sure the images cover the entire height of the carousel */
   }
+  .custom-carousel:hover {
+  background-color: transparent; /* Change to your desired color */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
   
  .about-container{
     width: 100%;

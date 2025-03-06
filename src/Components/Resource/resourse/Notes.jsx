@@ -8,6 +8,7 @@ import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
 import { FaFilePdf, FaFileImage, FaFileWord, FaFileAlt } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import AlertMessage from "./AlertMessage";
 
 
 const Documents = () => {
@@ -29,6 +30,8 @@ const Documents = () => {
   const [loading, setLoading] = useState(true);  // Add loading state
   const navigate = useNavigate();
   const [expandedNote, setExpandedNote] = useState(null);
+  const [messages, setMessages] = useState([]); // Changed to an array for multiple messages
+  const [currentMessageIndex, setCurrentMessageIndex] = useState(0); // New state to track the current message
 
 
   useEffect(() => {
@@ -56,7 +59,15 @@ const Documents = () => {
    
 
   }, []);
+  useEffect(() => {
+    if (messages.length > 0 && currentMessageIndex < messages.length) {
+      const timer = setTimeout(() => {
+        setCurrentMessageIndex(currentMessageIndex + 1);
+      }, 3000); // Delay of 3 seconds between each message
 
+      return () => clearTimeout(timer);
+    }
+  }, [messages, currentMessageIndex]);
   
 
  console.log(isTeacher);
@@ -138,12 +149,24 @@ const formatFileName = (fileName) => {
     navigate(`/resourse/${domain}/notes/notesview?title=${encodeURIComponent(fileName)}&id=${encodeURIComponent(id)}`);
   };
 
-  const handleDelete = async (noteId, notes_title) => {
+  const handleDelete = async (noteId,noteti, notes_title) => {
     try {
-      alert("click ok to delete")
-      const response = await axios.delete(`${d}/delete/notes/${noteId}/${encodeURIComponent(notes_title)}`);
-      setMessage(response.data.message || "Note deleted successfully");
-      window.location.reload();
+      const confirmDelete = window.confirm(`Do you want to delete this notes_title: ${noteti}${notes_title ? `, file name is ${notes_title}` : ''}`);
+      if (confirmDelete) {
+ 
+               
+              const response = await axios.delete(`${d}/delete/notes/${noteId}/${encodeURIComponent(notes_title)}`);
+              setMessage(response.data.message || "Note deleted successfully");
+              window.location.reload();
+             }
+         
+             // Update the messages state with a success message from the response
+      setMessages(prevMessages => [
+        ...prevMessages, 
+        'notes deleted successfully.'
+      ]);
+      
+    
     } catch (error) {
       console.error("Error deleting the note:", error);
     }
@@ -178,7 +201,7 @@ if (loading) {
     <div className="d-flex justify-content-between align-items-center mb-4">
    
             <h1 className="h3"> Notes Resources</h1>
-            <div className="d-flex justify-content-center my-3">
+            <div className="d-flex justify-content-center ">
   {/* Teacher can add links */}
   {isTeacher && (
     <motion.button
@@ -216,7 +239,7 @@ if (loading) {
         className="btn btn-outline-danger btn-sm me-2"
         onClick={(e) => {
           e.stopPropagation(); // Prevent dropdown toggle on delete click
-          handleDelete(note._id);
+          handleDelete(note._id,note.noteDetails?.[0]?.title);
         }}
         aria-label="Delete Note"
       >
@@ -262,7 +285,7 @@ if (loading) {
             {isTeacher && (
               <button
                 className="btn btn-outline-danger btn-sm"
-                onClick={() => handleDelete(note._id, file.originalName)}
+                onClick={() => handleDelete(note._id,note.noteDetails?.[0]?.title, file.originalName)}
               >
                 🗑️
               </button>
@@ -286,7 +309,9 @@ if (loading) {
     </li>
     ))
   ) : (
-    <p className="text-muted">No notes available</p>
+    <div className="text-center text-muted">
+    <h5>No Notes available</h5>
+  </div>
   )}
 </ul>
 
@@ -372,6 +397,12 @@ if (loading) {
           </div>
         </div>
       )}
+
+
+    {/* Alert Messages */}
+    {messages.length > 0 && currentMessageIndex < messages.length && (
+          <AlertMessage message={messages[currentMessageIndex]} />
+        )}
 
      
     </div>

@@ -186,22 +186,22 @@ export default function Seperate_student_Edit({ title }) {
             <div>
               <p>{editContent.profileSummary}</p>
               <div className={style.option}>
-                  <a href={editContent.linkedinLink} target="blank">
+                  <a href={editContent.linkedinLink} target="blank" className="links">
                 <li>
                   <img src="/images/student_seperate_page/linked_in.png" alt="linkedin" height="10px" /> Linked in
                 </li>
                   </a>
-                <a href={editContent.githubLink} target="blank">
+                <a href={editContent.githubLink} target="blank" className="links">
                 <li>
                   <img src="/images/student_seperate_page/github.png" alt="github" height="10px" /> Github
                 </li>
                   </a>
-                <a href={editContent.gmailLink} target="blank">
+                <a href={editContent.gmailLink} target="blank" className="links">
                 <li>
                   <img src="/images/student_seperate_page/mail.png" alt="mail" height="10px" /> Gmail
                 </li>
                   </a>
-                <a href={editContent.leedcodeLink} target="blank">
+                <a href={editContent.leedcodeLink} target="blank" className="links">
                 <li>
                   <img src="/images/student_seperate_page/leetcode.png" alt="leet code" height="10px" /> Leet code
                 </li>
@@ -236,11 +236,15 @@ export default function Seperate_student_Edit({ title }) {
           <div className={style.card_size}>
           <div className="pdf-container d-flex justify-content-center align-items-center py-3">
               <div className="card shadow-lg w-100 rounded-3">
-                  <iframe
+                                {editContent.profileResume ? <iframe
                       src={`data:application/pdf;base64,${editContent.profileResume}`}
                       title={title}
                       className="rounded-3"
-                  ></iframe>
+                  ></iframe>:
+                  <div className="text-center text-muted p-5">
+                  <h5>No resume available.</h5>
+                </div>
+                  }
               </div>
               </div>
           </div>

@@ -31,3 +31,12 @@
 .si_b{
     background-color: var(--slide);
 }
+
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.links{
+    color: black;
+}

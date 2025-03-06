@@ -74,11 +74,18 @@ const VideoComponent = () => {
     }
   };
 
-  const handleDelete = async (videoid) => {
+  const handleDelete = async (videoid,title) => {
+  
     try {
-      await axios.delete(`${d}/videodelete/${videoid}`);
-      setMessage("Video deleted successfully");
-      fetchVideos(); // Fetch updated video list after deletion
+           const confirmDelete = window.confirm(`Do you want to delete this title: ${title}`);
+                  if (confirmDelete) {
+      
+                    await axios.delete(`${d}/videodelete/${videoid}`);
+                    setMessage("Video deleted successfully");
+                    fetchVideos(); // Fetch updated video list after deletion
+              
+                  }
+     
     } catch (error) {
       console.error("Error deleting video:", error);
     }
@@ -104,7 +111,13 @@ const VideoComponent = () => {
               
               </div>
             </div>
+            
 
+            {videos.length === 0 ? (
+  <div className="text-center text-muted">
+    <h5>No videos available</h5>
+  </div>
+) : (
             <div className="row g-4">
   {videos.map((video) => (
     <div key={video.videoid} className="col-12">
@@ -124,11 +137,11 @@ const VideoComponent = () => {
           ></iframe>
         </div>
         <div className="card-body text-center">
-          <h5 className="card-title">{video.title}</h5>
-          <p className="card-text">{video.description}</p>
+          <h5 className="card-title">{video.Video.title}</h5>
+          <p className="card-text">{video.Video.description}</p>
           {isTeacher && (
             <motion.button
-              onClick={() => handleDelete(video._id)}
+              onClick={() => handleDelete(video._id,video.Video.title)}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="btn btn-danger ml-1"
@@ -141,6 +154,7 @@ const VideoComponent = () => {
     </div>
   ))}
 </div>
+)}
 
 
       {/* Bootstrap Modal for Adding New Video */}

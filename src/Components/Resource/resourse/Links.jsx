@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
 import { useParams } from 'react-router-dom';
 import {checkJwtCookie} from '../../Jwt_verify/checkJwtCookie';
 
-
+import style from "./button.module.css";
 
 
 const LinkComponent = () => {
@@ -93,11 +93,20 @@ const LinkComponent = () => {
     }
   };
 
-  const handleDelete = async (linkid) => {
+  const handleDelete = async (linkid,name) => {
     try {
-      const response = await axios.delete(`${d}/deletelinks/${linkid}`);
-      setLinks(links.filter((link) =>link._id !== linkid)); // Match the correct property name
-      setMessage(response.data.message || "Link deleted successfully");
+           const confirmDelete = window.confirm(`Do you want to delete this name: ${name}`);
+                  if (confirmDelete) {
+      
+                    console.log(linkid);
+                    
+                    const response = await axios.delete(`${d}/deletelinks/${linkid}`);
+                    setLinks(links.filter((link) =>link._id !== linkid)); // Match the correct property name
+                    setMessage(response.data.message || "Link deleted successfully");
+                      
+              
+                  }
+   
      
     } catch (error) {
       console.error("Error deleting link:", error);
@@ -125,7 +134,11 @@ const LinkComponent = () => {
         </div>
       </div>
 
-
+      {links.length === 0 ? (
+           <div className="text-center text-muted">
+           <h5>No Links available</h5>
+         </div>
+      ) : (
 
 
       <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
@@ -135,7 +148,7 @@ const LinkComponent = () => {
               <h3 className="font-weight-bold">{link.link.name}</h3>
               {isTeacher && (
                  <button
-                 onClick={() => handleDelete(link._id)}
+                 onClick={() => handleDelete(link._id,link.link.name)}
                  className="btn btn-sm btn-danger"
                >
                  Delete
@@ -151,13 +164,15 @@ const LinkComponent = () => {
               rel="noopener noreferrer"
               className="text-primary"
             >
-              <button className="btn btn-link">Get Link</button>
+              <button className={style.buttons}>Get Link</button>
             </a>
             
        
           </li>
         ))}
       </ul>
+
+      )}
 
       {/* Popup form for adding new link */}
       {showPopup && (

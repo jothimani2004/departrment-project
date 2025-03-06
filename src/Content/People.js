@@ -14,9 +14,9 @@ export  const facultyData = [
       photo: "/images/faculity_photo/muruganantham.jpg",
       name: "Mr.U.Muruganantham",
       degree: "	M.Tech.,",
-      role: "Placement Coordinator And Assistant Professor",
+      role: "Assistant Professor",
       joiningDate: "11-07-2024",
-      description:" "
+      description:"Mr.U.Muruganantham is an Assistant Professor in the CSE (IoT & CS) Department, specializing in Artificial Intelligence and Machine Learning. With 6 years and 6 months of experience, His research interests include Artificial Intelligence, Deep Learning, Internet of Things & Blockchain Technology. He has been serving at Manakula Vinayagar Institute of Technology since 2024. He holds several key positions including Placement coordinator, Dreams and Competition coordinator, Dept MoU In-Charge, Internship and Industrial visit Coordinator and Consultancy Coordinator. He has actively participated in many Faculty development programs and workshops since 2015 and has published 2 international Journal and 5 National conference papers. He has received appreciation awards for achieving outstanding results in Mobile communication, Software Engineering, Data mining and data warehousing, and Computer Networks for different student batches."
 
     },
     {
@@ -55,7 +55,7 @@ export  const facultyData = [
       description:"A. Sheerin is an Assistant Professor in the CSE (IoT & CS) Department, specializing in Network Security. She holds an M.Tech in Network & Information Security from Pondicherry University and a B.Tech in Electronics & Communication Engineering from Sri Manakula Vinayagar Engineering College. With nine months of experience, she has been working at Manakula Vinayagar Institute of Technology since September 2023. She also serves as the Library Coordinator for the department and has published one research paper in an international journal."
     },
     {
-      photo: "/images/faculity_photo/Shyni.jpeg",
+      photo: "https://placehold.co/400x400?text=Adolphine+Shyni&font=roboto",
       name: "Ms. S.Adolphine Shyni",
       degree: "M.Tech",
       role: "Assistant Professor",

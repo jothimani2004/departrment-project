@@ -99,7 +99,7 @@ export const Navbar = () => {
                 <li><a className="dropdown-item" href="/Academic/calander">Calendar</a></li>
                 <li><a className="dropdown-item" href="/Academic/courses">Courses</a></li>
                 <li><a className="dropdown-item" href="/Academic/Time_table">Time Table</a></li>
-                <li><a className="dropdown-item" href="#">Student Data Verification</a></li>
+                <li><a className="dropdown-item" href="/Academic/student-verification">Student Data Verification</a></li>
               </ul>
             </li>
 
