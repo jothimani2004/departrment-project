@@ -20,7 +20,7 @@ export  const facultyData = [
 
     },
     {
-      photo: "/images/faculity_photo/kumaraguru.jpeg",
+      photo: "https://placehold.co/400x400?text=Kumaraguru&font=roboto",
       name: "Kumaraguru",
       degree: "M.E.,",
       role: "Assistant Professor",
@@ -29,7 +29,7 @@ export  const facultyData = [
 
     },
     {
-      photo: "/images/faculity_photo/Nithasri.jpg.jpeg",
+      photo: "/images/faculity_photo/Nithasri.jpg",
       name: "Mrs.K.C Nithyasree",
       degree: "	M.Tech.,",
       role: "Assistant Professor",
@@ -47,7 +47,7 @@ export  const facultyData = [
 
     },
     {
-      photo: "/images/faculity_photo/sheerin.jpeg",
+      photo: "/images/faculity_photo/sheerin.jpg",
       name: "Ms..A.Sheerin",
       degree: "M.Tech",
       role: "Assistant Professor",

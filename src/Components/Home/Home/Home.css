@@ -30,27 +30,28 @@
   flex-direction:column ;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  
  }
  
  .top-con{
   display: flex;
   justify-content: center;
-  gap: 25px;
   padding:1em;
  }
  .text-con{
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 1em;
+  gap: 25px;
+  padding: 1em 1em 0em 1em ;
 
  }
  .text-con p{
   font-size: 1.1rem;
   line-height: 32px;
   text-align: justify;
+
  }
+
  .bottom-con{
   font-size: 1.1rem;
   line-height: 32px;

@@ -53,13 +53,13 @@ export const Home = () =>{
         <div className="carousel-item active">
           <div className="carousel-image-container">
             <img src="/images/firstpage_img/1000147493 (1).jpg" className="d-block w-100 carousel-image" alt="First Event"/>
-            <div className="carousel-caption">First Event - A Special Moment</div>
+            <div className="carousel-caption">1st position in ANVESHAN -25 Southern india student research convention by all India University (AIU) at SRM University Chennai</div>
           </div>
         </div>
         <div className="carousel-item">
           <div className="carousel-image-container">
             <img src="/images/firstpage_img/balaji_3rdyear.jpg" className="d-block w-100 carousel-image" alt="Project Expo"/>
-            <div className="carousel-caption">We are proud to announce that G.Lakshmi Balaji, a student of MVIT, has won 1st prize in drone workshop. The event focused on drone technology, flight mechanics, and real-world applications. Competing against talented participants, G.Lakshmi Balaji demonstrated exceptional skills in drone navigation, design, and programming. This achievement reflects their dedication to innovation and technology.</div>
+            <div className="carousel-caption">G. Lakshmi Balaji, a student of MVIT, secured 1st prize in a drone workshop, showcasing excellence in navigation, design, and programming. This achievement highlights their dedication to innovation and technology.</div>
           </div>
         </div>
 
@@ -72,8 +72,15 @@ export const Home = () =>{
 
         <div className="carousel-item">
           <div className="carousel-image-container">
+            <img src="/images/firstpage_img/scimit_hari.jpeg" className="d-block w-100 carousel-image" alt="Project Expo"/>
+            <div className="carousel-caption">SCIMIT -2023 3rd place</div>
+          </div>
+        </div>
+
+        <div className="carousel-item">
+          <div className="carousel-image-container">
             <img src="/images/firstpage_img/IMG20240302175103 (1).jpg" className="d-block w-100 carousel-image" alt="Tech Event"/>
-            <div className="carousel-caption">Tech Event - Innovation in Action</div>
+            <div className="carousel-caption">1st position in gyanith24 National level Hackathon and project expo at NIT puducherry</div>
           </div>
         </div>
       </div>
@@ -128,19 +135,19 @@ export const Home = () =>{
         <div className="stats-container b_g_s t_c">
           
             <div className="stat-item">
-              <h3>Graudation</h3>
+              <h3>Graduation</h3>
               {isstat &&(
               <p><CountUp start={0} end={100} duration={2}/>%</p>
               )}
             </div>
             <div className="stat-item">
-              <h3>Placement</h3>
+              <h3>Placements</h3>
               {isstat &&(
               <p><CountUp start={0} end={94.7} duration={2}/>+</p>
             )}
             </div>
             <div className="stat-item">
-              <h3>Certification</h3>
+              <h3>Certifications</h3>
               {isstat &&(
               <p><CountUp start={0} end={90} duration={2}/>+</p>
             )}
@@ -148,14 +155,14 @@ export const Home = () =>{
             <div className="stat-item">
               <h3>LPA</h3>
               {isstat &&(
-              <p><CountUp start={0} end={7} duration={2}/>LPA</p>
+              <p><CountUp start={0} end={7} duration={2}/>+</p>
             )}
             </div>
             
             <div className="stat-item">
-              <h3>Internship</h3>
+              <h3>Internships</h3>
               {isstat &&(
-                <p><CountUp start={0} end={80} duration={2}/>+</p>
+                <p><CountUp start={0} end={40} duration={2}/>+</p>
               )}
             </div>
         </div>
@@ -215,7 +222,6 @@ export const Home = () =>{
         
         <div className="about-container-syllabus shadow">  
           <div className="main-content-con-syllabus shadow-lg  s_b t_c rounded-3">
-                <h2>CURRICULAM</h2>
                 <div className="main-content">
                   <div className="Core-Competencies shadow-lg s2_b rounded-4">
                     <h2>Core Competencies</h2>
@@ -310,8 +316,13 @@ export const Home = () =>{
         <div className="main-content-con-contact shadow-lg s_b rounded-3 t_c">
           <h2>Contact</h2>
           <p>If you have any inquiries regarding the department, please feel free to reach out to us.<br></br> We are here to assist you with any questions or information you may need.
-<br></br>Dr. N. PALANIVEL, Professor & Head,
+<br/>Dr. N. PALANIVEL, Professor & Head,<br/>
 Department of CSE(Internet of Things and Cyber security including Block chain technology)</p>
+
+            <div className="detail">
+              <p >Phone No: 0413-2643007 <br/> Email : cseicb@mvit.edu.in</p>
+             
+            </div>
         </div>
       </div>
 

@@ -3,17 +3,8 @@ export const Footer = () =>{
         <footer className="bg-dark text-white py-4" id="Contact">
           <div className="container">
             <div className="row">
-              {/* About Section */}
-              <div className="col-md-4 mb-3">
-                <h5>About Us</h5>
-                <p>
-                Welcome to our college, committed to quality education and innovation.  
-                We empower students through knowledge, research, and community engagement.
-                </p>
-              </div>
-    
-              {/* Links Section */}
-              <div className="col-md-4 mb-3">
+
+            <div className="col-md-4 mb-3">
                 <h5>Quick Links</h5>
                 <ul className="list-unstyled">
                   <li>
@@ -32,6 +23,26 @@ export const Footer = () =>{
                       Contact
                     </a>
                   </li>
+                </ul>
+              </div>
+             
+    
+              {/* Links Section */}
+              <div className="col-md-4 mb-3">
+                <h5>Quick Links</h5>
+                <ul className="list-unstyled">
+                  <li>
+                    <a href="/" className="text-white text-decoration-none">
+                      Home
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/About_us" className="text-white text-decoration-none">
+                      About Us
+                    </a>
+                  </li>
+                  
                 </ul>
               </div>
     

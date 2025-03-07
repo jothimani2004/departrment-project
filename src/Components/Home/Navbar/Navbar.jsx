@@ -50,7 +50,7 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-xxl navbar-light sticky-top ">
       <div className="container-fluid">
         <a className="navbar-brand text-dark" href="/">
-          <img src={width > 500 ? "/MVIT-logo_full.png" : "/mit_logo.jpg"} alt="" height="85px" />
+          <img src={width > 500 ? "/MVIT-logo_full.png" : "/mit_logo.jpg"} alt="" height="75px" />
         </a>
 
         {/* Hamburger Button */}
