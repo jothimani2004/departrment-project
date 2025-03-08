@@ -79,6 +79,13 @@ export const Home = () =>{
 
         <div className="carousel-item">
           <div className="carousel-image-container">
+            <img src="/images/firstpage_img/vr.jpg" className="d-block w-100 carousel-image" alt="Project Expo"/>
+            <div className="carousel-caption">Experience immersive learning and innovation with our state-of-the-art AR/VR Lab, bridging the gap between reality and technology.</div>
+          </div>
+        </div>
+
+        <div className="carousel-item">
+          <div className="carousel-image-container">
             <img src="/images/firstpage_img/IMG20240302175103 (1).jpg" className="d-block w-100 carousel-image" alt="Tech Event"/>
             <div className="carousel-caption">1st position in gyanith24 National level Hackathon and project expo at NIT puducherry</div>
           </div>
