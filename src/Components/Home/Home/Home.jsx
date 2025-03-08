@@ -225,7 +225,7 @@ export const Home = () =>{
                 <div className="main-content">
                   <div className="Core-Competencies shadow-lg s2_b rounded-4">
                     <h2>Core Competencies</h2>
-                    <ul>
+                    <ul className="bullet">
                       <li>Internet of things</li>
                       <li>Cloud computing</li>
                       <li>Information Security</li>
@@ -317,12 +317,9 @@ export const Home = () =>{
           <h2>Contact</h2>
           <p>If you have any inquiries regarding the department, please feel free to reach out to us.<br></br> We are here to assist you with any questions or information you may need.
 <br/>Dr. N. PALANIVEL, Professor & Head,<br/>
-Department of CSE(Internet of Things and Cyber security including Block chain technology)</p>
+Department of CSE(Internet of Things and Cyber security including Block chain technology) <br/> Phone No: 0413-2643007 <br/> Email : cseicb@mvit.edu.in</p>
 
-            <div className="detail">
-              <p >Phone No: 0413-2643007 <br/> Email : cseicb@mvit.edu.in</p>
-             
-            </div>
+           
         </div>
       </div>
 

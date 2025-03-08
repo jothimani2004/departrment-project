@@ -53,7 +53,7 @@ export const RouterPath = () => {
 
 
      
-        <Route path="/Event/Cocurrcular_events" element={ <Event_show title="Cocurrcular Event"/> } />
+        <Route path="/Event/Cocurrcular_events" element={ <Event_show title="Cocurricular Events"/> } />
         <Route path="/Event/Extra_Curricular_events" element={ <Event_show title="Extra Curricular Events"/> } />
         <Route path="/Event/Major_events/Event_detail" element={ <Event_Seperate_page title="Elan 2025"/> } />
         <Route path="/Event/Major_events" element={<MajorEvents />} />

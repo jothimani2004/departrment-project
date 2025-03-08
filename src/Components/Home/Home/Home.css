@@ -1,5 +1,11 @@
   /* background color for slide */
   
+.bullet li{
+  list-style:circle;
+  margin-left: 1em;
+}
+
+
   .b_g_s{
     background-color: #155E95;
    

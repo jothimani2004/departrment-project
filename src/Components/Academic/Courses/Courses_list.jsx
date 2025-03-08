@@ -63,7 +63,7 @@ const CourseTable = () => {
         <>
            {/* Display Filter Name */}
            <h2 className="text-center mb-4">
-           {filter === "all" ? "All Courses" : filter === "CORE" ? "Core Courses" : "Elective Courses"}
+           {filter === "all" ? "Courses" : filter === "CORE" ? "Core Courses" : "Elective Courses"}
          </h2>
       
         <Table striped bordered hover responsive variant="light">
