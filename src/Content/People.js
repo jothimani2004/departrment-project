@@ -10,15 +10,7 @@ export  const facultyData = [
       joiningDate: "06-06-2011",
       description:"Dr. N. Palanivel, M.E., Ph.D., is the Head of the Department (HOD) of Computer Science and Engineering (ICB) at Manakula Vinayagar Institute of Technology, Puducherry, with 17 years of teaching experience. He holds a Ph.D. in Computer Science and Engineering from Manonmaniam Sundaranar University and specializes in platform technology, enterprise solutions, and database management systems. He has published over 25 international journal papers in machine learning, IoT, cybersecurity, and AI applications and has actively contributed as a reviewer, session chair, and research coordinator. He is also involved in AICTE-funded lab modernization, mentoring students, and guiding research scholars while collaborating with industries on emerging technologies. "
     },
-    {
-      photo: "/images/faculity_photo/muruganantham.jpg",
-      name: "Mr.U.Muruganantham",
-      degree: "	M.Tech.,",
-      role: "Placement Coordinator And Assistant Professor",
-      joiningDate: "11-07-2024",
-      description:" "
-
-    },
+    
     {
       photo: "/images/faculity_photo/kumaraguru.jpeg",
       name: "Kumaraguru",
@@ -55,7 +47,17 @@ export  const facultyData = [
       description:"A. Sheerin is an Assistant Professor in the CSE (IoT & CS) Department, specializing in Network Security. She holds an M.Tech in Network & Information Security from Pondicherry University and a B.Tech in Electronics & Communication Engineering from Sri Manakula Vinayagar Engineering College. With nine months of experience, she has been working at Manakula Vinayagar Institute of Technology since September 2023. She also serves as the Library Coordinator for the department and has published one research paper in an international journal."
     },
     {
-      photo: "/images/faculity_photo/Shyni.jpeg",
+      photo: "/images/faculity_photo/muruganantham.jpg",
+      name: "Mr.U.Muruganantham",
+      degree: "	M.Tech.,",
+      role: "Assistant Professor",
+      joiningDate: "11-07-2024",
+      description:"Mr.U.Muruganantham is an Assistant Professor in the CSE (IoT & CS) Department, specializing in Artificial Intelligence and Machine Learning. With 6 years and 6 months of experience, His research interests include Artificial Intelligence, Deep Learning, Internet of Things & Blockchain Technology. He has been serving at Manakula Vinayagar Institute of Technology since 2024. He holds several key positions including Placement coordinator, Dreams and Competition coordinator, Dept MoU In-Charge, Internship and Industrial visit Coordinator and Consultancy Coordinator. He has actively participated in many Faculty development programs and workshops since 2015 and has published 2 international Journal and 5 National conference papers. He has received appreciation awards for achieving outstanding results in Mobile communication, Software Engineering, Data mining and data warehousing, and Computer Networks for different student batches."
+
+    },
+    {
+      photo: "https://via.placeholder.com/300x200",
+      // photo: "/images/faculity_photo/Shyni.jpeg",
       name: "Ms. S.Adolphine Shyni",
       degree: "M.Tech",
       role: "Assistant Professor",
