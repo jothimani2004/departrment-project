@@ -1,0 +1,87 @@
+/* NotFound.css */
+.not_found_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* Center the text */
+  margin: 4em 1em;;
+}
+
+.h {
+  font-size: clamp(4rem, 15vw, 7.5rem); /* Scales between 64px and 120px */
+  margin: 0;
+  color: #ff4444;
+  line-height: 1;
+  text-align: center; /* Center the text */
+}
+
+.hh {
+  font-size: clamp(1.5rem, 5vw, 2.25rem); /* Scales between 24px and 36px */
+  margin: 0.625rem 0;
+  align-self:center;
+  color: #333;
+  text-align: center; /* Center the text */
+}
+
+.p {
+  font-size: clamp(1rem, 3vw, 1.125rem); /* Scales between 16px and 18px */
+  margin: 1.25rem 0;
+  color: #666;
+  max-width: 90%;
+  text-align: center; /* Center the text */
+}
+
+.home_link {
+  text-decoration: none;
+}
+
+.gawkgawk {
+  padding: clamp(0.625rem, 2vw, 1.25rem) clamp(1.25rem, 3vw, 2.5rem); /* Responsive padding */
+  font-size: clamp(0.875rem, 2.5vw, 1rem); /* Scales between 14px and 16px */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.3125rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.gawkgawk:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Media Queries for additional responsiveness */
+@media (max-width: 768px) {
+  .not-found-container {
+    padding: 1.5rem;
+  }
+
+  .p {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .not-found-container {
+    padding: 1rem;
+  }
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .hh{
+    margin: 0.5rem 0;
+  }
+
+  .p {
+    margin: 1rem 0;
+  }
+
+  .gawkgawk {
+    width: 100%;
+    max-width: 200px;
+  }
+}

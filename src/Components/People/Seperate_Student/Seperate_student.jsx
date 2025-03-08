@@ -74,7 +74,7 @@ export default function Seperate_student({title}){
                                     height="100%"
                                     style={{ borderRadius: '10px' }} />
                                 ) : (
-                                    <Spinner/>
+                                   <h5>upload your photo !</h5>
                                 )}
                             </div>
 
@@ -93,11 +93,16 @@ export default function Seperate_student({title}){
                 <div className={style.card_size}>
                 <div className="pdf-container d-flex justify-content-center align-items-center py-3">
               <div className="card shadow-lg w-100 rounded-3">
-                  <iframe
+                {studentDetail.resume ? <iframe
                       src={`data:application/pdf;base64,${studentDetail.resume}`}
                       title={title}
                       className="rounded-3"
-                  ></iframe>
+                  ></iframe>:
+                  <div className="text-center text-muted p-5">
+                  <h5>No resume available.</h5>
+                </div>
+                  }
+
               </div>
                 </div>
 </div>

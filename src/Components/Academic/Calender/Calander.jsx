@@ -7,33 +7,32 @@ import UseApiGet from "../../../Custom_hook/apiGetCall";
 import { Spinner } from 'react-bootstrap';
 import { checkJwtCookie } from "../../Jwt_verify/checkJwtCookie.jsx";
 import "./Calender.css"
+import { useLocation } from 'react-router-dom';
 
 export default function Calander_show({keys:{pfd_path,title}}){
   
 
 
   const role = checkJwtCookie({ returnme: "role" }) || "Guest";  
-      
+  const location = useLocation();
         const [showPopup, setShowPopup] = useState(false);
         const [selectFile,setSelectFile] = useState(null)
         const [calander,setCalander] = useState(null)
+        const [Location,setLocation] = useState(null)
         let val;
 
+      
 
 
-    useEffect(()=>{
-   
-       async function call(){
-   
-           val = await UseApiGet(`/file_upload?title=${title}`);
-          
-
-        setCalander(val.buffer);  
-         }
-       call()
-       
-   
-       },[])
+        useEffect(() => {
+          async function call() {
+            val = await UseApiGet(`/file_upload?title=${title}`);
+            setLocation(location.pathname); // Set path from location
+            console.log("Current Path:", location.pathname); // Log path
+            setCalander(val.buffer);
+          }
+          call();
+        }, []); // Add location.pathname as dependency
 
 
 
@@ -80,7 +79,11 @@ export default function Calander_show({keys:{pfd_path,title}}){
          <div className="container py-4 s_b rounded-2 my-4" >
             <div className="content mt-3 px-3">
                  <div className="d-flex justify-content-between align-items-center mb-4">
-                    <h1 className="h1"> {title}</h1>
+                 {Location == "/Academic/calander"?<p className="desc">
+                  <h1 className="h1"> Academic Calender</h1>                    </p>:<p className="desc">
+                  <h1 className="h1"> Time Table</h1>                    </p>
+                    }
+                    
                     <div>
                     {role =="Admin"?<button class="btn btn-primary mx-1 my-3 "
                         onClick={()=> setting_pop_field([])}
@@ -88,10 +91,14 @@ export default function Calander_show({keys:{pfd_path,title}}){
                     </div>
                 </div>
                 <div className="para">
-                    <p className="desc">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta asperiores ipsum dolorem, reprehenderit quisquam placeat illo neque esse iure harum, quod fuga fugiat quibusdam. Officiis hic eius inventore perferendis quis!
-                        Dolor earum adipisci placeat, deserunt aperiam corporis saepe nisi tempora ea sequi debitis consequatur? Eaque aut deserunt non aperiam perferendis fuga et aliquam tempora, eos nihil cumque cupiditate, illum itaque!
+
+                    {Location == "/Academic/calander"?<p className="desc">
+                    Welcome to the cse(ICB) Academic Calendar section. This calendar provides an overview of the important academic events, holidays, and examination schedules for the current academic year. Students and faculty can download the official calendar by clicking the link below.
+                    </p>:<p className="desc">
+                    Welcome to the cse(ICB) Class Timetable section. This timetable outlines the weekly schedule of lectures, lab sessions, and other academic activities for various batches. Students can refer to this timetable to stay updated with their daily classes and timings.
                     </p>
+                    }
+
                 </div>
             </div>
 

@@ -1,5 +1,11 @@
   /* background color for slide */
   
+.bullet li{
+  list-style:circle;
+  margin-left: 1em;
+}
+
+
   .b_g_s{
     background-color: #155E95;
    
@@ -13,6 +19,10 @@
     object-fit: cover; /* Ensure the images fill the carousel while maintaining their aspect ratio */
     height: 85vh; /* Make sure the images cover the entire height of the carousel */
   }
+  .custom-carousel:hover {
+  background-color: transparent; /* Change to your desired color */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
   
  .about-container{
     width: 100%;
@@ -26,27 +36,28 @@
   flex-direction:column ;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  
  }
  
  .top-con{
   display: flex;
   justify-content: center;
-  gap: 25px;
   padding:1em;
  }
  .text-con{
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 1em;
+  gap: 25px;
+  padding: 1em 1em 0em 1em ;
 
  }
  .text-con p{
   font-size: 1.1rem;
   line-height: 32px;
   text-align: justify;
+
  }
+
  .bottom-con{
   font-size: 1.1rem;
   line-height: 32px;

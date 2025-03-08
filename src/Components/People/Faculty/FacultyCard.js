@@ -11,9 +11,9 @@ const FacultyCard = ({ photo, name, degree, role, joiningDate, description, anim
         // Delay for staggered animation
       }}
     >
-      <div className="row g-4 flex-column flex-md-row align-items-center align-items-md-start ">
+      <div className="row g-4 flex-column flex-md-row align-items-center">
         {/* Faculty Photo */}
-        <div className="col-auto text-center">
+        <div className="col-auto text-center ">
           <img
             src={photo}
             alt={`${name}'s profile`}

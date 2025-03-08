@@ -13,6 +13,13 @@
   padding: 1em;
 }
 
+.dropdown-item:hover{
+  background-color: #B7C2F3;
+}
+.dropdown-item:active{
+  color: black;
+}
+
 /* Set background color of collapse content */
 .navbar-collapse {
   background-color: #FBF8EF !important; /* Same as navbar */

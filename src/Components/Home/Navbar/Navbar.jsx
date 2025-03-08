@@ -50,7 +50,7 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-xxl navbar-light sticky-top ">
       <div className="container-fluid">
         <a className="navbar-brand text-dark" href="/">
-          <img src={width > 500 ? "/MVIT-logo_full.png" : "/mit_logo.jpg"} alt="" height="85px" />
+          <img src={width > 500 ? "/MVIT-logo_full.png" : "/mit_logo.jpg"} alt="" height="75px" />
         </a>
 
         {/* Hamburger Button */}
@@ -99,7 +99,7 @@ export const Navbar = () => {
                 <li><a className="dropdown-item" href="/Academic/calander">Calendar</a></li>
                 <li><a className="dropdown-item" href="/Academic/courses">Courses</a></li>
                 <li><a className="dropdown-item" href="/Academic/Time_table">Time Table</a></li>
-                <li><a className="dropdown-item" href="#">Student Data Verification</a></li>
+                <li><a className="dropdown-item" href="/Academic/student-verification">Student Data Verification</a></li>
               </ul>
             </li>
 

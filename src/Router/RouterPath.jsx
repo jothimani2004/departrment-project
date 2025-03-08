@@ -3,7 +3,6 @@ import Student_list from '../Components/People/Student/Student_list.jsx';
 import Courses from '../Components/Academic/Courses/Courses_list.jsx'
 import {Navbar} from '../Components/Home/Navbar/Navbar.jsx';
 import {Home} from '../Components/Home/Home/Home.jsx';
-import Calander_show from "../Components/Academic/Calender/Calander.jsx";
 import { Calander, Time_tables } from "../Content/Academic.js";
 import Seperate_student from "../Components/People/Seperate_Student/Seperate_student.jsx";
 import Seperate_student_Edit from "../Components/People/Seperate_Student_Edit/Seperate_student_Edit.jsx";
@@ -26,9 +25,12 @@ import NoteViewer from '../Components/Resource/pdfview/NoteViewer.jsx';
 import { DomainContext } from '../Components/Resource/domain/DomainContext.jsx'
 import {ProtectedRoute} from '../Components/ProtectedRoute/ProtectedRoute.jsx'
 import Admin_page from "../Components/Admin_page/Admin_page.jsx";
-
+import { Contact } from "lucide-react";
+import Calander_show from "../Components/Academic/Calender/Calander.jsx";
+import StudentVerification from "../Components/Academic/Student_data_verification/StudentVerification.jsx";
+import NotFound from "../Components/NotFound/NotFound.jsx";
 export const RouterPath = () => {
-
+  
   const domainnames = ["InternetOfThings", "CyberSecurity", "BlockchainTechnology"];
   const { domainDetails, resourses } = useContext(DomainContext);
   
@@ -51,7 +53,7 @@ export const RouterPath = () => {
 
 
      
-        <Route path="/Event/Cocurrcular_events" element={ <Event_show title="Cocurrcular Event"/> } />
+        <Route path="/Event/Cocurrcular_events" element={ <Event_show title="Cocurricular Events"/> } />
         <Route path="/Event/Extra_Curricular_events" element={ <Event_show title="Extra Curricular Events"/> } />
         <Route path="/Event/Major_events/Event_detail" element={ <Event_Seperate_page title="Elan 2025"/> } />
         <Route path="/Event/Major_events" element={<MajorEvents />} />
@@ -70,6 +72,7 @@ export const RouterPath = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/" element={<Home />} />
+        <Route path="/Academic/student-verification" element={<StudentVerification />} />
         <Route path="/People/Students/Profile/Edit" element={
           <ProtectedRoute>
               <Seperate_student_Edit />
@@ -122,7 +125,10 @@ export const RouterPath = () => {
   element={<NoteViewer />}
 />
 
-
+<Route
+  path="*"
+  element={<NotFound />}
+/>
 
 
       </Routes>
