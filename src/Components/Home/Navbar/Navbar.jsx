@@ -3,15 +3,17 @@ import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import "./Navbar.css";
 import { GlobalContext } from "../../GlobalContext/globalContext.jsx";
 import Resize from "../../../Custom_hook/window_resize.jsx";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
+import cookies from 'js-cookie'; 
 
 
 export const Navbar = () => {
-  const { checker } = useContext(GlobalContext);
+  const { checker } = useContext (GlobalContext);
   const [display, setDisplay] = useState(false);
   const {width} = Resize()
   const location = useLocation(); // Get current route
-
+  const navigate=useNavigate();
+  const back_api=process.env.REACT_APP_API_URL;
 
   const [open, setOpen] = useState(false);
   // Function to handle hover
@@ -45,6 +47,16 @@ export const Navbar = () => {
     updateDisplay();
     console.log("path of the page ",location.pathname);
   }, [location.pathname]);
+
+  const logoutApicall = async () =>{
+    cookies.remove("jwtToken");
+   
+   console.log("hello");
+   navigate('/');
+   window.location.reload();
+    
+  }
+
 
   return (
     <nav className="navbar navbar-expand-xxl navbar-light sticky-top ">
@@ -199,7 +211,12 @@ export const Navbar = () => {
               
               <ul className="dropdown-menu">
                 <li><a className="dropdown-item" href={display.role == "stud"?`/People/Students/Profile/Edit?register_no=${display.reg}`:"/Admin_page/Edit"}>profile</a></li>
-                <li><a className="dropdown-item" href="/login">Logout</a></li>
+                <li>
+                  <a className="dropdown-item" onClick={logoutApicall}>
+                    Logout
+                  </a>
+                </li>
+
               </ul>
             </li>
             // <div 

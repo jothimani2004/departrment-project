@@ -19,14 +19,18 @@ const Login = () => {
   const back_api = process.env.REACT_APP_API_URL ;
 
   useEffect(()=>{
-    const logout = async ()=>{
-      await fetch(`${back_api}/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
-      localStorage.removeItem("token");
+    const tt = async ()=>{
+      const token = Cookies.get('jwtToken');
+      if(token){
+        const decodedToken = jwtDecode(token);
+        if(decodedToken.jwtPayload.role == 'Admin'){
+          navigate('/Admin_page/Edit')
+        }else{
+          navigate(`/People/Students/Profile/Edit?register_no=${decodedToken.jwtPayload.reg}`);
+        }
+      }
     }
-    logout()
+    tt()
   }, [])
 
   const togglePasswordVisibility = () => {
