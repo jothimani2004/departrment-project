@@ -74,7 +74,7 @@ export default function Seperate_student({title}){
                                     height="100%"
                                     style={{ borderRadius: '10px' }} />
                                 ) : (
-                                   <h5>upload your photo !</h5>
+                                    <h5>student didn't upload photo!</h5>
                                 )}
                             </div>
 

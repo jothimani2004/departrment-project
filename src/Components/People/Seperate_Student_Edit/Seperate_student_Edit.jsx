@@ -220,7 +220,7 @@ export default function Seperate_student_Edit({ title }) {
                   style={{ borderRadius: '10px' }}
                 />
               ) : (
-                <Spinner />
+                <h5>upload your photo !</h5>
               )}
 
                 </div>
