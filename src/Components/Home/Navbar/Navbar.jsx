@@ -49,7 +49,7 @@ export const Navbar = () => {
   }, [location.pathname]);
 
   const logoutApicall = async () =>{
-    cookies.remove("jwtToken");
+    Cookies.remove('jwtToken', { path: '/', domain: '.mvitcseicb.in' });
    
    console.log("hello");
    navigate('/');
